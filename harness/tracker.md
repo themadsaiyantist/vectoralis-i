@@ -115,7 +115,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
-| `community/README.md` where people talk, topic by topic | ⬜ | ⬜ | ⬜ |
+| `community/README.md` where people talk, topic by topic | ✅ | ✅ | ⬜ |
 
 ## The repository
 
