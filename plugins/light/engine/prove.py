@@ -6,13 +6,14 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 import time
 from pathlib import Path
 from typing import Dict, List
 
-from . import grants, guards, records
+from . import grants, guards, records, trust
 from .payload import Call, Write
 from .project import Project
 from .state import snapshot
@@ -56,8 +57,12 @@ def run_case(case) -> Dict:
             if case.get("person"):
                 subprocess.run(["git", "-C", str(root), "config", "user.name", case["person"]], **quiet)
         kept = os.environ.pop("CLAUDE_PROJECT_DIR", None)
+        kept_home = os.environ.get("VECTORALIS_HOME")
+        os.environ["VECTORALIS_HOME"] = str(root.parent / (root.name + "-home"))
         try:
             proj = Project(str(root))
+            if not case.get("unapproved"):
+                trust.approve(proj)
             state = dict(case.get("state") or {})
             if "prompt" in case:
                 state["grants"] = grants.parse(case["prompt"])
@@ -81,6 +86,11 @@ def run_case(case) -> Dict:
             found = [f for f in guards.run(case["event"], call, proj, state) if f.guard == case["guard"]]
             took = time.monotonic() - began
         finally:
+            shutil.rmtree(os.environ["VECTORALIS_HOME"], ignore_errors=True)
+            if kept_home is None:
+                os.environ.pop("VECTORALIS_HOME", None)
+            else:
+                os.environ["VECTORALIS_HOME"] = kept_home
             if kept is not None:
                 os.environ["CLAUDE_PROJECT_DIR"] = kept
     got = max((f.level for f in found), key=lambda level: RANK[level], default="pass")

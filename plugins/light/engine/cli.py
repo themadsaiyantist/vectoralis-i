@@ -11,7 +11,7 @@ import re
 import sys
 from pathlib import Path
 
-from . import VERSION, briefing, checks, dashboard, prove, records, rules
+from . import VERSION, briefing, checks, dashboard, prove, records, rules, trust
 from .project import DEFAULT_MODES, HEAVY, LIGHT, Project, git
 
 TEMPLATES = Path(__file__).resolve().parents[1] / "templates"
@@ -104,6 +104,9 @@ def cmd_init(args) -> int:
         (made if moved else kept).append("harness/settings.json" + (" (" + ", ".join(moved) + ")" if moved else ""))
     had_records = (proj.harness / "tracker.md").exists() or (proj.harness / "todo.md").exists()
     path.write_text(json.dumps(settings, indent=2) + "\n", encoding="utf-8")
+    proj.settings = settings
+    if not existed:
+        trust.approve(proj)  # init found these commands itself, in the project's own files
     if settings["profile"] == "heavy":
         person = git(proj.root, "config", "user.name").strip() or "you"
         for name in RECORDS:
@@ -134,6 +137,10 @@ def cmd_init(args) -> int:
               "and one `## Yours, name` section per person to the to-do list.")
     print("Tests: " + (f"`{settings['test']}`" if settings.get("test") else "no test command found. The `tests` guard is off until `test` is set in harness/settings.json."))
     print("Formatter: " + (f"`{settings['format']}`" if settings.get("format") else "none found. The `format` guard is off until `format` is set."))
+    waiting = [kind for kind in trust.KINDS if not trust.trusted(proj, kind)]
+    if waiting:
+        print("Not approved on this machine yet: " + ", ".join(waiting) + ". A hook runs these commands, so read them, "
+              "then run `vectoralis trust`.")
     if starter:
         print("No instructions file here. A starter is ready: `vectoralis init " + settings["profile"] + " --starter` writes AGENTS.md and a one-line CLAUDE.md.")
     else:
@@ -161,15 +168,16 @@ def _guard_results():
 def cmd_guards(args) -> int:
     proj = Project()
     results, failed, unproven = _guard_results()
-    print(f"{'guard':<13}{'here':<8}{'default':<9}proof")
+    good_rules, bad_rules = rules.load(proj)
+    wide = max([13] + [len(str(rule["id"])) + 2 for rule in good_rules])
+    print(f"{'guard':<{wide}}{'here':<8}{'default':<9}proof")
     for guard in LIGHT + HEAVY:
         cases = [r for r in results if r["guard"] == guard]
         good = sum(1 for r in cases if r["ok"])
         proof = f"{good} of {len(cases)} payloads behave" if cases else "no payloads"
-        print(f"{guard:<13}{proj.mode(guard):<8}{DEFAULT_MODES[guard]:<9}{proof}")
-    good_rules, bad_rules = rules.load(proj)
+        print(f"{guard:<{wide}}{proj.mode(guard):<8}{DEFAULT_MODES[guard]:<9}{proof}")
     for rule in good_rules:
-        print(f"{rule['id']:<13}{rule.get('mode', 'warn'):<8}{'project':<9}its payloads behave")
+        print(f"{rule['id']:<{wide}}{rule.get('mode', 'warn'):<8}{'project':<9}its payloads behave")
     for line in bad_rules:
         print("NOT RUNNING: " + line)
     for result in failed:
@@ -218,6 +226,19 @@ def cmd_affirm(args) -> int:
     for path in missing:
         print(f"Not recorded: `{path}` is not bound to a ticked row of harness/tracker.md.")
     return 1 if missing else 0
+
+
+def cmd_trust(args) -> int:
+    proj = Project()
+    found = trust.approve(proj)
+    if not found:
+        print("Nothing to approve: this project sets no test command and no formatter.")
+        return 0
+    print(f"Approved on this machine, for {proj.root}:")
+    for kind, line in found:
+        print(f"  {kind}: `{line}`")
+    print("A hook runs these from now on. A change to either one needs a new approval.")
+    return 0
 
 
 def cmd_dashboard(args) -> int:
@@ -273,6 +294,7 @@ def main(argv) -> int:
         ("guards", cmd_guards, "every guard, its mode, and whether its payloads behave"),
         ("budget", cmd_budget, "what is always loaded, against the cap"),
         ("dashboard", cmd_dashboard, "write one HTML page and print its path"),
+        ("trust", cmd_trust, "approve this project's test and format commands on this machine"),
     ):
         sub.add_parser(name, help=text).set_defaults(run=run)
     fail = sub.add_parser("fail", help="add an entry to the failure log")

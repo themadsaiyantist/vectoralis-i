@@ -150,6 +150,7 @@ One Python package, standard library only, written for Python 3.9 and later. One
 | `records.py` | parses the tracker, the to-do list, the failure log and the locks |
 | `guards/` | one file per guard, each beside its payloads |
 | `rules.py` | loads the project's own guards from `harness/guards/` |
+| `trust.py` | which test and format commands the person approved on this machine |
 | `checks.py` | the staleness check and the budget |
 | `briefing.py` | the session briefing and the compaction prompt |
 | `dashboard.py` | the one HTML page |
@@ -189,6 +190,7 @@ One Python package, standard library only, written for Python 3.9 and later. One
 | `nudge` | heavy | stop | | work changed and no record moved. Said once a turn |
 
 - **`tests` runs only when something changed** since the last green run. The fingerprint is the commit plus the diff.
+- **A hook runs only a command the person approved.** `test` and `format` come from a file a cloned repository can set, and a hook runs outside the agent's permission prompts. `vectoralis init` approves what it found itself. Anything else waits for `vectoralis trust`. The record is in the home folder, `~/.vectoralis/trusted.json`, never in the repository.
 - **`stop` sends the agent back at most once a turn.**
 - **Every guard can be set to `block`, `warn` or `off`** in `harness/settings.json`. Switching one off, and promoting one, are the person's.
 - **A path can be excused** from one guard that reads files, in `settings.json`, with its reason in `harness/decisions.md`.
@@ -304,6 +306,7 @@ All in `harness/`. Light keeps `settings.json` alone. Each record opens with wha
 | `vectoralis status` | the briefing, as a session start prints it |
 | `vectoralis check` | staleness, budget and every guard's proof in one pass. Exit 1 on any flag |
 | `vectoralis affirm <path>` | says a ticked file was checked again as it is now |
+| `vectoralis trust` | approves this project's test and format commands on this machine |
 | `vectoralis guards` | every guard, its mode and whether its payloads behave |
 | `vectoralis budget` | what is always loaded, against the cap |
 | `vectoralis dashboard` | writes one HTML page and prints its path |
@@ -425,7 +428,7 @@ The same two plugins, the same engine, the same records.
 | Skills | `skills/<name>/SKILL.md` | the same folders |
 | File edits | Write, Edit | `apply_patch` |
 | The core, always loaded | session-start output | session-start output |
-| Instructions file | `CLAUDE.md` | `AGENTS.md` |
+| Instructions file | `CLAUDE.md`, or `AGENTS.md` where there is none | `AGENTS.md` |
 
 - `payload.py` is the only module that knows which agent is calling.
 - **The table of gaps** lists what Codex cannot do yet, each one marked `read` or `run`. It lives in `guide/codex.md`.

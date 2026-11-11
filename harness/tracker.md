@@ -54,14 +54,14 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `guide/locks.md` | ✅ | ✅ | ⬜ |
 | `guide/agents.md` | ✅ | ✅ | ⬜ |
 | `guide/pull-requests.md` | ✅ | ✅ | ⬜ |
-| `guide/unattended.md` | ⬜ | ⬜ | ⬜ |
-| `guide/safety.md` | ⬜ | ⬜ | ⬜ |
+| `guide/unattended.md` | ✅ | ✅ | ⬜ |
+| `guide/safety.md` | ✅ | ✅ | ⬜ |
 | `guide/cost.md` | ✅ | ✅ | ⬜ |
-| `guide/mcp.md` | ⬜ | ⬜ | ⬜ |
+| `guide/mcp.md` | ✅ | ✅ | ⬜ |
 | `guide/dashboard.md` | ✅ | ✅ | ⬜ |
 | `guide/team.md` | ✅ | ✅ | ⬜ |
 | `guide/codex.md` | ✅ | ✅ | ⬜ |
-| `guide/other-agents.md` | ⬜ | ⬜ | ⬜ |
+| `guide/other-agents.md` | ✅ | ✅ | ⬜ |
 | `guide/proof.md` | ✅ | ✅ | ⬜ |
 | `guide/reference.md` | ✅ | ✅ | ⬜ |
 

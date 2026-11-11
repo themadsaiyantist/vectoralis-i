@@ -108,6 +108,7 @@ Your records are plain files in `harness/`. Removing a plugin leaves them where 
 - **A hook never fires in Codex** → it was not trusted. Open `/hooks`.
 - **A teammate has no guards** → they pulled the settings and never ran the install.
 - **The `tests` guard is off** → no test command was found. Set `test` in `harness/settings.json`.
+- **"Nobody approved it on this machine"** → the project came with its own test or format command, or one of them changed. Read it, then `vectoralis trust`.
 - **Python is missing** → the engine needs Python 3.9 or later and nothing else.
 
 Next → [Light](light.md).

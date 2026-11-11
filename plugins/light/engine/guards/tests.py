@@ -10,6 +10,7 @@ import re
 import subprocess
 
 from . import Finding
+from .. import trust
 from ..project import git
 
 NAME = "tests"
@@ -30,6 +31,9 @@ def check(call, proj, state):
         return []
     command = str(proj.settings.get("test") or "").strip()
     seconds = int(proj.settings.get("test_timeout") or 120)
+    if not trust.trusted(proj, "test"):
+        return [Finding(NAME, "notice", "Vectoralis did not run this project's test command, because nobody approved it on this "
+                                        f"machine yet: `{command}`. Read it, then approve it with `vectoralis trust`.")]
     mark = fingerprint(proj.root)
     if mark and state.get("green") == mark:
         return []

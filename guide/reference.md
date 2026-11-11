@@ -18,6 +18,7 @@ Every command, file, guard, setting and word of this harness, on one page. Look 
 | `vectoralis status` | the briefing, as a session start prints it |
 | `vectoralis check` | staleness, the budget and every guard's proof. Exit 1 on any flag |
 | `vectoralis affirm <path>` | says a ticked file was checked again as it is now |
+| `vectoralis trust` | approves this project's test and format commands on this machine. A hook runs nothing you did not approve |
 | `vectoralis guards` | every guard, its mode, and whether its payloads behave |
 | `vectoralis budget` | what is always loaded, against the cap |
 | `vectoralis dashboard` | writes `harness/dashboard.html` and prints its path |
@@ -43,6 +44,8 @@ All in `harness/`. Light keeps the first one alone.
 | `guards/<id>.json` | the project's own guards | the agent drafts at `warn`. You promote |
 | `.checked.json` | which version each tick refers to | the harness. Never by hand |
 | `dashboard.html` | the dashboard | the harness. Never committed |
+
+One file lives outside the project, in your home folder: `~/.vectoralis/trusted.json`, the commands you approved. A repository cannot approve itself.
 
 ---
 
