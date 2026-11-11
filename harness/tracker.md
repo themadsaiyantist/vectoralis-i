@@ -127,4 +127,4 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `spec.md` how it is built | ✅ | ✅ | ⬜ |
 | `tools/check_writing.py` the repository checks | ✅ | ✅ | ⬜ |
 | `tools/check.sh` every check before a commit, as one command | ✅ | ✅ | ⬜ |
-| `.github/workflows/ci.yml` tests and payloads on every push | ⬜ | ⬜ | ⬜ |
+| `.github/workflows/ci.yml` tests and payloads on every push | ✅ | ✅ | ⬜ |
