@@ -69,12 +69,12 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
-| `kit/README.md` the nineteen on one screen | ⬜ | ⬜ | ⬜ |
-| `kit/coding.md` | ⬜ | ⬜ | ⬜ |
-| `kit/frontend.md` | ⬜ | ⬜ | ⬜ |
-| `kit/backend.md` | ⬜ | ⬜ | ⬜ |
-| `kit/mobile.md` | ⬜ | ⬜ | ⬜ |
-| `kit/games-3d.md` | ⬜ | ⬜ | ⬜ |
+| `kit/README.md` the nineteen on one screen | ✅ | ✅ | ⬜ |
+| `kit/coding.md` | ✅ | ✅ | ⬜ |
+| `kit/frontend.md` | ✅ | ✅ | ⬜ |
+| `kit/backend.md` | ✅ | ✅ | ⬜ |
+| `kit/mobile.md` | ✅ | ✅ | ⬜ |
+| `kit/games-3d.md` | ✅ | ✅ | ⬜ |
 | `kit/reasoning.md` | ✅ | ✅ | ⬜ |
 | `kit/research.md` | ✅ | ✅ | ⬜ |
 | `kit/data-ml.md` | ✅ | ✅ | ⬜ |

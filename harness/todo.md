@@ -17,9 +17,9 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → the spec, the harness and fourteen guide pages are built, checked and pushed. Light ran for real in Claude Code. Both plugins install in Codex.
-- **Next →** review each page the subagents hand back → open its links → tick its row → commit. Then `kit/README.md`.
-- **In flight** → the kit, thirteen guide pages, the communities.
+- **Where it stands** → the spec, the harness, the guide's 30 pages, the kit's 19, the three roadmaps and the five topics are built, checked and pushed. Light ran for real in Claude Code. Both plugins install in Codex.
+- **Next →** the communities page: review it, add the few people worth following, open its links, commit. Then the last pass over everything.
+- **In flight** → the communities page, and the people on it.
 - **Open** → the communities page needs its people: the author asked for both communities and people, the best only.
 - **Mind** → commit with explicit paths while a subagent is writing. A page that is not reviewed is not committed.
 
@@ -67,8 +67,8 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ⬜ Codex, live → the hooks and the skills in a real Codex session. It needs your Codex login
 - ✅ One real run → light on `runlog`, in Claude Code, for `guide/light.md`
 - ⬜ Install heavy in this repository → run a live session on its own harness
-- ⬜ The guide → every page listed in `spec.md`. Fourteen of 30 are in
-- ⬜ The kit → 19 situations
+- ✅ The guide → every page listed in `spec.md`, 30 of them
+- ✅ The kit → 19 situations, and the index
 - ✅ The roadmaps → 3 careers
 - ✅ The five topics → 5 pages
 - ⬜ The communities → the subreddits and the rest, topic by topic, and the few people worth following
