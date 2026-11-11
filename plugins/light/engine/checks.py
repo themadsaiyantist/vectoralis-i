@@ -111,11 +111,15 @@ def stale(proj, seconds=None) -> List[str]:
             break
         elif path in checked and checked[path] != blob(target):
             flags.append(f"tracker: `{path}` changed after its row was ticked")
+    planned = {row["path"].rstrip("/") for row in records.tracker_rows(proj.read("tracker.md"))
+               if row["path"] and records.DONE not in row["marks"].values()}
     for name in ("rules.md", "todo.md", "decisions.md"):
         for _, line in records.plain_lines(proj.read(name)):
             if records.OPEN in line:
                 continue  # an open box may name a file that is not built yet
             for token in PATHLIKE.findall(line):
+                if token.rstrip("/") in planned:
+                    continue  # the tracker lists it as work ahead
                 looks = re.search(r"\.\w{1,5}$", token) or token.endswith("/")
                 if not looks or token.startswith(("http", "/", "~", "-", "$", ".")) or any(c in token for c in "*?<>{}$|=@:"):
                     continue

@@ -10,6 +10,7 @@ Every call that was made on Vectoralis I, and every exception to a rule, each on
 
 Newest first. One line: the date, the call in bold, then why.
 
+- 2026-11-11 · **Planned has one meaning: the tracker lists it and no box is ticked.** Why: three false flags came from three separate patches. The staleness check and the link check now ask the tracker.
 - 2026-11-11 · **A tick refers to a recorded version of its file, not to a date.** Why: the first design compared git times. A file changed and checked again in one commit would have stayed flagged for good, because its row reads the same before and after. Content compared with content is right before a commit and after one.
 - 2026-11-11 · **A row not built yet is never stale.** Why: a tracker lists the work ahead, and a check that flags it trains everyone to ignore the check. Found by running the check on this repository, `harness/failures.md`.
 - 2026-11-11 · **A kit pick is marked `read` until it is tried.** Why: the author's word, run only what cannot be read. The mark keeps the page honest.
