@@ -200,7 +200,7 @@ def cmd_budget(args) -> int:
     for name, chars, tokens in spent["rows"]:
         print(f"{tokens:>6}  {name}  ({chars} characters)")
     print(f"{spent['total']:>6}  always loaded, the cap for {proj.profile} is {spent['cap']}")
-    print("Tokens are an estimate: characters divided by four.")
+    print(f"Tokens are an estimate: characters divided by {checks.CHARS_PER_TOKEN}, the rate measured in live Claude Code sessions.")
     return 1 if spent["total"] > spent["cap"] else 0
 
 

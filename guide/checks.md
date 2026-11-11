@@ -87,7 +87,7 @@ The last step, and the place where honesty costs least.
 
 ## What it costs
 
-- **Tokens** → the `check` skill is about 360 when it loads. Nothing before that.
+- **Tokens** → the `check` skill is about 530 when it loads, and its description about 36 before that.
 - **Attention** → none for the check. For the re-check, you read the report's third line.
 - **Time** → a second pass. It is cheaper than the bug.
 

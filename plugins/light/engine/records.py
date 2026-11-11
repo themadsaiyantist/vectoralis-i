@@ -5,7 +5,8 @@ Every reader skips fenced code, so an example inside a record is never taken for
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Optional, Tuple
+from pathlib import Path
+from typing import Dict, List, Optional, Set, Tuple
 
 DONE, OPEN = "✅", "⬜"
 BOX = re.compile(r"^\s*- (" + DONE + "|" + OPEN + r") (.*)$")
@@ -13,6 +14,7 @@ LOCK = re.compile(r"^\s*- `([^`]+)`")
 FAILURE = re.compile(r"^### (" + DONE + "|" + OPEN + r") (\d{4}-\d{2}-\d{2}) · ([^·]+) · (.+?)\s*$")
 CLASS = re.compile(r"^\*\*Class\.\*\*\s*`([^`]+)`")
 BOUND = re.compile(r"^`([^`]+)`")
+TEMPLATES = Path(__file__).resolve().parents[1] / "templates"
 
 
 def plain_lines(text) -> List[Tuple[int, str]]:
@@ -125,8 +127,28 @@ def newly_ticked(before: Dict[str, str], after: Dict[str, str]) -> List[str]:
 
 
 def removed_open(before: Dict[str, str], after: Dict[str, str]) -> List[str]:
-    """The person's boxes that were open and are no longer there at all."""
-    return [key for key, mark in before.items() if mark == OPEN and key not in after]
+    """The person's boxes that were open and are gone. A box that only moved, its words unchanged, is still there.
+
+    A renamed section moves every box in it. So a box that left one place is matched with one that arrived, by the
+    record it is in and by its words, before it is called removed.
+    """
+    def words(key):
+        kind, _, unit = (key.split("|", 2) + ["", ""])[:3]
+        return kind, unit
+
+    arrived: Dict[Tuple[str, str], int] = {}
+    for key in after:
+        if key not in before:
+            arrived[words(key)] = arrived.get(words(key), 0) + 1
+    gone = []
+    for key, mark in before.items():
+        if mark != OPEN or key in after:
+            continue
+        if arrived.get(words(key), 0) > 0:
+            arrived[words(key)] -= 1
+            continue
+        gone.append(key)
+    return gone
 
 
 def owners(tracker_text, todo_text) -> Dict[str, str]:
@@ -144,3 +166,16 @@ def owners(tracker_text, todo_text) -> Dict[str, str]:
 
 def unit_of(key) -> Optional[str]:
     return key.split("|", 2)[2] if key.count("|") >= 2 else None
+
+
+def samples() -> Set[str]:
+    """The sample boxes `vectoralis init` writes in the person's column. Until someone rewrites one, it is nobody's."""
+    out: Set[str] = set()
+    for tracker, todo in (("tracker.md", "todo.md"), ("tracker.team.md", "todo.team.md")):
+        try:
+            marks = yours_marks((TEMPLATES / tracker).read_text(encoding="utf-8"),
+                                (TEMPLATES / todo).read_text(encoding="utf-8"))
+        except OSError:
+            continue
+        out |= {unit_of(key) or "" for key in marks}
+    return out - {""}

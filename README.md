@@ -13,7 +13,7 @@
 | The work | a bug fix, a small feature, one sitting | days of work, many files, anything other people rely on |
 | The steps | describe → plan in one line → edit → run the tests → commit | briefing → plan → build → check → re-check → record → report |
 | You get | three guards and one settings file | light, plus a tracker, two to-do lists, a failure log, lessons, decisions and locks |
-| Always loaded | 0 tokens | under 900, capped at 2,000 |
+| Always loaded | 0 tokens | about 1,400, capped at 2,000 |
 | Read | [guide/light.md](guide/light.md) | [guide/heavy.md](guide/heavy.md) |
 
 Start light. Switch the moment one of [five signals](guide/start.md) is true.
@@ -31,7 +31,7 @@ Then `/light:setup` in a session. Check it on your own machine:
 
 ```text
 $ vectoralis guards
-81 payloads, the slowest answer took 48 ms
+112 payloads, the slowest answer took 18 ms
 ```
 
 <details>

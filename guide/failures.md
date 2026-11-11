@@ -50,7 +50,8 @@ Draft a guard: harness/guards/debug-print.json, in warn mode, with one payload t
 ```
 
 - **The class** is a short slug. The command turns `Debug Print!` into `debug-print` and counts the entries that share it, open or closed.
-- **The real one** → this repository's [failure log](../harness/failures.md). Its class `false-flag` failed a second time, and that entry says: "this is the second failure of the class, so it gets one a machine enforces". What it got is a test. A guard is whatever a machine runs. This repository has no guard file yet.
+- **The real one** → this repository's [failure log](../harness/failures.md). Its class `false-flag` failed a second time, and that entry says: "this is the second failure of the class, so it gets one a machine enforces". What it got is a test. A guard is whatever a machine runs. The third failure of `claim-without-proof` got this repository's first guard file, [`rule-of-thumb-tokens.json`](../harness/guards/rule-of-thumb-tokens.json), at `warn`.
+- **In a live session** → told that a debug print had shipped twice, the agent logged both. The command said the class had failed before. It drafted `harness/guards/debug-print.json` at `warn`, with one payload cut from each real failure, ran `vectoralis guards`, and left the promotion to the person. Its first try wrote the file through a shell command, and `yours` blocked that: a guard file goes through the edit tool, where the guard can read it. `run`: Sonnet 5.5, headless, 2026-11-11.
 
 ---
 
@@ -79,7 +80,7 @@ BLOCKED by Vectoralis. Nothing was written.
 
 ## What it costs
 
-- **Tokens** → always loaded: the `failure` skill's description, 24 tokens, and one line of the briefing. `run`: `vectoralis budget`, an estimate of characters divided by four. The skill's body loads when a failure is logged. [Cost](cost.md)
+- **Tokens** → always loaded: the `failure` skill's description, about 42 tokens, and one line of the briefing. `run`: `vectoralis budget`, an estimate checked against live sessions. The skill's body loads when a failure is logged. [Cost](cost.md)
 - **Attention** → you read one guard file and type `promote`, once per guard. You read the log when you want to know why.
 
 ---

@@ -182,6 +182,29 @@ class Hooks(unittest.TestCase):
         recorded = json.loads((self.root / "harness/.checked.json").read_text())
         self.assertEqual(list(recorded), ["src/cart.py"])
 
+    def test_the_sample_boxes_of_a_new_harness_give_way_to_the_first_real_rows(self):
+        env = dict(os.environ, VECTORALIS_HOME=self.home.name)
+        env.pop("CLAUDE_PROJECT_DIR", None)
+        subprocess.run([sys.executable, str(ROOT / "plugins" / "light" / "bin" / "vectoralis"), "init", "heavy"],
+                       cwd=str(self.root), capture_output=True, env=env, check=True)
+        tracker, todo = self.root / "harness" / "tracker.md", self.root / "harness" / "todo.md"
+        sample = f"| the first unit of work | {OPEN} | {OPEN} | {OPEN} |"
+        self.assertIn(sample, tracker.read_text(encoding="utf-8"))
+        done = self.hook("write", tool_name="Edit", tool_input={
+            "file_path": str(tracker), "old_string": sample,
+            "new_string": f"| `src/cart.py` the cart total | {OPEN} | {OPEN} | {OPEN} |"})
+        self.assertEqual(done.returncode, 0, done.stderr)
+        mine = f"- {OPEN} the first thing only you can do"
+        self.assertIn(mine, todo.read_text(encoding="utf-8"))
+        done = self.hook("write", tool_name="Edit", tool_input={
+            "file_path": str(todo), "old_string": mine, "new_string": f"- {OPEN} approve the copy"})
+        self.assertEqual(done.returncode, 0, done.stderr)
+        todo.write_text(todo.read_text(encoding="utf-8").replace(mine, f"- {OPEN} approve the copy"), encoding="utf-8")
+        done = self.hook("write", tool_name="Edit", tool_input={
+            "file_path": str(todo), "old_string": f"- {OPEN} approve the copy\n", "new_string": ""})
+        self.assertEqual(done.returncode, 2)
+        self.assertIn("An open box of the person's would be removed", done.stderr)
+
     def test_a_subagent_cannot_write_a_record(self):
         self.settings(profile="heavy")
         done = self.hook("write", agent_id="agent-7", tool_name="Write",

@@ -324,7 +324,7 @@ A skill holds one procedure. Its description is the only part that is always loa
 
 | Skill | Plugin | Who calls it | What it does |
 |---|---|---|---|
-| `setup` | light, heavy | the person | runs `vectoralis init`, shows what it found, asks before a starter file |
+| `setup` | light, heavy | the person | runs `vectoralis init`, shows what it found, asks before a starter file. Heavy also offers the one setting that starts a builder from the work in hand |
 | `brief` | heavy | the agent | reads `## Now` and the next open boxes, states the session's goal |
 | `plan` | heavy | the agent | every question in one round, before the first edit: the crucial few in the dialog, the rest in a file, the pick first |
 | `check` | heavy | the agent | check, then re-check a different way: read the diff, sweep for siblings, re-run what found it |
@@ -332,7 +332,7 @@ A skill holds one procedure. Its description is the only part that is always loa
 | `report` | heavy | the agent | what changed, what ran and what it printed, what was not verified, every call made without asking |
 | `failure` | heavy | the agent | logs a failure, sweeps for siblings, drafts a guard the second time |
 | `handoff` | heavy | either | rewrites `## Now` so the next session starts cold and loses nothing |
-| `agents` | heavy | the agent | briefs a subagent in full, one owner per file, a worktree for work that could collide, and re-checks its claim |
+| `agents` | heavy | the agent | briefs a subagent in full, with the commit it starts from, one owner per file, a worktree for work that could collide, and re-checks its claim |
 | `pr` | heavy | the agent | opens a pull request, watches it to green, fixes what breaks, never merges unless `merge` is `agent` |
 
 - `setup` is person-only (`disable-model-invocation: true`), so it costs nothing until it is called.
@@ -341,7 +341,9 @@ A skill holds one procedure. Its description is the only part that is always loa
 | Subagent | What it does | Limits |
 |---|---|---|
 | `reviewer` | the re-check, read with fresh eyes | cannot write or edit |
-| `builder` | builds one unit it owns, in its own worktree | reports, never writes a record |
+| `builder` | checks the commit it stands on, then builds one unit it owns, in its own worktree | reports, never writes a record |
+
+- **A worktree starts from the remote's default branch**, not from the checkout, unless `"worktree": {"baseRef": "head"}` is in the project's `.claude/settings.json`. So the brief names the commit, and the builder goes there with a fast-forward or builds nothing. `read` in Claude Code's docs. `run`: both builders of a live session started 79 files away from the work in hand.
 
 ---
 
@@ -393,8 +395,9 @@ The briefing shows the count and the first three.
 | A skill body | 60 lines | counted |
 | `rules.md` | 60 lines | counted |
 
-- `vectoralis budget` counts characters and divides by four. It says it is an estimate.
-- The numbers printed in the guide come from a real session's context reading, marked `run`.
+- `vectoralis budget` counts characters and divides by 2.7, with ten characters for the list syntax around each name. It says it is an estimate.
+- The rate is measured, not assumed: the first request of a live Claude Code session, with the plugins and without, 2026-11-11. Four characters to a token read a third too low.
+- The numbers printed in the guide come from those sessions, marked `run`.
 
 ---
 
@@ -662,4 +665,3 @@ Each is marked `read` or `run` on its page before that page is called done.
 - Session-start output works as the always-loaded core in Codex.
 - Codex prints a compaction prompt from a hook, or it is a gap.
 - A plugin's `bin/` reaches the shell in Codex, or the skills call the CLI by its path.
-- Heavy's always-loaded cost, read from a real session.

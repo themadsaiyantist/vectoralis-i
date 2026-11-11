@@ -78,7 +78,7 @@ BLOCKED by Vectoralis. Nothing was written.
 
 ## What it costs
 
-- **Tokens** → `## Now` and the next boxes ride in the briefing, which is always loaded: 98 tokens in a fresh project, 133 once the scratch project had a handoff, two open failures and a lock. `run`: `vectoralis budget`, an estimate of characters divided by four.
+- **Tokens** → `## Now` and the next boxes ride in the briefing, which is always loaded: about 190 tokens in a fresh project, about 240 once a scratch project had a handoff, two open failures and a lock. `run`: `vectoralis budget`, an estimate checked against live sessions.
 - **Attention** → you tick your own boxes, and you read `## Now` when you come back.
 
 ---

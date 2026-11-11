@@ -27,7 +27,7 @@ The build state of a project as tables: one row per unit of work, one column per
 
 ## The file
 
-`harness/tracker.md`, one table under each `##` heading. Three rows of this repository's own [tracker](../harness/tracker.md), as they stood on 2026-11-11:
+`harness/tracker.md`, one table under each `##` heading. Three rows of this repository's own [tracker](../harness/tracker.md), as they stood on 2026-11-11, before the skills had run in a live session:
 
 ```markdown
 | Unit | Built | Checked | Yours |
@@ -79,7 +79,7 @@ NOT DONE YET, says Vectoralis.
 
 ## What it costs
 
-- **Tokens** → always loaded: one line of the briefing, `Tracker: 2 of 6 boxes done`, and the `record` skill's description, 22 tokens. `run`: `vectoralis budget`, an estimate of characters divided by four. The file itself is read when the agent opens it, and costs what it weighs. [Cost](cost.md)
+- **Tokens** → always loaded: one line of the briefing, `Tracker: 2 of 6 boxes done`, and the `record` skill's description, about 39 tokens. `run`: `vectoralis budget`, an estimate checked against live sessions. The file itself is read when the agent opens it, and costs what it weighs. [Cost](cost.md)
 - **Attention** → you tick your column, once per unit, and you read a stale flag when one appears.
 
 ---

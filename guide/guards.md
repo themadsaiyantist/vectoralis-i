@@ -55,21 +55,22 @@ Every guard ships with payloads: at least one that must be stopped, at least one
 
 ```text
 $ vectoralis guards
-guard        here    default  proof
-secrets      block   block    12 of 12 payloads behave
-format       off     warn     5 of 5 payloads behave
-tests        block   block    5 of 5 payloads behave
-destructive  block   block    15 of 15 payloads behave
-locks        block   block    10 of 10 payloads behave
-yours        block   block    14 of 14 payloads behave
-records      block   block    3 of 3 payloads behave
-push         block   block    6 of 6 payloads behave
-sweep        block   block    7 of 7 payloads behave
-nudge        warn    warn     4 of 4 payloads behave
-81 payloads, the slowest answer took 48 ms
+guard                 here    default  proof
+secrets               block   block    15 of 15 payloads behave
+format                off     warn     6 of 6 payloads behave
+tests                 block   block    6 of 6 payloads behave
+destructive           block   block    21 of 21 payloads behave
+locks                 block   block    11 of 11 payloads behave
+yours                 block   block    27 of 27 payloads behave
+records               block   block    3 of 3 payloads behave
+push                  block   block    6 of 6 payloads behave
+sweep                 block   block    13 of 13 payloads behave
+nudge                 warn    warn     4 of 4 payloads behave
+rule-of-thumb-tokens  warn    project  its payloads behave
+112 payloads, the slowest answer took 18 ms
 ```
 
-`run` on this repository, 2026-11-11. A payload is plain JSON, in [`plugins/light/engine/guards/payloads/`](../plugins/light/engine/guards/payloads/).
+`run` on this repository, 2026-11-11. The last row is this repository's own guard, drafted after a third failure of one class. A payload is plain JSON, in [`plugins/light/engine/guards/payloads/`](../plugins/light/engine/guards/payloads/).
 
 ---
 

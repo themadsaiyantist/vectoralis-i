@@ -61,7 +61,7 @@ Bypass is fast. **It removes the question, not the risk.** A guard stops only wh
 - **In Codex** `--yolo` drops the sandbox too. Its docs call a hook a guardrail, not a complete enforcement boundary, and warn that a hostile project can take what the container holds, credentials included.
 - **Most days the answer is not bypass.** `auto` in Claude Code and `--approve-for-me` in Codex remove most prompts and keep a check.
 
-`run`: `vectoralis guards` on this repository, 81 payloads, all behaving, 2026-11-11. Not run under bypass. More in [Safety](safety.md).
+`run`: `vectoralis guards` on this repository, 112 payloads, all behaving, 2026-11-11. And under bypass, in a live headless session on a scratch project: `yours` blocked a shell command that would have written a guard file, and `destructive` blocked a `git reset --hard` that a subagent tried. More in [Safety](safety.md).
 
 ---
 

@@ -2,7 +2,7 @@
 
 Watched to green. A pull request the agent opened is the agent's until its last check passes. Read this when work leaves your machine.
 
-**Contents:** When to add it · The steps · The file · The guard · What it costs · In Claude Code · In Codex · What can go wrong
+**Contents:** When to add it · The steps · The file · The guard · One real run · What it costs · In Claude Code · In Codex · What can go wrong
 
 ---
 
@@ -54,9 +54,29 @@ BLOCKED by Vectoralis. The command did not run.
 
 ---
 
+## One real run
+
+Pull request 1 of this repository, opened, watched and merged by a live session. `merge` is `agent` here.
+
+- **The change** → the CI workflow ran green, but warned that two of its actions sat on a deprecated runtime. The session read both sets of release notes, then moved them to their current major version.
+- **The commit was refused first.** The workflow's row in the tracker was ticked, and the file had changed:
+
+```text
+STALE: tracker: `.github/workflows/ci.yml` changed after its row was ticked
+1 flag(s).
+```
+
+- **It did not record a check that had not happened.** It unticked the box on its branch, pushed, opened the pull request and watched it: two runs, green on Python 3.9, 3.12 and 3.13.
+- **It read the run's log** for the warning the change was meant to remove, and found none. Then it merged, and ticked the row on `main`.
+- **What it taught** went into `harness/decisions.md`: a workflow is proven by its pull request, and its box stays open until the run is green.
+
+`run`: Claude Code 2.1.322, Sonnet 5.5, headless, 2026-11-11. Five minutes and 42 seconds, from the briefing to the handoff.
+
+---
+
 ## What it costs
 
-- **Tokens** → the `pr` skill is about 310 when it loads. No MCP server: `gh` is a command, and a command costs no context.
+- **Tokens** → the `pr` skill is about 450 when it loads. No MCP server: `gh` is a command, and a command costs no context.
 - **Attention** → you merge. Nothing before that, unless a check needs something only you have.
 - **Time** → the agent waits on the pipeline. That is the point.
 
@@ -82,4 +102,4 @@ BLOCKED by Vectoralis. The command did not run.
 - **Fixing the check, not the cause.** A skipped test is not a passing test.
 - **A branch open across another merge.** It was tested against code that is gone. Update it, and watch again.
 
-Verified 2026-11-11. The block is `run`. The steps are the `pr` skill of this repository.
+Verified 2026-11-11. The block and the real run are `run`. The steps are the `pr` skill of this repository.

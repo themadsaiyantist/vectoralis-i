@@ -74,7 +74,7 @@ STALE: decisions.md: `src/basket.py` names nothing
 
 ## What it costs
 
-- **Tokens** → nothing of the file is always loaded. Two skills send the agent to it, `plan` before it asks and `record` when a call is made: 22 tokens each for their descriptions. `run`: `vectoralis budget`, an estimate of characters divided by four.
+- **Tokens** → nothing of the file is always loaded. Two skills send the agent to it, `plan` before it asks and `record` when a call is made: about 39 tokens each for their descriptions. `run`: `vectoralis budget`, an estimate checked against live sessions.
 - **Attention** → none for a decision. For an exception you read the scope and type one `unlock`.
 
 ---

@@ -50,6 +50,58 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · The builder and the agents skill assumed a worktree starts from the work in hand · closed 2026-11-11
+
+**Class.** `unread-docs`
+
+**What failed.** The `builder` subagent works in its own worktree, and the `agents` skill merges its branch after the check. Both took for granted that a worktree starts from the session's checkout. It starts from the remote's default branch. In the first live run both builders built on a base 79 files away from the work in hand, and their passing tests proved nothing about it. The session caught it by checking the reports, and took their files instead of their branches.
+
+**Cause.** The page of Claude Code's docs on worktrees was not read when the subagent was written. Only the page on subagents was. The working rule says check the docs first, and one page short is not checked.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → the brief names the commit. The builder checks where it stands, goes there with a fast-forward, or builds nothing and says so. The setup skill offers the one setting that starts a worktree from the work in hand. A second live run started two commits behind, moved forward, and was merged after its check.
+- The guard → the box that caught it. A skill or a subagent is ticked Checked only after a live session used it, and that box stayed open until one did. For every piece that leans on the agent, the docs page of the feature it leans on is read before the piece is called built.
+
+### ✅ 2026-11-11 · Claude · The always-loaded cost on the pages was an estimate marked run, and a third too low · closed 2026-11-11
+
+**Class.** `claim-without-proof`
+
+**What failed.** The guide said heavy loads about 870 tokens before the first message, and a dozen pages gave a number for each piece, every one marked `run`. All of them came from `vectoralis budget`, which counted characters and divided by four. The spec said the guide's numbers come from a real session's context reading, and listed that reading as still to prove. The first reading showed 1,444 on a project one setup old and 1,746 on this repository. The pages were a third too low.
+
+**Cause.** A stand-in was marked as the thing. `run` was written because a command had run, not because a session had been read. The rule of thumb was never checked once against the model it stands for.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → the estimate divides by 2.7 and counts each name with its list syntax. Three live sessions set the rate, and it reads within 2% of them. Every page that carried an old number carries the new one, and says where it comes from.
+- The guard → the third failure of the class, so two things a machine holds. A unit test pins the estimate to the sessions that were measured. And this repository's first own guard, `harness/guards/rule-of-thumb-tokens.json`, warns when a guide page states the rule of thumb again. What a machine cannot hold stays a step: a `run` mark is written for a run of the thing itself.
+
+### ✅ 2026-11-11 · Claude · The setup skill could not fill the first rows: the yours guard blocked the sample rows and a renamed section · closed 2026-11-11
+
+**Class.** `false-flag`
+
+**What failed.** `/heavy:setup` ran in a live session for the first time. Its fifth step fills the first rows of the tracker and the to-do list. The `yours` guard blocked it twice. Replacing the sample row that `vectoralis init` writes read as removing an open box of the person's. Renaming the sample section read as removing every open box in it. The agent stopped and said so both times, and the project was left with sample rows only the person could delete.
+
+**Cause.** The guard's payloads were cut from its rule, not from the first minute of a new project. And the skill that leans on the guard had never been called in a live session, so the two had never met.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → a sample box that `init` wrote is nobody's until someone rewrites it, and a box that only moved keeps its place by its words. A third live run of the skill finished clean: rows replaced, section renamed, `vectoralis check` clean, the harness committed.
+- The guard → the fourth failure of the class. Six payloads hold both sides: the sample row, the sample box and the renamed section pass, and a real box removed, a box ticked during a rename and a box moved into the agent's list still block. One test walks from `init` to the first real rows through the hook.
+
+### ✅ 2026-11-11 · Claude · A script was edited while a background run was executing it, and the run started a second live session · closed 2026-11-11
+
+**Class.** `edit-while-running`
+
+**What failed.** A shell script that starts a headless session was edited while a background job was running it. A shell reads a script as it goes. When the first session ended, the shell read on from the middle of the new text and started the session a second time, with the same push rights on the copy of this repository. The second session found the work done and changed nothing. Its output replaced the transcript file of the first.
+
+**Cause.** The script was treated as text at rest. A file that a running process still reads is part of that process.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → the first session's transcript was recovered from Claude Code's own store. The second session ran three read-only commands and wrote nothing, and `main` holds no commit of its own.
+- The guard → one line in `CLAUDE.md`: a script a background job is running is not edited, a copy is.
+
 ### ✅ 2026-11-11 · Claude · A second review found the guards miss command forms the spec says they stop, and a hook ran commands nobody approved · closed 2026-11-11
 
 **Class.** `claim-without-proof`

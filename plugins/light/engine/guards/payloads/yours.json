@@ -375,5 +375,101 @@
     },
     "expect": "pass",
     "profile": "heavy"
+  },
+  {
+    "name": "passes the sample row of a new tracker being replaced by the first real one",
+    "call": {
+      "path": "harness/tracker.md",
+      "old": "| the first unit of work | ⬜ | ⬜ | ⬜ |",
+      "text": "| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| the first unit of work | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ the first thing only you can do\n\n## The agent's\n\n- ⬜ the first step\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes the sample box of a new to-do list being replaced by the person's first real one",
+    "call": {
+      "path": "harness/todo.md",
+      "old": "- ⬜ the first thing only you can do",
+      "text": "- ⬜ read the cart total once it is built"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| the first unit of work | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ the first thing only you can do\n\n## The agent's\n\n- ⬜ the first step\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a real open box of the person's being removed beside the sample one",
+    "call": {
+      "path": "harness/todo.md",
+      "old": "- ⬜ the first thing only you can do\n- ⬜ approve the copy",
+      "text": "- ⬜ read the cart total once it is built"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| the first unit of work | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ the first thing only you can do\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ the first step\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a tracker section being renamed with the person's open boxes in it",
+    "call": {
+      "path": "harness/tracker.md",
+      "old": "## First area",
+      "text": "## Checkout"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n**Contents:** First area\n\n---\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |\n| refund | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a box of the person's being ticked while its section is renamed",
+    "call": {
+      "path": "harness/tracker.md",
+      "old": "## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |",
+      "text": "## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ✅ |"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n**Contents:** First area\n\n---\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |\n| refund | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks an open box of the person's being moved into the agent's list",
+    "call": {
+      "path": "harness/todo.md",
+      "old": "- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy",
+      "text": "\n## The agent's\n\n- ⬜ approve the copy\n- ⬜ write the copy"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n**Contents:** First area\n\n---\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |\n| refund | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
   }
 ]

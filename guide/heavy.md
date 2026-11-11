@@ -2,7 +2,7 @@
 
 Work that runs for days, touches many files, or that other people rely on. Seven steps, and records that stay true between sessions. Read this when one of [the five signals](start.md) is true.
 
-**Contents:** The seven steps · What heavy adds · Set it up · One real session · The guards, live · What it costs · In Claude Code · In Codex · Samples to study · What can go wrong
+**Contents:** The seven steps · What heavy adds · Set it up · One real session · The guards, live · The skills, live · What it costs · In Claude Code · In Codex · Samples to study · What can go wrong
 
 ---
 
@@ -149,9 +149,41 @@ The agent reported both blocks and did not try to get around either.
 
 ---
 
+## The skills, live
+
+Three kinds of session called all ten skills and both subagents by name.
+
+**1. A whole session, on a copy of this repository.** One row of the tracker: the CI workflow.
+
+brief → plan → pr → record → check → report → handoff
+
+- It read the release notes before the first edit, and found the merge call already made in `harness/decisions.md`.
+- The commit step refused a ticked file that had changed. It unticked the box instead of recording a check that had not happened.
+- It opened pull request 1, watched both runs to green on three Python versions, merged, and ticked the row on `main`.
+- One call was not its to make. It left the question in a file at the root, its pick first, and went on.
+- Five minutes and 42 seconds. [Pull requests](pull-requests.md) has the run.
+
+**2. Setup, on a scratch project.** `/heavy:setup` → `vectoralis init heavy` → the test command approved on the person's word → the first rows → one line in `.claude/settings.json`, on the person's yes → `vectoralis check` clean → the harness committed. 6 turns, 25 seconds, 8 cents.
+
+- The first two tries did not finish. The `yours` guard read the sample rows as the person's and blocked them. The agent stopped and said so both times. The fix and its payloads are in [`harness/failures.md`](../harness/failures.md).
+
+**3. Two builders, the reviewer and a failure, on the same project.**
+
+brief → plan → failure → agents → check → record → report → handoff
+
+- A debug print had shipped twice. The second entry made the agent draft a guard at `warn`. [Failures](failures.md)
+- Two builders went out together, each in its own worktree, each told the commit to start from. [Agents](agents.md)
+- The reviewer read both branches and found two defects in one unit. Both were fixed before the merge, and only then did the two boxes move.
+- The last column stayed open. It is the person's.
+- Three minutes and 26 seconds, 69 cents.
+
+`run`: Claude Code 2.1.322, Sonnet 5.5, headless, 2026-11-11. The second and third ran with permission prompts off and the guards on.
+
+---
+
 ## What it costs
 
-- **Tokens** → about 870 always loaded on a fresh project: the skill descriptions about 240, `rules.md` about 500, the briefing about 130. The briefing grows with your handoff, and this repository's total is near 1,070. The cap is 2,000, and `vectoralis check` fails over it. [Cost](cost.md)
+- **Tokens** → about 1,400 always loaded on a fresh project: the skill and subagent descriptions about 420, `rules.md` about 740, the briefing about 190. A live session measured it: 1,444 on a project one setup old, 1,746 on this repository. The briefing grows with your handoff. The cap is 2,000, and `vectoralis check` fails over it. [Cost](cost.md)
 - **Attention** → you answer one round of questions before the build, and you tick your own boxes.
 - **Time** → one more test run at the end of a turn that changed something.
 

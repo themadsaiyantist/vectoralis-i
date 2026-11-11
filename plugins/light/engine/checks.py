@@ -16,6 +16,10 @@ from . import records, rules
 from .project import git, matches
 
 CAPS = {"light": 300, "heavy": 2000}
+# Characters to one token, and the list syntax around one skill or subagent. Measured, not assumed: three live
+# Claude Code sessions on Sonnet 5.5, 2026-11-11, where this estimate came within 2% of what the model was sent.
+# Four characters to a token, the usual rule of thumb, read a third too low on this kind of text.
+CHARS_PER_TOKEN, LISTING = 2.7, 10
 CHECKED = "harness/.checked.json"
 MAX_FILES = 3000
 RECORDS = ("rules.md", "tracker.md", "todo.md", "failures.md", "lessons.md", "decisions.md", "locks.md")
@@ -189,7 +193,7 @@ def plugin_roots(profile) -> List[Path]:
 
 
 def budget(proj) -> Dict:
-    """What is always loaded, in characters and in tokens estimated at four characters each, against the cap."""
+    """What is always loaded, in characters and in estimated tokens, against the cap."""
     from . import briefing
 
     items = []
@@ -200,9 +204,10 @@ def budget(proj) -> Dict:
                 continue
             name = path.parent.name if path.name == "SKILL.md" else path.stem
             text = (meta.get("description", "") + " " + meta.get("when_to_use", "")).strip()
-            items.append((f"{root.name}:{name}", len(name) + len(text)))
+            label = f"{root.name}:{name}"
+            items.append((label, len(label) + len(text) + LISTING))
     if proj.profile == "heavy":
         items.append(("harness/rules.md", len(proj.read("rules.md").strip())))
         items.append(("the briefing", len(briefing.status_text(proj, flags=[]))))
-    rows = [(name, chars, math.ceil(chars / 4)) for name, chars in items]
+    rows = [(name, chars, math.ceil(chars / CHARS_PER_TOKEN)) for name, chars in items]
     return {"rows": rows, "total": sum(r[2] for r in rows), "cap": CAPS[proj.profile]}

@@ -92,6 +92,6 @@ STALE: tracker: `cart.py` changed after its row was ticked
 - **Two instruction files that drift.** `CLAUDE.md` says one thing, `AGENTS.md` another, and Claude Code reads the first alone → one file, imported.
 - **A file that hides `AGENTS.md`.** Zed takes the first match of its list, so an old `.cursorrules` wins. Warp prefers `WARP.md`. Gemini CLI needs its setting → ask the agent which instruction files it loaded before you trust that it read yours.
 - **A file past its limit.** Codex stops at 32 KiB in all. Devin takes the first 16 KiB of each file → keep `AGENTS.md` to pointers, and let `harness/rules.md` hold the rules.
-- **The rules loaded twice.** A plain "read `harness/rules.md`" costs about 500 tokens a second time where the hook already printed them → the "if" that opens the first line above. `run`: `vectoralis budget`.
+- **The rules loaded twice.** A plain "read `harness/rules.md`" costs about 740 tokens a second time where the hook already printed them → the "if" that opens the first line above. `run`: `vectoralis budget`.
 
 Verified on Claude Code 2.1.322 and Codex 0.167.1, 2026-11-11. `read`: each agent's own docs, linked in the table, with Claude Code [memory](https://code.claude.com/docs/en/memory) and Codex [AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for the two sections on them. `run`: every `vectoralis` command of the first table, by hand in new projects. No agent of the second table was run here, so the setup is proven up to the moment the agent starts.

@@ -28,6 +28,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 - **Check the docs first.** Run only what cannot be read.
 - **Scope is the author's.** Anything else found on the way is reported, never fixed on the side.
 - **Scratch stays out of the repository.**
+- **A script a background job is running is not edited.** A shell reads it as it goes. Change a copy.
 
 ---
 

@@ -5,6 +5,7 @@ Run with `python3 -m unittest discover -s tests -q`.
 import contextlib
 import io
 import json
+import math
 import os
 import subprocess
 import sys
@@ -81,6 +82,16 @@ class Parts(unittest.TestCase):
         rows = records.tracker_rows(text)
         self.assertEqual([(r["section"], r["path"], r["yours"]) for r in rows], [("Real", "a.py", OPEN)])
         self.assertEqual(records.headings(text), ["Real"])
+
+    def test_a_box_that_moved_is_not_a_box_that_was_removed(self):
+        before = {"tracker|First area|cart": OPEN, "tracker|First area|refund": OPEN}
+        renamed = {"tracker|Checkout|cart": OPEN, "tracker|Checkout|refund": OPEN}
+        self.assertEqual(records.removed_open(before, renamed), [])
+        self.assertEqual(records.removed_open(before, {"tracker|Checkout|cart": OPEN}), ["tracker|First area|refund"])
+        twice = {"tracker|A|cart": OPEN, "tracker|B|cart": DONE}
+        self.assertEqual(records.removed_open(twice, {"tracker|B|cart": DONE}), ["tracker|A|cart"])
+        self.assertIn("the first unit of work", records.samples())
+        self.assertIn("the first thing only you can do", records.samples())
 
     def test_the_failure_log_reader(self):
         text = f"### {OPEN} 2026-01-02 · agent · A stale box\n\n**Class.** `stale-record`\n\n### {DONE} 2026-01-01 · goku · A lost edit · closed 2026-01-01\n"
@@ -178,6 +189,20 @@ class Checks(Project_):
         heavy = checks.budget(Project(str(self.root)))
         self.assertEqual(heavy["cap"], 2000)
         self.assertLessEqual(heavy["total"], 2000)
+
+    def test_the_budget_counts_at_the_rate_a_live_session_measured(self):
+        self.cli("init", "heavy")
+        self.put("harness/rules.md", "x" * 2700)
+        rows = {name: (chars, tokens) for name, chars, tokens in checks.budget(Project(str(self.root)))["rows"]}
+        self.assertEqual(rows["harness/rules.md"], (2700, 1000))
+        skill = ROOT / "plugins" / "heavy" / "skills" / "brief" / "SKILL.md"
+        said = checks.frontmatter(skill.read_text(encoding="utf-8"))["description"]
+        chars, tokens = rows["heavy:brief"]
+        self.assertEqual(chars, len("heavy:brief") + len(said) + checks.LISTING)
+        self.assertEqual(tokens, math.ceil(chars / 2.7))
+        # What live sessions carried for the text the session start printed: (characters, tokens), 2026-11-11.
+        for chars, measured in ((2682, 1444 - 419), (3595, 1746 - 419)):
+            self.assertAlmostEqual(chars / checks.CHARS_PER_TOKEN / measured, 1.0, delta=0.05)
 
 
 class Cli(Project_):

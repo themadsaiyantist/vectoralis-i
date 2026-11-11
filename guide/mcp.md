@@ -17,7 +17,7 @@ An MCP server gives the agent tools for a system outside the repository: an issu
 | How you trim it | switch a server off in `/mcp`, deny a tool with a rule | `enabled = false`, `enabled_tools`, `disabled_tools` |
 
 - **Attention** → one more sign-in to keep alive, one more program to keep trusted.
-- **For scale** → this whole harness holds itself to 2,000 tokens always loaded in heavy, and loads about 870 in a new project. `run`: `vectoralis budget`, 2026-11-11. What else loads → [Context](context.md).
+- **For scale** → this whole harness holds itself to 2,000 tokens always loaded in heavy, and loads about 1,400 in a new project. `run`: a live session, 2026-11-11. What else loads → [Context](context.md).
 
 `read`: Claude Code [MCP](https://code.claude.com/docs/en/mcp), [MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart), [costs](https://code.claude.com/docs/en/costs). Codex [MCP](https://learn.chatgpt.com/docs/extend/mcp), [configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference), [the CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli). 2026-11-11.
 

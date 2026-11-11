@@ -77,13 +77,14 @@ What is always loaded on the day you set it up, in tokens:
 | The piece | Light | Heavy | How it arrives |
 |---|---|---|---|
 | The guards | 0 | 0 | hooks. A guard costs context only when it speaks |
-| The skill and subagent descriptions | 0 | about 240 | with the plugin |
-| `harness/rules.md`, the core | 0 | about 500 | printed by the session-start hook |
-| The briefing | 0 | about 130 | printed right after it |
-| **Always loaded** | **0** | **about 870** | the caps are 300 and 2,000 |
+| The skill and subagent descriptions | 0 | about 420 | with the plugin |
+| `harness/rules.md`, the core | 0 | about 740 | printed by the session-start hook |
+| The briefing | 0 | about 190 | printed right after it |
+| **Always loaded** | **0** | **about 1,360** | the caps are 300 and 2,000 |
 
-- `run`: `vectoralis budget` printed 871 in a project fresh from `vectoralis init heavy`, and 0 for light, 2026-11-11. It counts characters and divides by four, and says it is an estimate.
-- **The briefing is the piece that moves.** It prints up to ten lines of `## Now`, the next three boxes, the open failures, the locks and the stale flags. In this repository it read 191 and, later the same afternoon, 303, when `## Now` went from one line to five. That is why the total in [Cost](cost.md), measured on this repository, is higher. `run`.
+- `run`: `vectoralis budget` printed 1,356 in a project fresh from `vectoralis init heavy`, and 0 for light, 2026-11-11. It counts characters and divides by 2.7, and says it is an estimate.
+- **The estimate was checked against live sessions.** With the two plugins, the first request carried 419 tokens more for the descriptions alone, 1,444 more on a project one setup old, and 1,746 more on this repository. Light alone added 0. The estimate came within 2% each time. `run`: Sonnet 5.5, 2026-11-11.
+- **The briefing is the piece that moves.** It prints up to ten lines of `## Now`, the next three boxes, the open failures, the locks and the stale flags. In this repository it read about 280 and, later the same afternoon, about 450, when `## Now` went from one line to five. That is why the total in [Cost](cost.md), measured on this repository, is higher. `run`.
 - **Over the cap, `vectoralis check` fails.** What each skill weighs when it loads is in [Cost](cost.md).
 - The core arrives through a hook because your instructions file is yours. Both agents run that hook again after a compaction, so the core comes back by itself.
 

@@ -20,16 +20,18 @@ The cheapest piece is a guard: it reads nothing until it speaks.
 | Piece | Light | Heavy |
 |---|---|---|
 | The guards | 0 | 0 |
-| The skill descriptions | 0 | about 195 |
-| The subagent descriptions | 0 | about 47 |
-| `harness/rules.md`, the core | 0 | about 500 |
-| The briefing | 0 | about 130 |
-| **Total** | **0** | **about 870** |
+| The skill descriptions | 0 | about 340 |
+| The subagent descriptions | 0 | about 80 |
+| `harness/rules.md`, the core | 0 | about 740 |
+| The briefing | 0 | about 190 |
+| **Total** | **0** | **about 1,360** |
 | **The cap** | **300** | **2,000** |
 
-- `run`: `vectoralis budget` on a fresh heavy project, 2026-11-11. It counts characters and divides by four, and says it is an estimate.
-- The briefing grows with your handoff. This repository's is about 325 today, which puts its total near 1,070.
-- In Codex the two `setup` descriptions are listed as well, about 30 tokens: the field that hides them is Claude Code's.
+- `run`: `vectoralis budget` on a fresh heavy project, 2026-11-11. It counts characters and divides by 2.7, and says it is an estimate.
+- **Measured, not only estimated.** The first request of a live session carried 1,444 tokens more with the two plugins than without, on a project one setup old, and 1,746 more on this repository. Light alone added 0. The estimate came within 2% of both. `run`: Claude Code 2.1.322, Sonnet 5.5, 2026-11-11.
+- **Four characters to a token read a third too low here.** The first version of the estimate used that rule of thumb and printed 870 where the session carried 1,444. Records are dense with paths, backticks and symbols. Measure once before you trust a rule of thumb.
+- The briefing grows with your handoff. This repository's is about 460 today, which puts its total near 1,630.
+- In Codex the two `setup` descriptions are listed as well, about 45 tokens: the field that hides them is Claude Code's.
 - Over the cap, `vectoralis check` fails. The cap is a test, not a hope.
 - Light's one skill is called by you alone, so its description is never loaded.
 
@@ -41,13 +43,13 @@ A skill's body loads when the task calls it, and stays for the session.
 
 | Skill | About, in tokens | Skill | About, in tokens |
 |---|---|---|---|
-| `brief` | 240 | `failure` | 530 |
-| `plan` | 430 | `handoff` | 360 |
-| `check` | 360 | `agents` | 380 |
-| `record` | 440 | `pr` | 310 |
-| `report` | 240 | `setup` | 330 |
+| `brief` | 360 | `failure` | 770 |
+| `plan` | 630 | `handoff` | 530 |
+| `check` | 530 | `agents` | 570 |
+| `record` | 650 | `pr` | 450 |
+| `report` | 350 | `setup` | 530 |
 
-`run`: the size of each `SKILL.md`, in characters divided by four, 2026-11-11.
+`run`: the size of each `SKILL.md`, in characters divided by 2.7, the rate the live sessions measured, 2026-11-11.
 
 - A record costs what it weighs, when it is read. A tracker of 80 rows is read once per session, not per turn.
 - A subagent starts its own context. It keeps yours small, and fills its own.

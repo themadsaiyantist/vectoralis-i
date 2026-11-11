@@ -1,0 +1,30 @@
+{
+  "id": "rule-of-thumb-tokens",
+  "why": "failures.md, class claim-without-proof, three times",
+  "on": "write",
+  "path": "guide/**/*.md",
+  "pattern": "(?i)divide[sd]? by four|characters ?[/÷] ?4\\b",
+  "mode": "warn",
+  "message": "A token count on a page comes from a live session, or from `vectoralis budget`, which was measured against one. Four characters to a token read a third too low here.",
+  "instead": "run `vectoralis budget`, or read the first request of a session with the plugins and without.",
+  "payloads": [
+    {
+      "name": "catches the rule of thumb on a guide page",
+      "path": "guide/cost.md",
+      "text": "It counts characters and divides by four, and says it is an estimate.",
+      "expect": "hit"
+    },
+    {
+      "name": "passes the measured rate",
+      "path": "guide/cost.md",
+      "text": "It counts characters and divides by 2.7, and says it is an estimate.",
+      "expect": "pass"
+    },
+    {
+      "name": "passes the same words outside the guide",
+      "path": "harness/failures.md",
+      "text": "It counted characters and divided by four.",
+      "expect": "pass"
+    }
+  ]
+}

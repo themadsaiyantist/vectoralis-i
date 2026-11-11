@@ -29,7 +29,7 @@ One HTML page, built from the files in `harness/` on your own machine: what is d
 
 | Card | What it shows | In the scratch project |
 |---|---|---|
-| The numbers | boxes done, open for the agent, open for you, open failures, stale flags, tokens always loaded against the cap | 2 / 6, 2, 2, 2, 0, 876 of 2000 |
+| The numbers | boxes done, open for the agent, open for you, open failures, stale flags, tokens always loaded against the cap | 2 / 6, 2, 2, 2, 0, 1405 of 2000 |
 | Now | the lines of `## Now` in the to-do list | one line, the handoff |
 | Open work | one bar per section of the tracker, done over total | Checkout, 2 / 6 |
 | Next for the agent | its first eight open boxes | two boxes |
@@ -41,7 +41,7 @@ One HTML page, built from the files in `harness/` on your own machine: what is d
 
 - The number of open failures turns red above zero, the stale flags amber, the tokens red over the cap (`run`). Otherwise each is green.
 - The numbers count everything. The two lists stop at eight, so a long list shows its top.
-- The page was 38 lines and about 4 KB. `run`: `vectoralis dashboard` in a scratch project, 2026-11-11, and the page it wrote.
+- The page was 39 lines and about 4 KB. `run`: `vectoralis dashboard` in a scratch project, 2026-11-11, and the page it wrote.
 
 ---
 

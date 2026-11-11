@@ -17,11 +17,10 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → every page is written, checked and pushed: the spec, the harness (41 tests, 106 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people worth following. Light and heavy ran for real in Claude Code. Both plugins install in Codex. CI runs `checkout@v7` and `setup-python@v7`, green on 3.9, 3.12 and 3.13, with no Node.js 20 warning (pull request 1, merged).
-- **Next →** the ten heavy skills and the two subagents in a live session, on a copy of this repository → tick their two rows in the tracker.
-- **Then** → one last pass: `sh tools/check.sh`, the tracker against the files, this block, the report to the author.
-- **Open** → a Codex session needs the author's login. Every CI run now shows a notice that `ubuntu-latest` moves to Ubuntu 26, outside the scope given, so the call is in `c.md`, pick first.
-- **Mind** → commit through the hook, with explicit paths while a subagent writes. A ticked file that changed needs `vectoralis affirm` after it is checked again, and a workflow can only be checked by a pull request, so untick its Built box on the branch and tick it on `main` after the merge.
+- **Where it stands** → built, checked and pushed: the spec, the harness (44 tests, 112 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people. Every skill and both subagents ran in live sessions. CI is green.
+- **Next →** nothing the agent can do alone. The open boxes are under **Yours**.
+- **Open** → a live Codex session needs the author's login. Kit entries are `read`, not tried.
+- **Mind** → commit through the hook. A ticked file that changed needs `vectoralis affirm` after it is checked again. A script a background job runs is not edited.
 
 ---
 
@@ -66,7 +65,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Codex → the same package installs in Codex, and the table of gaps is written
 - ⬜ Codex, live → the hooks and the skills in a real Codex session. It needs your Codex login
 - ✅ One real run → light on `runlog`, in Claude Code, for `guide/light.md`
-- ⬜ Install heavy in this repository → run a live session on its own harness
+- ✅ A live session on this repository's own harness → seven skills and pull request 1, on a copy with both plugins loaded
 - ✅ The guide → every page listed in `spec.md`, 30 of them
 - ✅ The kit → 19 situations, and the index
 - ✅ The roadmaps → 3 careers
