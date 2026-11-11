@@ -23,6 +23,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `plugins/light/engine/dashboard.py` the dashboard | ✅ | ✅ | ⬜ |
 | `plugins/light/engine/cli.py` the CLI | ✅ | ✅ | ⬜ |
 | `plugins/light/hooks/hooks.json` one hooks file, run in a live Claude Code session | ✅ | ✅ | ⬜ |
+| The heavy guards and the grants, in live Claude Code sessions | ✅ | ✅ | ⬜ |
 | `plugins/heavy/skills/` ten skills, used in a live session | ✅ | ⬜ | ⬜ |
 | `plugins/heavy/agents/` two subagents, used in a live session | ✅ | ⬜ | ⬜ |
 | `.claude-plugin/marketplace.json` the marketplace, validated | ✅ | ✅ | ⬜ |

@@ -15,7 +15,7 @@ The absolute rules are in `vectoralis-i.md`. This is what each one means when so
 | Human readable | plain words, one fact per bullet, a sequence written with →, a table when things are compared |
 | Modern | only what both agents ship as stable today, and every page closes with the versions it was verified on |
 | Hot topics | the twelve topics of the guide and the five topics beyond the roadmaps each own a page |
-| Clean | one fact has one home, and a page that runs past two screens is split |
+| Clean | one fact has one home, and a page stays near two screens. The two workflow pages run longer, because they carry their real runs |
 | Effective | every page ends in something the reader can do now |
 | Organized | every folder opens on a `README.md` that lists what is in it |
 | Inspirational | show what was built and how, and let that do the work. Never say it is motivation |
