@@ -21,7 +21,7 @@
   "plugins/heavy/agents": "d414a58add5388271b4d363b9b77de542bee3758",
   "plugins/heavy/skills": "ba4d9be5ddc68dd80c2b74a5ffd99dddba49146e",
   "plugins/light/engine/briefing.py": "b53021d2dd04386c8f670a6bf2bece5ac3a02f35",
-  "plugins/light/engine/checks.py": "b0388e2f662a747ba349df4a7ee9c3f33a8ba09c",
+  "plugins/light/engine/checks.py": "593573ceac7101ce9522da7fcc7771eec21e077e",
   "plugins/light/engine/cli.py": "147128d21acdf08902942bae63d013bbe8954508",
   "plugins/light/engine/dashboard.py": "b42f63b4cea6e9365c4a467b8e37148b69897468",
   "plugins/light/engine/grants.py": "0522631a5ab77c8f6ee4688fd09f096cc95c3ecb",

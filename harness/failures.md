@@ -50,6 +50,19 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · The staleness check flagged a handoff line that names a page the tracker lists as not built · closed 2026-11-11
+
+**Class.** `false-flag`
+
+**What failed.** The third false flag of the check. The handoff said what comes next and named the page, which is not written yet. The check called the path dead. The pre-commit hook then refused the commit, which is the hook working and the check wrong.
+
+**Cause.** Each earlier fix handled one place: first the tracker's rows, then the to-do list's open boxes. Nobody had written down what "planned" means, so each record got its own patch.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The cause → one definition, used by the staleness check and by the link check: a path the tracker lists with no box ticked is planned, and planned work is never stale.
+- The guard → the test holds a handoff line that names a planned page, beside the two earlier cases.
+
 ### ✅ 2026-11-11 · Claude · A commit went out while the check still showed a flag, a second time · closed 2026-11-11
 
 **Class.** `unread-check`
