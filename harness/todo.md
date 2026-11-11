@@ -17,7 +17,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-**Next →** the history is cleaned → the first push → the spec → the build, in the order below. `b.md` is answered while it runs.
+**Next →** the similar repositories → the spec → the build, in the order below. `b.md` is answered while it runs.
 
 ---
 
@@ -43,7 +43,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Start the to-do list, the failure log and `CLAUDE.md`
 - ✅ Fold the 25 answers into the outline → delete `a.md`
 - ✅ Ask the second round → `b.md`, seven calls
-- ⬜ Clean the series text and the history → first push
+- ✅ Clean the series text and the history → first push
 - ⬜ Study the similar repositories → notes kept outside the repository
 - ⬜ Check each platform fact in the docs → run only what cannot be read
 - ⬜ Fold the answers of `b.md` into the outline → delete `b.md`
