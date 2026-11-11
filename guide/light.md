@@ -22,7 +22,7 @@ describe → plan in one line → edit → run the tests → commit
 
 | Guard | What it does | When |
 |---|---|---|
-| `secrets` | stops a key being written to a file, and a command that prints one | before the write, before the command |
+| `secrets` | stops a key being written to a file, by an edit or by a shell command, and a command that prints one | before the write, before the command |
 | `format` | runs your formatter, and says when it rewrote the file | after every edit |
 | `tests` | stops "done" while the tests fail | when the agent stops |
 
@@ -136,7 +136,7 @@ Both are `run`, the same day, shortened to the lines that matter. Every block sa
 - **The tests already fail before you start** → every turn ends in a block. Fix them first, or set `"tests": "warn"` under `guards` for now.
 - **A slow suite** → raise `test_timeout`. Past it, the guard leaves a notice and does not block.
 - **A repository that arrives with its own settings** → its test command does not run until you have read it and typed `vectoralis trust`. The guard tells you so.
-- **An edit made through the shell** → the `secrets` guard reads a write and a command, not what a script does inside. Heavy adds a sweep at the end of the turn. [Guards](guards.md)
+- **A key the text does not show** → `secrets` reads the text of a write and of a command, a heredoc and a redirect included. A key built at run time, or carried by a variable with an innocent name, passes it. Light has no second look. Heavy adds a sweep at the end of the turn. [Guards](guards.md)
 
 ---
 

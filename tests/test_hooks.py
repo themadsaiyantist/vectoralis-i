@@ -74,6 +74,16 @@ class Hooks(unittest.TestCase):
         self.assertEqual(done.returncode, 2)
         self.assertIn("config.py", done.stderr)
 
+    def test_a_patch_sent_through_the_shell_keeps_the_projects_skip(self):
+        self.settings(skip={"secrets": ["tests/fixtures/**"]})
+        patch = lambda path: f"apply_patch <<'EOF'\n*** Begin Patch\n*** Add File: {path}\n+if n > 0: t = '{TOKEN}'\n*** End Patch\nEOF"
+        codex = {"PLUGIN_ROOT": str(ROOT / "plugins" / "light")}
+        excused = self.hook("shell", env=codex, tool_name="Bash", tool_input={"command": patch("tests/fixtures/k.py")})
+        self.assertEqual(excused.returncode, 0, excused.stderr)
+        held = self.hook("shell", env=codex, tool_name="Bash", tool_input={"command": patch("src/k.py")})
+        self.assertEqual(held.returncode, 2)
+        self.assertEqual(held.stderr.count("GitHub token"), 1, "one key, one finding: " + held.stderr)
+
     def test_a_warning_reaches_the_agent_as_context_and_does_not_block(self):
         done = self.hook("write", tool_name="Write", tool_input={
             "file_path": str(self.root / "s.py"), "content": 'api_key = "9f8e7d6c5b4a39281706f5e4d3c2b1a0"\n'})

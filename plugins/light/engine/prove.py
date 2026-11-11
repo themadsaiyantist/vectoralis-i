@@ -23,7 +23,10 @@ PAYLOADS = Path(__file__).resolve().parent / "guards" / "payloads"
 
 
 def _text(parts) -> str:
-    """A payload's text: a string, or pieces joined, so no real-looking key ever sits whole in a file."""
+    """A payload's text or command: a string, or pieces joined with nothing, so no real-looking key sits whole in a file.
+
+    Not a Codex argv list, which `payload.build` joins with spaces.
+    """
     if isinstance(parts, str):
         return parts
     return "".join(p if isinstance(p, str) else str(p["repeat"]) * int(p["times"]) for p in parts or [])
@@ -72,7 +75,7 @@ def run_case(case) -> Dict:
                 state.setdefault("locks", records.locks(proj.read("locks.md")))
             _put(root, case.get("then"))
             spec = case.get("call") or {}
-            call = Call(event=case["event"], cwd=str(root), command=spec.get("command", ""),
+            call = Call(event=case["event"], cwd=str(root), command=_text(spec.get("command", "")),
                         subagent=bool(case.get("subagent")), last_message=case.get("last_message", ""))
             if "path" in spec:
                 target = root / spec["path"]

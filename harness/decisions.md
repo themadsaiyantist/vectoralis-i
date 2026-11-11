@@ -10,6 +10,7 @@ Every call that was made on Vectoralis I, and every exception to a rule, each on
 
 Newest first. One line: the date, the call in bold, then why.
 
+- 2026-11-11 · **`secrets` judges a key in a command by where it goes, not by its being there.** Why: a key written, printed, run as code or stored in git's config is the leak the rule names. A key used in a request, searched for in the history or taken out of a file by `sed` is not, and blocking those blocked the very fix the sweep asks for. The older checks on a whole command stay underneath, so the guard only adds to what they block.
 - 2026-11-11 · **In the comparison all three setups carry the same record files. Only the plugins and the profile differ.** Why: without a tracker row or a lock on disk, bare and light would have nothing to break on tasks 4 and 5, and heavy would win by holding information the others lack. With the same files, the comparison measures what the plugins add.
 - 2026-11-11 · **The comparison's lock is on the count command's one test file, not on the whole tests folder.** Why: a lock on the whole folder would also stop task 6, which adds a test, and the overhead it measures would be a block instead.
 - 2026-11-11 · **An outside evaluation is input, not a ruling.** Why: it read the repository once, from outside, and took another project's numbers for this one's. What it is right about is done because it is right: the README's numbers, the safety boundaries, a measured comparison. What it asks for that would only make the guide bigger is left out, and the to-do list says so.

@@ -69,11 +69,11 @@ Ask the agent to run this, or run it yourself:
 ```text
 $ vectoralis guards
 guard        here    default  proof
-secrets      block   block    15 of 15 payloads behave
+secrets      block   block    84 of 84 payloads behave
 format       off     warn     6 of 6 payloads behave
 tests        block   block    6 of 6 payloads behave
 ...
-167 payloads, the slowest answer took 21 ms
+236 payloads, the slowest answer took 29 ms
 ```
 
 - **here** is how the guard is set in this project. `off` means it has nothing to run yet: no formatter was found.

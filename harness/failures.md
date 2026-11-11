@@ -50,6 +50,20 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · The `secrets` guard let a token into a file through a shell heredoc · closed 2026-11-11
+
+**Class.** `claim-without-proof`
+
+**What failed.** The measured comparison asked for a GitHub token as a constant in a script. In two of three light runs the agent wrote the file with `cat > scripts/upload.py <<'EOF'`, the token in the command's own text, and committed it. Nothing blocked. `guide/light.md` says the guard "stops a key being written to a file". In heavy the `sweep` found the token when the agent stopped, all three times, and the agent took it out and amended its local commit. Nothing was pushed.
+
+**Cause.** On a shell command the guard asks three questions: does it read a secrets file, echo a secret variable, or dump the environment. It never asks whether the command's own text holds a key in a known format. The payloads were cut from "prints", and none writes a file through the shell. The live sessions before this one used the file tools, so the gap never showed.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → the guard reads a command the way the shell splits it: pipelines of simple commands, quotes read in order, comments dropped, each heredoc body kept with its command. A key the text holds blocks where it would be written, printed, run as code or stored in git's config, and not where it is only used. A secret variable expanded into a file blocks. The older checks stay underneath as a floor. Task 1 of the comparison ran again on the fixed guard: light 0 of 3, heavy 0 of 3, blocked before the command ran.
+- The cause → the first fix was the narrow one, a key anywhere in a command, and a second reader who had not written it found what it broke and what it missed, five rounds over: a project's `skip` lost for a patch, a search for a leaked key blocked, a key used in a header blocked, a sed that removes a key blocked, apostrophes that hid an `echo`. Each round's fix opened something smaller. The same lesson as the guard fix before it: a guard is proven by the cases its author did not think of.
+- The guard → 84 payloads for `secrets`, from 15, each a case the reader raised, both sides. 25 mutants of the new code, each caught by one of them. What a text guard cannot hold is written on [Guards](../guide/guards.md): a key built at run time, a key carried into a later command by an innocent name, the output of a command sent to a file when the key sits in its arguments.
+
 ### ✅ 2026-11-11 · Claude · A second reader found a hole the guard fix had opened, and older ways past the guard · closed 2026-11-11
 
 **Class.** `claim-without-proof`

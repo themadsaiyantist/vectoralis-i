@@ -28,7 +28,7 @@ A block always says three things: what was stopped → the rule → what to do i
 
 | Guard | Profile | Blocks | Warns |
 |---|---|---|---|
-| `secrets` | light | a key in a known format written to a file, a command that prints a secrets file | a quoted value that only looks like a key |
+| `secrets` | light | a key in a known format written to a file, by an edit or by a command: a redirect, a heredoc, an in-place edit, a remote's address. A secret variable expanded into a file. A command that prints a key, a secret variable or a secrets file | a quoted value that only looks like a key |
 | `format` | light | never | says when the formatter rewrote the file |
 | `tests` | light | "done" while the tests fail | tells you when they pass, and when the suite ran out of time |
 | `destructive` | heavy | `git reset --hard`, `git clean -f`, a forced push, `rm -rf` on the root, the home or `.` | `rm -r`, `git checkout --`, `git branch -D` |
@@ -56,7 +56,7 @@ Every guard ships with payloads: at least one that must be stopped, at least one
 ```text
 $ vectoralis guards
 guard                 here    default  proof
-secrets               block   block    15 of 15 payloads behave
+secrets               block   block    84 of 84 payloads behave
 format                off     warn     6 of 6 payloads behave
 tests                 block   block    6 of 6 payloads behave
 destructive           block   block    21 of 21 payloads behave
@@ -67,7 +67,7 @@ push                  block   block    6 of 6 payloads behave
 sweep                 block   block    30 of 30 payloads behave
 nudge                 warn    warn     4 of 4 payloads behave
 rule-of-thumb-tokens  warn    project  its payloads behave
-167 payloads, the slowest answer took 21 ms
+236 payloads, the slowest answer took 29 ms
 ```
 
 `run` on this repository, 2026-11-11. The last row is this repository's own guard, drafted after a third failure of one class. A payload is plain JSON, in [`plugins/light/engine/guards/payloads/`](../plugins/light/engine/guards/payloads/).
@@ -137,6 +137,7 @@ In `harness/settings.json`:
 - **A guard nobody tested.** Without a payload that must pass, you find the false alarm in the middle of real work.
 - **Routing around a block.** When a write is refused, the fix is the cause. Writing the same text through the shell is the same mistake, and the sweep finds it.
 - **A guard is not a sandbox.** It stops honest mistakes. [Safety](safety.md)
+- **A key the text does not show.** `secrets` reads the text of an edit and of a command, the way the shell splits it. A key built at run time, from base64 or from pieces, or carried by a variable with an innocent name, passes it. So does a command's output sent to a file when the key sits only in its arguments: `curl -H '<key>' ... > out.json` is blocked though the file holds no key. Heavy's `sweep` reads the changed files when the turn ends, apart from what git ignores, such as `.env`.
 - **A guard that reads a record reads it line by line, the way a page shows it.** `yours` holds against the mistake: a box ticked, blanked, deleted, hidden in a comment, moved out of your column. It does not hold against a record rewritten into another shape of Markdown, and a box folded into a collapsed block is still there for the guard and out of your sight. So read the count: the briefing says how many boxes wait on you.
 
 Verified on Claude Code 2.1.322, 2026-11-11. The table is `run`. The Codex lines are `read`.
