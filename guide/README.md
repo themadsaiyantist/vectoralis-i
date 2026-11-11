@@ -28,6 +28,7 @@ How to run a coding agent on light and heavy work, in Claude Code and in Codex. 
 | [Plan](plan.md) | the brief and the plan, every question asked up front |
 | [Modes](modes.md) | plan mode in action, and the permission modes |
 | [Models](models.md) | which model, what effort, for which job |
+| [Layout](layout.md) | where every file goes, at which level, and how the files point at each other |
 | [Context](context.md) | what loads, what it costs, how the core stays small |
 | [Handoff](handoff.md) | a handoff, a compaction with a prompt, an auto compaction |
 

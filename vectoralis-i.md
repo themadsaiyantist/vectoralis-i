@@ -80,6 +80,7 @@ Added 2026-11-11 by the author. Each one is shown in action, on both agents: "al
 - **Plan mode and the permission modes** → "plan mode in action, bypaass permissions yk, thats the worklfow thing".
 - **Which model, what effort** → "which model to use when etc, what effort, yk".
 - **Handing a session over** → "hand off documents vs auto compact vs compact with prompt given by the claude code itself right before auto compact or before it, yk, hidden but smart anf very effective things".
+- **Where every file goes** → "perfect folder structure, referencing, local level global level etc of the claude md files etc, all taht yk".
 
 ## Every piece, the same four things
 
