@@ -1,6 +1,6 @@
 # Vectoralis I
 
-The practical guide to running coding agents on light and heavy work, the harness that installs each, the kit by situation and three career roadmaps. Read this file first in every session.
+The practical guide to running coding agents on light and heavy work, the harness that installs each, the kit by situation, three career roadmaps, five topics beyond them, the communities and the proof. Read this file first in every session.
 
 **Contents:** Read first · How the work runs · Writing · Git · The to-do list, loaded in full
 
@@ -22,6 +22,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 - **A failure is logged the same turn it is found** → `harness/failures.md`, facts only, with its cause and its guard.
 - **A ruling is written down the same turn.** What the product contains → `vectoralis-i.md`, dated, in the author's words. How the work runs → here. When it is unclear which, ask.
 - **Ask in one round, before the first edit.** The crucial few in the dialog, the rest in a `.md` file at the root, the pick first.
+- **While a build runs**, a crucial call goes into the open question file at the root, the pick first, and the work goes on with the pick until the author answers.
 - **A file handed over for answers is the author's** until they say done. A change goes in the chat.
 - **Check the docs first.** Run only what cannot be read.
 - **Scope is the author's.** Anything else found on the way is reported, never fixed on the side.
@@ -43,7 +44,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 ## Git
 
 - Commit locally without asking → `type: what changed`, with `feat`, `fix`, `docs`, `refactor` or `chore`.
-- **Nothing is pushed until the history is cleaned**, a step on the to-do list. After that, push without asking.
+- Push without asking. **The repository stays private** until the author says release.
 - Never force-push, reset or delete without the author's yes.
 
 ---
