@@ -49,7 +49,7 @@ Nothing else is added. No tracker, no log, no subagent.
 
 - It finds the test command and the formatter from the files your project already has. An empty one switches that guard off.
 - A hook runs those two commands, so they are approved on your machine: by the setup when it found them itself, by `vectoralis trust` when the repository arrived with its own.
-- Where no instructions file exists, it offers a starter: a twelve-line `AGENTS.md` with your commands, and a one-line `CLAUDE.md` that points at it. It never edits one you wrote.
+- Where no instructions file exists, it offers a starter: a short `AGENTS.md` with your commands, and a one-line `CLAUDE.md` that points at it. It never edits one you wrote.
 
 ---
 
@@ -132,7 +132,7 @@ Both are `run`, the same day, shortened to the lines that matter. Every block sa
 
 ## What can go wrong
 
-- **The agent guesses your commands.** In the first try of the run above there was no instructions file. The agent reached for `python`, which was not on the path, and could not run the tests. The starter file fixed it. Twelve lines.
+- **The agent guesses your commands.** In the first try of the run above there was no instructions file. The agent reached for `python`, which was not on the path, and could not run the tests. The starter file fixed it. A dozen lines.
 - **The tests already fail before you start** → every turn ends in a block. Fix them first, or set `"tests": "warn"` under `guards` for now.
 - **A slow suite** → raise `test_timeout`. Past it, the guard leaves a notice and does not block.
 - **A repository that arrives with its own settings** → its test command does not run until you have read it and typed `vectoralis trust`. The guard tells you so.

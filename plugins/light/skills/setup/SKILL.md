@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Set up light
 
-Three guards and one settings file. Nothing else is added.
+Three guards and one settings file in the project. The commands you approve are remembered in your home folder.
 
 1. Run `vectoralis init light` and show the person what it printed.
    - If the command is not found, the CLI lives in this plugin, at `${CLAUDE_PLUGIN_ROOT}/bin/vectoralis`.
@@ -20,4 +20,4 @@ Three guards and one settings file. Nothing else is added.
    - the formatter runs after every edit
    - the tests run before the agent says done
 
-**What to write where:** only `harness/settings.json`. The person's instructions file is theirs.
+**What to write where:** `harness/settings.json` in the project. The approval goes to the home folder, by `vectoralis trust`. The person's instructions file is theirs.

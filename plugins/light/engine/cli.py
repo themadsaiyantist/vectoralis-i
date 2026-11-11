@@ -1,6 +1,7 @@
 """The `vectoralis` command: set a project up, show where it stands, prove the guards, check the records.
 
-Run `vectoralis` with no argument for the list. It writes only inside `harness/`, plus one line in `.gitignore`.
+Run `vectoralis` with no argument for the list. It writes inside `harness/`, one line in `.gitignore`, and the commands
+you approved in `~/.vectoralis/trusted.json`. With `--starter` it also writes an instructions file, only where none exists.
 """
 from __future__ import annotations
 
@@ -16,6 +17,7 @@ from .project import DEFAULT_MODES, HEAVY, LIGHT, Project, git
 
 TEMPLATES = Path(__file__).resolve().parents[1] / "templates"
 RECORDS = ("rules.md", "tracker.md", "todo.md", "failures.md", "lessons.md", "decisions.md", "locks.md")
+INSTRUCTIONS = ("AGENTS.md", "AGENTS.override.md", "CLAUDE.md", "CLAUDE.local.md", ".claude/CLAUDE.md")
 
 
 def detect_test(root) -> str:
@@ -120,11 +122,14 @@ def cmd_init(args) -> int:
             made.append(f"harness/{name}")
         if _ignore_dashboard(proj):
             made.append(".gitignore, one line")
-    starter = not (proj.root / "AGENTS.md").exists() and not (proj.root / "CLAUDE.md").exists()
+    starter = not any((proj.root / name).exists() for name in INSTRUCTIONS)
     if args.starter and starter:
+        commands = [f"- Run the tests \u2192 `{settings['test']}`"] if settings.get("test") else []
+        commands += [f"- Format a file \u2192 `{settings['format']}`"] if settings.get("format") else []
+        commands = commands or ["- Add the commands you run most here: the tests, the formatter."]
         body = (TEMPLATES / "AGENTS.md").read_text(encoding="utf-8")
-        body = body.replace("{project}", proj.root.name).replace("{test}", settings.get("test") or "none found yet")
-        (proj.root / "AGENTS.md").write_text(body.replace("{format}", settings.get("format") or "none found yet"), encoding="utf-8")
+        body = body.replace("{project}", proj.root.name).replace("{commands}", "\n".join(commands))
+        (proj.root / "AGENTS.md").write_text(body, encoding="utf-8")
         (proj.root / "CLAUDE.md").write_text("@AGENTS.md\n", encoding="utf-8")
         made += ["AGENTS.md", "CLAUDE.md"]
         starter = False
