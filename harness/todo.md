@@ -38,6 +38,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ⬜ Give the address of the Coding Agents course → for the README's one link
 - ⬜ Say how the history goes public → as it is, or as one release commit. Today every commit carries one date
 - ⬜ Find five developers to install it cold → the one proof nobody here can make. The issue template for their report is ready
+- ⬜ Say whether the kit's local Docker image `kit-think-node` goes → I remove it with `docker rmi kit-think-node`
 - ⬜ Say release → the repository goes public
 
 ---
