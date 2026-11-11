@@ -17,11 +17,11 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → the spec, the harness, the guide's 30 pages, the kit's 19, the three roadmaps and the five topics are built, checked and pushed. Light ran for real in Claude Code. Both plugins install in Codex.
-- **Next →** the communities page: review it, add the few people worth following, open its links, commit. Then the last pass over everything.
-- **In flight** → the communities page, and the people on it.
-- **Open** → the communities page needs its people: the author asked for both communities and people, the best only.
-- **Mind** → commit with explicit paths while a subagent is writing. A page that is not reviewed is not committed.
+- **Where it stands** → everything is built, checked and pushed but one page: the spec, the harness (41 tests, 106 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics. Light and heavy ran for real in Claude Code. Both plugins install in Codex.
+- **Next →** `community/README.md`: when its subagent reports, check it → add the section of people from the research → fix any subreddit the feed check could not open → tick its row → commit.
+- **Then** → one last pass: `sh tools/check.sh`, the tracker against the files, this block, the report to the author.
+- **Open** → the heavy skills were never called in a live session. A Codex session needs the author's login.
+- **Mind** → commit through the hook, with explicit paths while a subagent writes. A ticked file that changed needs `vectoralis affirm` after it is checked again.
 
 ---
 
