@@ -96,6 +96,7 @@ And then this repository:
 ## The limits
 
 - **A guard is a guardrail, not a wall.** It stops the mistakes a machine can be sure of. It is not a sandbox.
+- **It keeps your rules and stops honest mistakes. It does not isolate.** Policy, mistakes, secrets and isolation are four promises: the harness keeps the first two and a part of the third, and isolation is the agent's sandbox or a container. [guide/safety.md](guide/safety.md#four-promises-kept-apart)
 - **Run in Claude Code, installed in Codex.** Codex installs both plugins from the same package. The guards are tested against Codex's payloads, and not yet run inside a Codex session.
 - **A kit entry marked `read` was read in its maker's docs**, not installed here.
 - **Linux, macOS and WSL.**

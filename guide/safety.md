@@ -2,7 +2,23 @@
 
 What stands between an agent and your machine: its own permission rules and sandbox first, then the guards of this harness. Read this before you give an agent a shell, before you loosen a mode, and before any run from [Unattended](unattended.md).
 
-**Contents:** The four ways it goes wrong · What a guard is not · In Claude Code · In Codex · With the harness · What can go wrong
+**Contents:** Four promises, kept apart · The four ways it goes wrong · What a guard is not · In Claude Code · In Codex · With the harness · What can go wrong
+
+---
+
+## Four promises, kept apart
+
+"Safe" is four different promises. A tool that keeps one does not keep the others, so ask for each by name.
+
+| The promise | What it means | Who can keep it | This harness |
+|---|---|---|---|
+| **Policy** | the agent keeps your project's rules: a locked path, your own boxes, no push to the default branch | a hook that reads each edit and command before it runs | yes, in heavy → `locks`, `yours`, `records`, `push` |
+| **Mistakes** | an honest slip is stopped before it lands, with the fix in the message | a hook, then a second read when the turn ends | yes → `tests` in light, `destructive` and the `sweep` in heavy |
+| **Secrets** | a key reaches no file and no output | a hook for the text, then the agent's deny rules and its sandbox for what the text hides | in part → `secrets` reads the text of an edit or a command. A script that opened `.env` itself passed it |
+| **Isolation** | whatever runs reaches only what you gave it, whatever the command says | the operating system → the agent's sandbox, a container, a virtual machine | **no.** A hook runs with your full access |
+
+- Vectoralis keeps the first two, a part of the third, and never the fourth.
+- Against code or text written to get past a guard, only the fourth holds. Turn on the agent's sandbox, or run the agent in a container, and keep the guards inside it for the honest mistakes.
 
 ---
 
