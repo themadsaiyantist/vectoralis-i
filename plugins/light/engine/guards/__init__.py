@@ -45,6 +45,6 @@ def run(event, call, proj, state) -> List[Finding]:
             if mode == "warn" and finding.level == "block":
                 finding.level = "warn"
             out.append(finding)
-    if event in ("write", "shell") and proj.profile == "heavy":
-        out.extend(rules.check(call, proj, event))
+    if event in ("write", "shell"):
+        out.extend(rules.check(call, proj, event))  # a project's own guard runs in light and in heavy
     return out

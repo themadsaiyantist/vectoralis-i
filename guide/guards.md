@@ -75,7 +75,7 @@ nudge        warn    warn     4 of 4 payloads behave
 
 ## A guard of your own
 
-One file, `harness/guards/<id>.json`. It is data, so reading it takes a minute.
+One file, `harness/guards/<id>.json`. It runs in light and in heavy. It is data, so reading it takes a minute.
 
 ```json
 {
@@ -95,7 +95,7 @@ One file, `harness/guards/<id>.json`. It is data, so reading it takes a minute.
 
 - `on` is `write` or `shell`. On `shell` the pattern is read against the command.
 - **A guard without its proof does not run.** It needs one payload that hits and one that passes, both behaving.
-- **It starts at `warn`.** You make it block by typing `promote debug-print`. The agent cannot.
+- **It starts at `warn`.** In heavy you make it block by typing `promote debug-print`, and the agent cannot. In light nothing guards the file: set `"mode": "block"` yourself.
 - [The kit](../kit/README.md) has a proven recipe for each kind of work.
 
 ---
