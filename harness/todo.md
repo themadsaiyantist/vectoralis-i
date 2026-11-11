@@ -17,17 +17,18 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-**Next →** you say start → the answers are folded in → the spec is written → the build begins in the same run.
+**Next →** the history is cleaned → the first push → the spec → the build, in the order below. `b.md` is answered while it runs.
 
 ---
 
 ## Yours
 
 - ✅ Answer the question round → `a.md`, 25 questions
-- ⬜ Say start
+- ✅ Say start
+- ⬜ Answer `b.md` → seven short calls, while the build runs
 - ⬜ Read `spec.md` while the build runs → say what to change
 - ⬜ Trust the hooks once in Codex → `/hooks` → when the Codex part lands
-- ⬜ Say release
+- ⬜ Say release → the repository goes public
 
 ---
 
@@ -40,10 +41,12 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Create the private repository → `themadsaiyantist/vectoralis-i`
 - ✅ Record every ruling so far in the outline
 - ✅ Start the to-do list, the failure log and `CLAUDE.md`
-- ⬜ Fold the 25 answers into the outline → delete `a.md`
+- ✅ Fold the 25 answers into the outline → delete `a.md`
+- ✅ Ask the second round → `b.md`, seven calls
 - ⬜ Clean the series text and the history → first push
 - ⬜ Study the similar repositories → notes kept outside the repository
 - ⬜ Check each platform fact in the docs → run only what cannot be read
+- ⬜ Fold the answers of `b.md` into the outline → delete `b.md`
 
 **2. The spec**
 
@@ -53,11 +56,14 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 - ⬜ Light → three guards, one settings file
 - ⬜ Heavy → the records, the guards, the skills
-- ⬜ The smart pieces → staleness check, guard tests, dashboard, proposed guard
+- ⬜ The smart pieces → staleness check, guard tests, dashboard, proposed guard, the compaction prompt
 - ⬜ Codex → the same package, and the table of gaps
-- ⬜ The guide → 24 pages
+- ⬜ The guide → every page listed in `spec.md`
 - ⬜ The kit → 19 situations
 - ⬜ The roadmaps → 3 careers
+- ⬜ The five topics → 5 pages
+- ⬜ The communities → the subreddits and the rest, topic by topic
+- ⬜ The proof → one page, and beside each piece it proves
 
 **4. The release**
 
