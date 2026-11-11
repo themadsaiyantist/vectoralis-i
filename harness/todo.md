@@ -79,11 +79,12 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 **5. The refinement**, on the author's word of 2026-11-11 after an outside evaluation: prove more, add less
 
 - ✅ The README says whose numbers are whose → the earlier work, then this repository
-- ⬜ Send five subagents in one message → four try the kit's entries by group, in a container, one owner per page → one looks for the heavy things the guide misses and writes them down outside the repository
+- ✅ Send five subagents in one message → four try the kit's entries by group, in a container, one owner per page → one looks for the heavy things the guide misses and writes them down outside the repository
 - ⬜ While they run → `guide/measure.md`: six small tasks, bare agent against light against heavy, three runs each, read from the files and not from what the agent says. The outline and the spec get the page first
-- ⬜ Still while they run → the four guarantees side by side on `guide/safety.md`: policy, mistakes, secrets, and isolation, which is not ours. One line of it in the README's limits
-- ⬜ The tests the tracker still lacks → a reverted file clears its flag → a turn cut short leaves no grant behind → an edit by hand between two turns is not the agent's
+- ✅ Still while they run → the four guarantees side by side on `guide/safety.md`: policy, mistakes, secrets, and isolation, which is not ours. One line of it in the README's limits
+- ✅ The tests the tracker still lacks → a reverted file clears its flag → a turn cut short leaves no grant behind → an edit by hand between two turns is not the agent's
 - ⬜ When the kit subagents report → check each claim against what they ran → every entry reads `tried` with its evidence or `read` with its reason → `kit/README.md` says what the two marks mean
+- ⬜ When the kit subagents report → each missed thing they name is checked, then added on its page within the caps, on the author's word of 2026-11-11: "add cool useful effective things, and put them in proper place"
 - ⬜ When the research reports → each addition on the page where a reader meets the need: task state on the tracker page, memory on the handoff page, isolation on the safety page, public benchmarks on the measure page, a framework in a roadmap
 - ⬜ `tools/check_links.py` → the link check belongs to the repository, not to a scratch folder
 - ⬜ An install report template → `.github/ISSUE_TEMPLATE/install-report.md`, for the five cold installs

@@ -474,6 +474,7 @@ The same two plugins, the same engine, the same records.
 | `codex.md` | the same harness in Codex, and every gap |
 | `other-agents.md` | what works in any agent that reads `AGENTS.md` |
 | `proof.md` | what this way of working built |
+| `measure.md` | six small tasks, bare against light against heavy, three runs each, and the public benchmarks |
 | `reference.md` | every command, file, guard and setting |
 
 **The shape of a page that adds a piece:**
@@ -609,6 +610,7 @@ The five are the author's, settled 2026-11-11.
 - **The lines** are facts counted from the author's own repositories, each with how it was counted. Approved by the author, 2026-11-11.
 - **The frame** is what one person and an agent built, and how the pieces made it possible. A reader should finish the page wanting to start.
 - **Never the word motivation**, and never a claim the count does not back.
+- **The measured comparison** is `guide/measure.md` → the same six tasks, the same model, the same project, in three setups: bare, light and heavy. Every setup carries the same record files, and only the plugins differ. Each outcome is read from the files after the run, the cost from the session's own result. Every number is `run`, with the model, the Claude Code version and the date. The page says what it does not show.
 
 ---
 

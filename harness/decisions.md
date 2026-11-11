@@ -10,6 +10,8 @@ Every call that was made on Vectoralis I, and every exception to a rule, each on
 
 Newest first. One line: the date, the call in bold, then why.
 
+- 2026-11-11 · **In the comparison all three setups carry the same record files. Only the plugins and the profile differ.** Why: without a tracker row or a lock on disk, bare and light would have nothing to break on tasks 4 and 5, and heavy would win by holding information the others lack. With the same files, the comparison measures what the plugins add.
+- 2026-11-11 · **The comparison's lock is on the count command's one test file, not on the whole tests folder.** Why: a lock on the whole folder would also stop task 6, which adds a test, and the overhead it measures would be a block instead.
 - 2026-11-11 · **An outside evaluation is input, not a ruling.** Why: it read the repository once, from outside, and took another project's numbers for this one's. What it is right about is done because it is right: the README's numbers, the safety boundaries, a measured comparison. What it asks for that would only make the guide bigger is left out, and the to-do list says so.
 - 2026-11-11 · **Third-party code is tried in a container, with only a scratch folder mounted.** Why: the kit's entries run with whatever access they are given, and the safety page of this guide says to put a wall around that. The repository does what it tells its reader to do.
 - 2026-11-11 · **The comparison is small on purpose: six tasks, three setups, three runs each.** Why: it shows that the guards do what they say at a known cost, on a project a reader can clone. A benchmark of agents is someone else's work, and the page points at it.

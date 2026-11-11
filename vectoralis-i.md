@@ -168,6 +168,7 @@ Settled 2026-11-11 by the author's answers.
 - **Free and open first** → a paid service appears only where nothing free does the job, and it is marked paid. The author's word: "mostly free proirity".
 - **Nothing third-party ships in or through Vectoralis** → a kit page gives the install line, the cost and the risk, and the reader runs it.
 - **The small ones are run here, the heavy ones the guide misses are added**, the author's word of 2026-11-11, after an outside evaluation: "i guess you can still refine it and make it better, validate all the small workloads and computes here, while if you missed on some really importatn heavy things outisde on the internet then by all means add them and integrate them" → an entry that fits a laptop, free and with no account, is tried and marked `tried`. A heavy one stays a reference. What the guide misses goes on the page where a reader meets the need, never into a directory.
+- **What is useful is added, where it belongs**, the author's word of 2026-11-11, while the refinement ran: "add cool useful effective things, and put them in proper place" → what the kit's tryers and the research find that beats an entry or fills a gap is checked, then added on the page where a reader meets the need. The caps hold: one pick and at most four more of each kind.
 
 ## The roadmaps
 
@@ -217,6 +218,7 @@ Added 2026-11-11 by the author: "also mention about the efficincy etc about thos
 - **Direct proof** → what this way of working built: the bootcamp end to end, its platform, the free course and the products around it.
 - **More than numbers** → it shows a reader what one person and an agent can build, and never calls itself motivation.
 - It replaces the answer of the same day that the guide says nothing about the bootcamp's harness.
+- **A measured comparison**, the author's word of 2026-11-11, after an outside evaluation: "validate all the small workloads and computes here" → `guide/measure.md`: six small tasks on `runlog`, a bare agent against light against heavy, three runs each, read from the files and not from what the agent says. It shows what the harness changes and what it costs. It is not a benchmark of agents, and it points at the public ones.
 - **The lines**, approved by the author on 2026-11-11, "good" → the tracker's 130 lessons and 708 boxes · the guards · 26 pull requests merged green · the failure log · the course written on 199 real runs · 351 commits in three months.
 
 ## What it is not
