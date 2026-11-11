@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT / "plugins" / "light"))
 
 from engine import records  # noqa: E402
 
-DASH = re.compile("[–—]")
+DASH = re.compile("[" + chr(0x2013) + chr(0x2014) + "]")
 LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 CODE = re.compile(r"`[^`]*`")
 

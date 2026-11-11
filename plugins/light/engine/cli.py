@@ -179,6 +179,8 @@ def cmd_budget(args) -> int:
 
 def cmd_check(args) -> int:
     proj = Project()
+    if proj.profile == "heavy":
+        checks.sync(proj)
     flags = checks.stale(proj) if proj.profile == "heavy" else []
     _, failed, unproven = _guard_results()
     flags += [f"guard `{r['guard']}`: payload \"{r['name']}\" expected {r['expect']}, got {r['got']}" for r in failed]
@@ -191,6 +193,17 @@ def cmd_check(args) -> int:
         print("STALE: " + flag)
     print("Clean: every record is backed, every guard is proven, the core is under its cap." if not flags else f"{len(flags)} flag(s).")
     return 1 if flags else 0
+
+
+def cmd_affirm(args) -> int:
+    proj = Project()
+    done = checks.affirm(proj, args.paths)
+    for path in done:
+        print(f"Recorded: `{path}` was checked again as it is now.")
+    missing = [p for p in args.paths if (proj.rel(p) or p).rstrip("/") not in done]
+    for path in missing:
+        print(f"Not recorded: `{path}` is not bound to a ticked row of harness/tracker.md.")
+    return 1 if missing else 0
 
 
 def cmd_dashboard(args) -> int:
@@ -250,6 +263,9 @@ def main(argv) -> int:
     fail.add_argument("--class", dest="klass", required=True, help="a short slug. The second failure of a class asks for a guard")
     fail.add_argument("--who", default="agent")
     fail.set_defaults(run=cmd_fail)
+    again = sub.add_parser("affirm", help="say a ticked file was checked again as it is now")
+    again.add_argument("paths", nargs="+")
+    again.set_defaults(run=cmd_affirm)
     sub.add_parser("version", help="the version").set_defaults(run=lambda a: print(VERSION) or 0)
     args = parser.parse_args(argv)
     if not getattr(args, "run", None):

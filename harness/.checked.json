@@ -1,0 +1,19 @@
+{
+  ".claude-plugin/marketplace.json": "1e48488807c702c01bf298121d3d626358d7aadd",
+  ".github/workflows/ci.yml": "7089e97c2ec4c252a651a8fc3f13d74dcf336aaf",
+  "CONTRIBUTING.md": "ab6e6271ec92c78e09716ba54f506f102cfc34ff",
+  "LICENSE": "b4a13ee94d9a55c332414c135262c7e1e4de132c",
+  "plugins/heavy/agents": "d414a58add5388271b4d363b9b77de542bee3758",
+  "plugins/heavy/skills": "ba4d9be5ddc68dd80c2b74a5ffd99dddba49146e",
+  "plugins/light/engine/briefing.py": "b53021d2dd04386c8f670a6bf2bece5ac3a02f35",
+  "plugins/light/engine/checks.py": "b0388e2f662a747ba349df4a7ee9c3f33a8ba09c",
+  "plugins/light/engine/cli.py": "147128d21acdf08902942bae63d013bbe8954508",
+  "plugins/light/engine/dashboard.py": "b42f63b4cea6e9365c4a467b8e37148b69897468",
+  "plugins/light/engine/grants.py": "0522631a5ab77c8f6ee4688fd09f096cc95c3ecb",
+  "plugins/light/engine/guards": "eaab10b2b44b068817ca4c12aeda7ef2c6a5e6e7",
+  "plugins/light/engine/payload.py": "e7d91f89800b61d42056e5c87e29171709879b87",
+  "plugins/light/engine/rules.py": "886e5285ccbb8321506b0eb789e437998672b007",
+  "plugins/light/hooks/hooks.json": "b34925bc7bca781ae8bb7de82158863179f10e02",
+  "spec.md": "f4e1c0e66a21877cd76362fcabab15ed7d57a649",
+  "tools/check_writing.py": "d662f03409ceb22ec97e323a0e88bd711d37e252"
+}

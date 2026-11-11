@@ -86,6 +86,8 @@ def run(event) -> int:
     if event not in ("write", "shell", "wrote", "stop"):
         return 0
     findings = guards.run(event, call, proj, state)
+    if heavy and event in ("write", "wrote"):
+        _ticks(event, call, proj, state)
     if event == "wrote":
         state["changed"] = True
         names = {proj.rel(w.path) for w in call.writes}
@@ -96,6 +98,26 @@ def run(event) -> int:
         state["changed"] = state["shell"] = False
     states.save(call, state)
     return answer(event, findings)
+
+
+def _ticks(event, call, proj, state) -> None:
+    """When the agent ticks a stage of a bound row, record which version of the file that tick refers to."""
+    from . import checks
+
+    for write in call.writes:
+        if proj.rel(write.path) != "harness/tracker.md":
+            continue
+        if event == "write" and write.after is not None:
+            before = {r["unit"]: r for r in records.tracker_rows(proj.read("tracker.md"))}
+            fresh = []
+            for row in records.tracker_rows(write.after):
+                old = before.get(row["unit"], {"marks": {}})
+                stages = [n for n in row["marks"] if n != row["yours_stage"]]
+                if row["path"] and any(row["marks"][n] == records.DONE and old["marks"].get(n) != records.DONE for n in stages):
+                    fresh.append(row["path"])
+            state["affirm"] = fresh
+        elif event == "wrote" and state.get("affirm"):
+            checks.affirm(proj, state.pop("affirm"))
 
 
 def main(argv) -> int:

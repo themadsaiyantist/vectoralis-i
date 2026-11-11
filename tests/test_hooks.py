@@ -118,6 +118,18 @@ class Hooks(unittest.TestCase):
         self.hook("prompt", prompt="thanks, carry on")
         self.assertEqual(self.hook("write", **call).returncode, 2)
 
+    def test_a_tick_records_the_version_it_refers_to(self):
+        self.settings(profile="heavy")
+        self.put("src/cart.py", "total = 0\n")
+        open_row, done_row = f"| `src/cart.py` cart | {OPEN} | {OPEN} |", f"| `src/cart.py` cart | {DONE} | {OPEN} |"
+        tracker = self.put("harness/tracker.md", f"# Tracker\n\n## Checkout\n\n| Unit | Built | Yours |\n|---|---|---|\n{open_row}\n")
+        edit = dict(tool_name="Edit", tool_input={"file_path": str(tracker), "old_string": open_row, "new_string": done_row})
+        self.assertEqual(self.hook("write", **edit).returncode, 0)
+        tracker.write_text(tracker.read_text(encoding="utf-8").replace(open_row, done_row), encoding="utf-8")
+        self.hook("wrote", **edit)
+        recorded = json.loads((self.root / "harness/.checked.json").read_text())
+        self.assertEqual(list(recorded), ["src/cart.py"])
+
     def test_a_subagent_cannot_write_a_record(self):
         self.settings(profile="heavy")
         done = self.hook("write", agent_id="agent-7", tool_name="Write",

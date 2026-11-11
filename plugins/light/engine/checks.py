@@ -1,6 +1,11 @@
-"""The staleness check and the budget: is every record still backed by the repository, and is the core still small."""
+"""The staleness check and the budget: is every record still backed by the repository, and is the core still small.
+
+Keeps one generated file in the project, `harness/.checked.json`: which version of each bound file its ticks refer to.
+"""
 from __future__ import annotations
 
+import hashlib
+import json
 import math
 import re
 import time
@@ -11,30 +16,79 @@ from . import records, rules
 from .project import git, matches
 
 CAPS = {"light": 300, "heavy": 2000}
+CHECKED = "harness/.checked.json"
+MAX_FILES = 3000
 RECORDS = ("rules.md", "tracker.md", "todo.md", "failures.md", "lessons.md", "decisions.md", "locks.md")
 PATHLIKE = re.compile(r"`([^`\s]+/[^`\s]*)`")
 
 
-def _line_times(proj, rel) -> Dict[int, int]:
-    """When each line of a file last changed, from one git blame."""
-    times, per_commit, sha = {}, {}, ""
-    for line in git(proj.root, "blame", "--porcelain", "--", rel, timeout=20).splitlines():
-        head = re.match(r"^([0-9a-f]{40}) \d+ (\d+)", line)
-        if head:
-            sha = head.group(1)
-            times[int(head.group(2))] = sha
-        elif line.startswith("committer-time "):
-            per_commit[sha] = int(line.split()[1])
-    return {number: per_commit.get(commit, 0) for number, commit in times.items()}
+def blob(path) -> str:
+    """The content of a file, or of every file under a folder, as one short value."""
+    path = Path(path)
+    if path.is_dir():
+        total = hashlib.sha1()
+        files = sorted(f for f in path.rglob("*") if f.is_file() and "__pycache__" not in f.parts)
+        for found in files[:MAX_FILES]:
+            total.update(found.relative_to(path).as_posix().encode("utf-8"))
+            total.update(hashlib.sha1(found.read_bytes()).digest())
+        return total.hexdigest()
+    return hashlib.sha1(path.read_bytes()).hexdigest()
 
 
-def _path_time(proj, rel) -> int:
-    """When a path last changed: now-ish when it has uncommitted changes, else its last commit."""
-    if git(proj.root, "status", "--porcelain", "--", rel).strip():
-        target = proj.root / rel
-        return int(target.stat().st_mtime) if target.exists() else 0
-    stamp = git(proj.root, "log", "-1", "--format=%ct", "--", rel).strip()
-    return int(stamp) if stamp.isdigit() else 0
+def ticked_rows(proj) -> Dict[str, Dict]:
+    """Every tracker row that is bound to a path and has a stage ticked, by its path."""
+    out = {}
+    for row in records.tracker_rows(proj.read("tracker.md")):
+        path = row["path"]
+        if not path or any(c in path for c in "*?"):
+            continue
+        stages = [mark for name, mark in row["marks"].items() if name != row["yours_stage"]]
+        if records.DONE in stages:
+            out[path.rstrip("/")] = row
+    return out
+
+
+def load_checked(proj) -> Dict[str, str]:
+    """Which version of each bound file its ticks refer to."""
+    try:
+        data = json.loads((proj.root / CHECKED).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def save_checked(proj, data) -> None:
+    target = proj.root / CHECKED
+    if data:
+        target.write_text(json.dumps(dict(sorted(data.items())), indent=2) + "\n", encoding="utf-8")
+    elif target.exists():
+        target.unlink()
+
+
+def sync(proj) -> List[str]:
+    """Record the version of every newly ticked file, and forget the ones no longer ticked. Returns what was recorded."""
+    rows, data = ticked_rows(proj), load_checked(proj)
+    fresh = [path for path in rows if path not in data and (proj.root / path).exists()]
+    kept = {path: mark for path, mark in data.items() if path in rows}
+    for path in fresh:
+        kept[path] = blob(proj.root / path)
+    if kept != data:
+        save_checked(proj, kept)
+    return fresh
+
+
+def affirm(proj, paths) -> List[str]:
+    """Say that these ticked files were checked again as they are now. Returns the ones recorded."""
+    rows, data = ticked_rows(proj), load_checked(proj)
+    done = []
+    for path in paths:
+        key = (proj.rel(path) or str(path)).rstrip("/")
+        if key in rows and (proj.root / key).exists():
+            data[key] = blob(proj.root / key)
+            done.append(key)
+    if done:
+        save_checked(proj, data)
+    return done
 
 
 def _names(text) -> List[str]:
@@ -44,30 +98,23 @@ def _names(text) -> List[str]:
 def stale(proj, seconds=None) -> List[str]:
     """Every flag: a record that says something the repository no longer backs.
 
-    With `seconds`, the slow part (the tracker against git) stops when the time is up.
+    A ticked row is stale when its file no longer is what it was when the row was ticked.
+    With `seconds`, that comparison stops when the time is up.
     """
     start, flags = time.monotonic(), []
-    tracker = proj.read("tracker.md")
-    line_times = None
-    for row in records.tracker_rows(tracker):
-        path = row["path"]
-        if not path or any(c in path for c in "*?"):
-            continue
-        stages = [mark for name, mark in row["marks"].items() if name != row["yours_stage"]]
-        if records.DONE not in stages:
-            continue
-        if not (proj.root / path).exists():
+    checked = load_checked(proj)
+    for path in ticked_rows(proj):
+        target = proj.root / path
+        if not target.exists():
             flags.append(f"tracker: `{path}` is ticked and the file is gone")
-            continue
-        if seconds is not None and time.monotonic() - start > seconds:
-            continue
-        if line_times is None:
-            line_times = _line_times(proj, "harness/tracker.md")
-        ticked, changed = line_times.get(row["line"], 0), _path_time(proj, path)
-        if ticked and changed and changed > ticked:
+        elif seconds is not None and time.monotonic() - start > seconds:
+            break
+        elif path in checked and checked[path] != blob(target):
             flags.append(f"tracker: `{path}` changed after its row was ticked")
     for name in ("rules.md", "todo.md", "decisions.md"):
         for _, line in records.plain_lines(proj.read(name)):
+            if records.OPEN in line:
+                continue  # an open box may name a file that is not built yet
             for token in PATHLIKE.findall(line):
                 looks = re.search(r"\.\w{1,5}$", token) or token.endswith("/")
                 if not looks or token.startswith(("http", "/", "~", "-", "$", ".")) or any(c in token for c in "*?<>{}$|=@:"):

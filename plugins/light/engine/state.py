@@ -1,7 +1,7 @@
 """The state of one session: the turn's baseline, the files touched, the grants, what was already said.
 
 One small JSON file, in the session's scratchpad when the agent names one, in the system's temp folder otherwise.
-Nothing is written to the project.
+This module writes nothing to the project.
 """
 from __future__ import annotations
 
