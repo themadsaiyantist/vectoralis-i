@@ -75,7 +75,7 @@ Move from light to heavy the moment any of these is true:
 
 ## Inside the workflow
 
-Added 2026-11-11 by the author. Each one is shown in action, on both agents: "also consider the workfow on claude code/gpt ofc".
+Added 2026-11-11 by the author. Each one is shown in action, on both agents: "also consider the workfow on claude code/gpt ofc". The second agent is Codex, OpenAI's coding agent, settled the same day.
 
 - **Plan mode and the permission modes** → "plan mode in action, bypaass permissions yk, thats the worklfow thing".
 - **Which model, what effort** → "which model to use when etc, what effort, yk".
@@ -122,7 +122,7 @@ harness/
 - **What the agent may do alone** → it commits, and pushes only to a branch it opened. It watches its pull request to green and fixes what breaks. It never touches the default branch and never merges. One setting hands it the merge.
 - **Three things stay the person's alone** → ticking a "yours" box, writing a lesson, opening a lock. A guard enforces all three.
 - **The person's instructions file is theirs** → Vectoralis never edits a `CLAUDE.md` or an `AGENTS.md`. It offers a starter only where none exists.
-- **One harness for one person and for a team.**
+- **One harness for one person and for a team**, the same files. A team adds four things → the plugin at project scope so everyone gets it → one to-do section per person → an owner on every tracker row → a change to a rule or a guard goes through a pull request. Settled 2026-11-11.
 - **MCP only for outside systems** that need it, because every server costs context. No MCP server ships with Vectoralis, and GitHub goes through the `gh` CLI.
 - **On top of the agents' own features, never in place of them:** to-dos, plan mode and memory are theirs. Vectoralis I adds memory of failures, enforcement, and records that stay true.
 - **Nothing leaves the reader's machine** → no telemetry, no account, no network call.
@@ -190,12 +190,15 @@ Settled 2026-11-11 by the author's answers.
 - **Each page** → the job, the road in stages, a milestone and a project for every stage, the future.
 - **No hours and no weeks** → a stage ends when its milestone is met.
 - **Grounded** → each is checked against real job postings of the month it is written, and says which month.
+- **The stars** → a star and a number from 1 to 10, and the page says they are a judgment. A resource gets four: clarity, depth, hands-on, current. A project repository gets two: difficulty, what it teaches. Settled 2026-11-11.
+- **The price cap** → a paid resource costs at most $60 once, or $30 a month. Settled 2026-11-11.
 
 ## The five topics
 
 Added 2026-11-11 by the author: "also per topic things besides the 3 career paths have 5 hottest topics outside the any milestones of those 3 career paths".
 
 - **Five topics, one page each**, none of them a milestone of the three careers.
+- **The five**, the author's answer of 2026-11-11, "good" → local and open models · voice and real-time agents · computer use and browser agents · AI security · generative media.
 
 ## The communities
 
@@ -203,6 +206,7 @@ Added 2026-11-11 by the author: "also mention the msot important social medias a
 
 - **Reddit first** → the exact subreddits, topic by topic.
 - **Other social media** → per topic, where one matters.
+- **Communities and people**, the author's answer of 2026-11-11: "both, the best only tho" → the exact subreddits and the official channels, and the few people worth following, per topic.
 
 ## The proof
 
@@ -212,6 +216,7 @@ Added 2026-11-11 by the author: "also mention about the efficincy etc about thos
 - **Direct proof** → what this way of working built: the bootcamp end to end, its platform, the free course and the products around it.
 - **More than numbers** → it shows a reader what one person and an agent can build, and never calls itself motivation.
 - It replaces the answer of the same day that the guide says nothing about the bootcamp's harness.
+- **The lines**, approved by the author on 2026-11-11, "good" → the tracker's 130 lessons and 708 boxes · the guards · 26 pull requests merged green · the failure log · the course written on 199 real runs · 351 commits in three months.
 
 ## What it is not
 
@@ -239,12 +244,4 @@ Added 2026-11-11 by the author: "also mention about the efficincy etc about thos
 
 ## Open questions
 
-Asked in `b.md` at the root while the build runs, and folded in here once answered.
-
-- Which five topics.
-- Whether a single person is ever named among the communities.
-- The price cap on a paid resource.
-- How much a team adds.
-- Whether ChatGPT itself is covered beside Codex.
-- The categories of the stars.
-- The lines of the proof.
+None. The second round, `b.md`, was answered on 2026-11-11 and is folded in above.

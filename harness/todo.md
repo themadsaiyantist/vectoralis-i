@@ -20,7 +20,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - **Where it stands** → the spec, the harness and fourteen guide pages are built, checked and pushed. Light ran for real in Claude Code. Both plugins install in Codex.
 - **Next →** review each page the subagents hand back → open its links → tick its row → commit. Then `kit/README.md`.
 - **In flight** → the kit, thirteen guide pages, the communities.
-- **Open** → `b.md` is not answered, so every page is built on its pick. The proof's numbers wait on the author.
+- **Open** → the communities page needs its people: the author asked for both communities and people, the best only.
 - **Mind** → commit with explicit paths while a subagent is writing. A page that is not reviewed is not committed.
 
 ---
@@ -29,7 +29,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 - ✅ Answer the question round → `a.md`, 25 questions
 - ✅ Say start
-- ⬜ Answer `b.md` → seven short calls, while the build runs
+- ✅ Answer `b.md` → seven short calls, while the build runs
 - ⬜ Read `spec.md` while the build runs → say what to change
 - ⬜ Trust the hooks once in Codex → `/hooks` → then say so, and I run the first live Codex session
 - ⬜ Open the subreddits of `community/README.md` once → Reddit refuses a checker
@@ -52,7 +52,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Clean the series text and the history → first push
 - ✅ Study the similar repositories → notes kept outside the repository
 - ✅ Check each platform fact in the docs → run only what cannot be read
-- ⬜ Fold the answers of `b.md` into the outline → delete `b.md`
+- ✅ Fold the answers of `b.md` into the outline → delete `b.md`
 
 **2. The spec**
 
@@ -71,7 +71,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ⬜ The kit → 19 situations
 - ✅ The roadmaps → 3 careers
 - ✅ The five topics → 5 pages
-- ⬜ The communities → the subreddits and the rest, topic by topic
+- ⬜ The communities → the subreddits and the rest, topic by topic, and the few people worth following
 - ✅ The proof → one page, built on the pick of `b.md` until it is answered
 
 **4. The release**
