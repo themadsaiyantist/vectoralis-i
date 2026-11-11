@@ -92,9 +92,15 @@ class Hooks(unittest.TestCase):
         self.assertEqual(done.returncode, 0)
         self.assertIn("they pass", json.loads(done.stdout)["systemMessage"])
 
+    def test_stop_answers_codex_in_json_even_with_nothing_to_say(self):
+        self.settings()
+        done = self.hook("stop", env={"PLUGIN_ROOT": str(ROOT / "plugins" / "light")})
+        self.assertEqual((done.returncode, json.loads(done.stdout)), (0, {}))
+
     def test_stop_is_silent_when_nothing_changed(self):
         self.settings(test="exit 1")
-        self.assertEqual(self.hook("stop").returncode, 0)
+        done = self.hook("stop")
+        self.assertEqual((done.returncode, done.stdout), (0, ""))
 
     def test_a_heavy_guard_does_nothing_in_a_light_project(self):
         self.settings()
@@ -146,9 +152,12 @@ class Hooks(unittest.TestCase):
 
     def test_the_compaction_prompt_names_what_to_keep(self):
         self.settings(profile="heavy")
-        self.hook("prompt", prompt="unlock docs")
+        self.hook("prompt", prompt="start on the cart")
         self.hook("wrote", tool_name="Write", tool_input={"file_path": str(self.put("src/a.py", "x\n")), "content": "x\n"})
+        self.hook("prompt", prompt="unlock docs")
+        self.hook("wrote", tool_name="Write", tool_input={"file_path": str(self.put("src/b.py", "x\n")), "content": "x\n"})
         out = self.hook("compact").stdout
+        self.assertIn("src/a.py, src/b.py", out)
         self.assertIn("Keep these in the summary", out)
         self.assertIn("src/a.py", out)
         self.assertIn("unlock docs", out)

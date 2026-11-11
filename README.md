@@ -13,7 +13,7 @@
 | The work | a bug fix, a small feature, one sitting | days of work, many files, anything other people rely on |
 | The steps | describe → plan in one line → edit → run the tests → commit | briefing → plan → build → check → re-check → record → report |
 | You get | three guards and one settings file | light, plus a tracker, two to-do lists, a failure log, lessons, decisions and locks |
-| Always loaded | 0 tokens | about 930, capped at 2,000 |
+| Always loaded | 0 tokens | about 840, capped at 2,000 |
 | Read | [guide/light.md](guide/light.md) | [guide/heavy.md](guide/heavy.md) |
 
 Start light. Switch the moment one of [five signals](guide/start.md) is true.
