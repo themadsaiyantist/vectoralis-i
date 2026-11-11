@@ -126,6 +126,21 @@ class Hooks(unittest.TestCase):
         done = self.hook("stop")
         self.assertEqual((done.returncode, done.stdout), (0, ""))
 
+    def test_a_projects_own_guard_runs_in_a_light_project_too(self):
+        self.settings()
+        self.put("harness/guards/debug-print.json", json.dumps({
+            "id": "debug-print", "on": "write", "path": "src/**/*.py", "pattern": "^\\s*print\\(", "mode": "warn",
+            "message": "A debug print is about to ship.", "instead": "use the logger.",
+            "payloads": [{"name": "hit", "path": "src/a.py", "text": "print(x)", "expect": "hit"},
+                         {"name": "pass", "path": "src/a.py", "text": "log(x)", "expect": "pass"}]}))
+        call = lambda text: self.hook("write", tool_name="Write", tool_input={"file_path": str(self.root / "src/a.py"), "content": text})
+        warned = call("print(total)\n")
+        self.assertEqual(warned.returncode, 0)
+        note = json.loads(warned.stdout)["hookSpecificOutput"]["additionalContext"]
+        self.assertIn("A debug print is about to ship.", note)
+        self.assertIn("use the logger.", note)
+        self.assertEqual(call("log.info(total)\n").stdout, "")
+
     def test_a_heavy_guard_does_nothing_in_a_light_project(self):
         self.settings()
         done = self.hook("shell", tool_name="Bash", tool_input={"command": "git reset --hard"})

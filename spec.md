@@ -197,7 +197,7 @@ One Python package, standard library only, written for Python 3.9 and later. One
 
 **Every built-in guard ships with its payloads**, in `engine/guards/payloads/<guard>.json`: at least one that must block or warn, at least one that must pass. `vectoralis guards` runs them all.
 
-**A project's own guard** is one file, `harness/guards/<id>.json`. It is data, so approving one means reading ten lines:
+**A project's own guard** is one file, `harness/guards/<id>.json`. It runs in light and in heavy. It is data, so approving one means reading ten lines:
 
 ```json
 {

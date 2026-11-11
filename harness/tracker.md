@@ -78,9 +78,9 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `kit/reasoning.md` | ⬜ | ⬜ | ⬜ |
 | `kit/research.md` | ⬜ | ⬜ | ⬜ |
 | `kit/data-ml.md` | ⬜ | ⬜ | ⬜ |
-| `kit/design.md` | ⬜ | ⬜ | ⬜ |
-| `kit/images.md` | ⬜ | ⬜ | ⬜ |
-| `kit/animation.md` | ⬜ | ⬜ | ⬜ |
+| `kit/design.md` | ✅ | ✅ | ⬜ |
+| `kit/images.md` | ✅ | ✅ | ⬜ |
+| `kit/animation.md` | ✅ | ✅ | ⬜ |
 | `kit/video.md` | ✅ | ✅ | ⬜ |
 | `kit/voice.md` | ✅ | ✅ | ⬜ |
 | `kit/docs.md` | ✅ | ✅ | ⬜ |
