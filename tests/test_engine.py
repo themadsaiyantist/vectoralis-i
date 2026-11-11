@@ -247,6 +247,27 @@ class Checks(Project_):
         self.cli("check")
         self.assertFalse((self.root / "harness/.checked.json").exists())
 
+    def test_a_file_put_back_as_it_was_clears_its_flag(self):
+        self.put("harness/settings.json", json.dumps({"profile": "heavy"}))
+        self.put("src/cart.py", "total = 0\n")
+        head = "# Tracker\n\n**Contents:** Checkout\n\n## Checkout\n\n| Unit | Built | Yours |\n|---|---|---|\n"
+        self.put("harness/tracker.md", head + f"| `src/cart.py` cart | {DONE} | {OPEN} |\n")
+        git(self.root, "init", "-q")
+        self.cli("check")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "the cart, ticked")
+        flag = "tracker: `src/cart.py` changed after its row was ticked"
+        stale = lambda: checks.stale(Project(str(self.root)))
+        self.put("src/cart.py", "total = 1\n")
+        self.assertIn(flag, stale())
+        self.put("src/cart.py", "total = 0\n")
+        self.assertNotIn(flag, stale(), "the file is the version the tick refers to again")
+        self.put("src/cart.py", "total = 1\n")
+        git(self.root, "commit", "-q", "-am", "a change after the tick")
+        self.assertIn(flag, stale())
+        git(self.root, "revert", "--no-edit", "HEAD")
+        self.assertNotIn(flag, stale(), "a reverted commit clears the flag it raised")
+
     def test_a_cell_holds_a_box_or_nothing_and_a_broken_version_file_is_said(self):
         self.put("harness/settings.json", json.dumps({"profile": "heavy"}))
         self.put("src/cart.py", "total = 0\n")

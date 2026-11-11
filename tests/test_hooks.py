@@ -170,6 +170,19 @@ class Hooks(unittest.TestCase):
         self.hook("prompt", prompt="thanks, carry on")
         self.assertEqual(self.hook("write", **call).returncode, 2)
 
+    def test_a_turn_cut_short_leaves_no_grant_behind(self):
+        self.settings(profile="heavy")
+        self.put("harness/locks.md", "# Locks\n\n- `src/pay/**` → locked 2026-01-01, live\n")
+        call = dict(tool_name="Write", tool_input={"file_path": str(self.root / "src/pay/refund.py"), "content": "x = 1\n"})
+        self.hook("prompt", prompt="unlock src/pay/refund.py and fix the rounding")
+        self.assertEqual(self.hook("write", **call).returncode, 0)
+        # The person presses Escape: the turn ends with no Stop event. They come back, or resume the session later.
+        self.hook("session", source="resume")
+        self.hook("prompt", prompt="go on where you stopped")
+        self.assertEqual(self.hook("write", **call).returncode, 2, "the grant ended with the message that gave it")
+        self.assertEqual(self.hook("write", session_id="test-another", **call).returncode, 2,
+                         "a new session starts with no grant")
+
     def test_a_tick_records_the_version_it_refers_to(self):
         self.settings(profile="heavy")
         self.put("src/cart.py", "total = 0\n")
@@ -292,6 +305,35 @@ class Hooks(unittest.TestCase):
         change("## Checkout", "## Cart")
         done = self.hook("stop")
         self.assertEqual(done.returncode, 0, "her tick is known by where it stood before the rename: " + done.stderr)
+
+    def test_an_edit_by_hand_between_two_turns_is_not_the_agents(self):
+        self.settings(profile="heavy")
+        cart, refund = f"| the cart total | {DONE} | {DONE} | {OPEN} |", f"| refund | {DONE} | {OPEN} | {OPEN} |"
+        checked = f"| refund | {DONE} | {DONE} | {OPEN} |"
+        head = "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n"
+        tracker = self.put("harness/tracker.md", f"{head}{cart}\n{refund}\n")
+        run = dict(cwd=str(self.root), capture_output=True, check=True)
+        for step in (["init", "-q"], ["add", "-A"], ["-c", "user.name=goku", "-c", "user.email=goku@example.com", "commit", "-q", "-m", "start"]):
+            subprocess.run(["git", *step], **run)
+
+        def change(old, new):
+            tracker.write_text(tracker.read_text(encoding="utf-8").replace(old, new), encoding="utf-8")
+
+        self.hook("prompt", prompt="read the cart total")
+        self.assertEqual(self.hook("stop").returncode, 0)
+        change(cart, cart[:-3] + f"{DONE} |")  # the person, in their editor, between two turns
+        self.hook("prompt", prompt="check the refund")
+        work = dict(tool_name="Write", tool_input={"file_path": str(self.put("src/refund.py", "x = 1\n")), "content": "x = 1\n"})
+        self.hook("wrote", **work)
+        change(refund, checked)
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 0, "a box the person ticked before the turn began is theirs: " + done.stderr)
+        self.hook("prompt", prompt="finish the refund")
+        self.hook("wrote", **work)
+        change(checked, checked[:-3] + f"{DONE} |")  # the person's box, ticked inside a turn
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 2, "inside a turn, the person's box is not the agent's to tick")
+        self.assertIn("refund", done.stderr)
 
     def test_a_subagent_cannot_write_a_record(self):
         self.settings(profile="heavy")

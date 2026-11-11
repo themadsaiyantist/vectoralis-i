@@ -108,5 +108,8 @@ NOT DONE YET, says Vectoralis.
 - **A row that is not bound.** A unit with no path, or with a wildcard such as `src/**/*.py`, is not watched (`run`). Bind it to a file or a folder.
 - **A cell that holds something else.** `WIP` in a cell is flagged by `vectoralis check`: a cell holds ✅, ⬜ or nothing (`run`). Make two rows, one done and one not.
 - **A tick through the shell.** `sed` on the tracker goes around `yours`. The `sweep` guard finds the ticked box when the agent stops, and sends it back (`run`). [Locks](locks.md)
+- **A ticked file changed, then put back.** By hand or by `git revert`, the file is the version its tick refers to again, and the flag clears. The check compares content, not history (`run`: a unit test).
+- **A turn cut short.** Escape in the middle of a turn leaves no grant open. A `tick` or an `unlock` ends with the message that gave it, in the same session and in a resumed one, and a new session starts with none (`run`: a unit test).
+- **Your own edit between two turns.** A box you tick in your editor between two turns stays yours. The sweep compares a turn with how it began, so only what changed inside the turn is the agent's. The same tick made inside a turn is sent back (`run`: a unit test).
 
 Verified on Claude Code 2.1.322 and Codex 0.167.1, 2026-11-11. `run`: every output and every line marked so, printed by this repository's CLI and engine on a scratch project. `read`: how each agent calls a skill, finds the CLI and trusts a hook, in the docs linked above.
