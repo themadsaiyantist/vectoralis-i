@@ -91,7 +91,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ When the research reports → each addition on the page where a reader meets the need: task state on the tracker page, memory on the handoff page, isolation on the safety page, public benchmarks on the measure page, a framework in a roadmap
 - ✅ `tools/check_links.py` → the link check belongs to the repository, not to a scratch folder
 - ✅ An install report template → `.github/ISSUE_TEMPLATE/install-report.md`, for the five cold installs
-- ⬜ Last pass → every changed page's links opened → `sh tools/check.sh` → the tracker against the files → `## Now` → commit by unit → CI watched to green
+- ✅ Last pass → every changed page's links opened → `sh tools/check.sh` → the tracker against the files → `## Now` → commit by unit → CI watched to green
 - Left out on purpose → interoperability with other trackers, a third agent, a benchmark suite of its own. The evaluation names them, and each would make the guide bigger, not truer
 
 **4. The release**
