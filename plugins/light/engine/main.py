@@ -42,7 +42,7 @@ def note(finding) -> str:
     return text
 
 
-def answer(event, findings) -> int:
+def answer(event, findings, codex=False) -> int:
     blocks = [f for f in findings if f.level == "block"]
     warns = [f for f in findings if f.level == "warn"]
     notices = [f for f in findings if f.level == "notice"]
@@ -54,7 +54,7 @@ def answer(event, findings) -> int:
         out["hookSpecificOutput"] = {"hookEventName": HOOK[event], "additionalContext": " ".join(note(f) for f in warns)}
     if notices:
         out["systemMessage"] = " ".join(f.what for f in notices)
-    if out:
+    if out or (event == "stop" and codex):
         sys.stdout.write(json.dumps(out) + "\n")
     return 0
 
@@ -92,12 +92,13 @@ def run(event) -> int:
         state["changed"] = True
         names = {proj.rel(w.path) for w in call.writes}
         state["touched"] = sorted(set(state.get("touched") or []) | {n for n in names if n})
+        state["written"] = sorted(set(state.get("written") or []) | {n for n in names if n})
     elif event == "shell":
         state["shell"] = True
     elif event == "stop" and not any(f.level == "block" for f in findings):
         state["changed"] = state["shell"] = False
     states.save(call, state)
-    return answer(event, findings)
+    return answer(event, findings, codex=call.agent == "codex")
 
 
 def _ticks(event, call, proj, state) -> None:

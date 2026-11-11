@@ -107,7 +107,7 @@ Every output above is `run` on this repository, 2026-11-11.
 
 ## What it costs
 
-- **Tokens** → about 930 always loaded: the skill descriptions about 240, `rules.md` about 500, the briefing about 190. The cap is 2,000, and `vectoralis check` fails over it. [Cost](cost.md)
+- **Tokens** → about 840 always loaded on a fresh project: the skill descriptions about 240, `rules.md` about 500, the briefing about 100. The briefing grows with your handoff, and this repository's total is near 1,040. The cap is 2,000, and `vectoralis check` fails over it. [Cost](cost.md)
 - **Attention** → you answer one round of questions before the build, and you tick your own boxes.
 - **Time** → one more test run at the end of a turn that changed something.
 
@@ -122,7 +122,7 @@ Every output above is `run` on this repository, 2026-11-11.
 ## In Codex
 
 - The same records, the same guards, the same skills, called with `$heavy:plan` and the rest.
-- Two gaps: the `reviewer` and `builder` subagents are Claude Code only, and the compaction prompt is not confirmed in Codex. [Codex](codex.md)
+- Two gaps: the `reviewer` and `builder` subagents are Claude Code only, and Codex ignores what a hook prints before a compaction. [Codex](codex.md)
 
 ---
 

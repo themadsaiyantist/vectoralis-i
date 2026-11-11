@@ -47,7 +47,7 @@ def session_text(proj) -> str:
 
 def compact_text(proj, state) -> str:
     """What a compaction must keep, written from the records and the session's state."""
-    touched = (state.get("touched") or [])[:30]
+    written = (state.get("written") or state.get("touched") or [])[:30]
     given = state.get("grants") or {}
     open_grants = [f"{verb} {target}" for verb in ("unlock", "tick", "promote") for target in given.get(verb, [])]
     lines = [
@@ -55,9 +55,9 @@ def compact_text(proj, state) -> str:
         "1. The task in hand and its goal, in the person's own words.",
         "2. The boxes moved this session, and the next open box in harness/todo.md and harness/tracker.md.",
         "3. Every decision made, and every call made without asking.",
-        "4. The files changed this session" + (": " + ", ".join(touched) if touched else "."),
+        "4. The files written this session" + (": " + ", ".join(written) if written else "."),
         "5. Every failure logged, and everything that was not verified.",
         "6. What the person allowed this turn" + (": " + ", ".join(open_grants) if open_grants else ": nothing") + ".",
-        "Drop any tool output that a file already holds. The records in harness/ are read again after the compaction.",
+        "Drop any tool output that a file already holds. The rules and the briefing are printed again after the compaction, and the records stay on disk in harness/.",
     ]
     return "\n".join(lines) + "\n"

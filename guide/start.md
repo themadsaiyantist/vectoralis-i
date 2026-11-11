@@ -22,11 +22,11 @@ What a harness is, and which of the two you need. One minute.
 | The work | a bug fix, a small feature, one sitting | days of work, many files, anything other people rely on |
 | The steps | describe → plan in one line → edit → run the tests → commit | briefing → plan → build → check → re-check → record → report |
 | What is installed | three guards, one settings file | light, plus the records and the guards that keep them true |
-| Always loaded | 0 tokens | about 930 tokens, capped at 2,000 |
+| Always loaded | 0 tokens | about 840 tokens, capped at 2,000 |
 | What you do | nothing, until a guard speaks | tick your own boxes, answer one round of questions |
 | Read next | [Light](light.md) | [Heavy](heavy.md) |
 
-The token counts are `run`: `vectoralis budget` on this repository, 2026-11-11. It counts characters and divides by four.
+The token counts are `run`: `vectoralis budget` on a fresh project, 2026-11-11. It counts characters and divides by four.
 
 ---
 

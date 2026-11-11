@@ -57,12 +57,12 @@ heavy@vectoralis  installed, enabled  0.1.0    /home/goku/vectoralis-i/plugins/h
 | Hooks need one review | a hook is skipped until you trust it, and again when it changes | `/hooks`, once, and after an update |
 | A plugin cannot carry a subagent | `reviewer` and `builder` are Claude Code only | write yours in `.codex/agents/*.toml`, or use a second session with a read-only sandbox |
 | No worktree isolation for a subagent | two agents can meet in one tree | `git worktree add` by hand |
-| The compaction prompt | Codex has the hook, and its docs do not say its output shapes the summary | write the handoff before a long session ends |
+| The compaction prompt | Codex runs the hook and ignores what it prints | set `compact_prompt` in `.codex/config.toml`, and write the handoff before a long session ends |
 | The CLI is not on the path | `vectoralis` is not found | the skills call it by its path, under `~/.codex/plugins/cache/vectoralis/light/` |
 | No "ask" from a hook | a guard cannot hand a decision to you | here a guard blocks or warns, in both agents |
-| No allow, ask, deny rules | permission rules do not carry over | `sandbox_mode` and `approval_policy` |
+| Command rules are experimental | Codex has allow, prompt and forbidden rules for commands, and labels them experimental, so nothing here builds on them | `sandbox_mode` and `approval_policy` |
 
-Each row is `read`: [plugins](https://learn.chatgpt.com/docs/plugins), [hooks](https://learn.chatgpt.com/docs/hooks), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), [approvals and sandbox](https://learn.chatgpt.com/docs/agent-approvals-security), 2026-11-11.
+Each row is `read`: [plugins](https://learn.chatgpt.com/docs/plugins), [hooks](https://learn.chatgpt.com/docs/hooks), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), [approvals and sandbox](https://learn.chatgpt.com/docs/agent-approvals-security), [command rules](https://learn.chatgpt.com/docs/agent-configuration/rules), [the config reference](https://learn.chatgpt.com/docs/config-file/config-reference), 2026-11-11.
 
 ---
 

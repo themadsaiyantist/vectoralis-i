@@ -39,11 +39,11 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `guide/light.md` | ✅ | ✅ | ⬜ |
 | `guide/heavy.md` | ✅ | ✅ | ⬜ |
 | `guide/plan.md` | ✅ | ✅ | ⬜ |
-| `guide/modes.md` | ⬜ | ⬜ | ⬜ |
-| `guide/models.md` | ⬜ | ⬜ | ⬜ |
+| `guide/modes.md` | ✅ | ✅ | ⬜ |
+| `guide/models.md` | ✅ | ✅ | ⬜ |
 | `guide/layout.md` | ⬜ | ⬜ | ⬜ |
-| `guide/context.md` | ⬜ | ⬜ | ⬜ |
-| `guide/handoff.md` | ⬜ | ⬜ | ⬜ |
+| `guide/context.md` | ✅ | ✅ | ⬜ |
+| `guide/handoff.md` | ✅ | ✅ | ⬜ |
 | `guide/guards.md` | ✅ | ✅ | ⬜ |
 | `guide/checks.md` | ✅ | ✅ | ⬜ |
 | `guide/tracker.md` | ⬜ | ⬜ | ⬜ |
