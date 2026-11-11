@@ -2,6 +2,8 @@
 
 Run with `python3 -m unittest discover -s tests -q`.
 """
+import contextlib
+import io
 import json
 import os
 import subprocess
@@ -102,12 +104,14 @@ class Parts(unittest.TestCase):
         self.assertLess(max(r["seconds"] for r in results if r["event"] != "stop"), 0.2)
 
     def test_a_guard_that_breaks_steps_aside(self):
-        real = main.run
+        real, said = main.run, io.StringIO()
         main.run = lambda event: 1 / 0
         try:
-            self.assertEqual(main.main(["write"]), 1)
+            with contextlib.redirect_stderr(said):
+                self.assertEqual(main.main(["write"]), 1)
         finally:
             main.run = real
+        self.assertIn("broke and stepped aside", said.getvalue())
 
 
 class Checks(Project_):
