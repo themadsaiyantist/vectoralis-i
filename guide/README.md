@@ -13,6 +13,7 @@ How to run a coding agent on light and heavy work, in Claude Code and in Codex. 
 | [Start](start.md) | you want to know what a harness is, and which one you need |
 | [Install](install.md) | you are ready. Two commands |
 | [Proof](proof.md) | you want to see what this way of working built |
+| [Measure](measure.md) | you want numbers: the same six tasks with no harness, with light and with heavy |
 
 ## The two workflows
 

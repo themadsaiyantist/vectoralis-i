@@ -31,7 +31,7 @@ Then `/light:setup` in a session. Check it on your own machine:
 
 ```text
 $ vectoralis guards
-167 payloads, the slowest answer took 21 ms
+236 payloads, the slowest answer took 29 ms
 ```
 
 <details>
@@ -63,6 +63,8 @@ BLOCKED by Vectoralis. Nothing was written.
 
 The agent read the reason, wrote the script to use an environment variable, and told the person to rotate the token. A real run, 19 seconds. [guide/light.md](guide/light.md) has it and two more.
 
+**Measured, not claimed.** Six tasks, 54 live sessions: a bare agent against light against heavy. Heavy stayed out of all five traps, at about 1,400 tokens and two cents more on a plain job. The run also found a gap in light, fixed the same day and run again. [guide/measure.md](guide/measure.md)
+
 ---
 
 ## What is inside
@@ -87,7 +89,7 @@ This way of working, before this repository existed:
 
 And then this repository:
 
-- **Built under its own harness**, with 50 tests and 167 guard payloads. Its tracker, its decisions and its failures are in [harness/](harness/), as they were written.
+- **Built under its own harness**, with 54 tests and 236 guard payloads. Its tracker, its decisions and its failures are in [harness/](harness/), as they were written.
 
 [guide/proof.md](guide/proof.md) has every number and how it was counted.
 
