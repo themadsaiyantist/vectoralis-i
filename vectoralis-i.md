@@ -1,8 +1,8 @@
 # Vectoralis I
 
-The authority on what Vectoralis I is and what it contains: the practical guide to running coding agents on light and heavy work, and the harness that installs each. Read it before writing any part of it. Started 2026-11-11 by the author: "the best guide about practical light and heavy workload and workflow with clear steps, skills, hooks".
+The authority on what Vectoralis I is and what it contains: the practical guide to running coding agents on light and heavy work, and the harness that installs each, with the kit of skills, hooks and MCP servers for each situation and three career roadmaps, both added the same day. Read it before writing any part of it. Started 2026-11-11 by the author: "the best guide about practical light and heavy workload and workflow with clear steps, skills, hooks".
 
-**Contents:** The series · What it is · Who it is for · The two workflows · When to switch · Every piece, the same four things · The harness · What it is not · Where it comes from · Open questions
+**Contents:** The series · What it is · The absolute rules · Who it is for · The two workflows · When to switch · Every piece, the same four things · The harness · The kit · The roadmaps · What it is not · Where it comes from · Open questions
 
 ---
 
@@ -18,12 +18,25 @@ Named 2026-11-11 by the author.
 
 - **A guide:** how to run Claude Code, Codex and other coding agents on real work, light and heavy, in clear steps.
 - **A harness:** the same guide as files you install, a `light` profile and a `heavy` profile, so the agent works the guide's way.
+- **A kit:** the most important skills, hooks and MCP servers for each situation.
+- **Three career roadmaps:** AI Engineering and two more.
 - **Open source**, free, human readable.
+- **On GitHub** at `themadsaiyantist/vectoralis-i`, private until the release, the author's word of 2026-11-11.
+- **Markdown in the repository**, read on GitHub, with no site, the author's word of 2026-11-11. The only HTML is the dashboard, built on the reader's own machine.
+
+## The absolute rules
+
+Ruled 2026-11-11 by the author. They bind every page, every file and every decision here.
+
+- **The absolute rules:** "human readable, modern, hot topics, clean, effective. those are the absolute rules"
+- **The utmost priority:** "the utmost prioruty is organization,quality,efficiency,human readable,modern and hot"
+- **No dates:** "we will do everything now ASAP, no dates no nothing". Everything is built now, and released the moment it is done.
 
 ## Who it is for
 
 - Anyone who already uses a coding agent and wants it to work reliably, from a one-file fix to a project that runs for weeks.
 - Students of the Coding Agents course, who build a harness there and keep this one as the reference.
+- Anyone heading into AI Engineering, or one of the two other careers of the roadmaps, who wants the steps, the milestones and the projects.
 
 ## The two workflows
 
@@ -85,11 +98,27 @@ And each states what it **costs**, in tokens and in attention, so a reader adds 
   - one dashboard page built from the files: open work, failures, what is next
   - after the same failure twice, a proposed guard a person approves
 
+## The kit
+
+Added 2026-11-11 by the author: "also write about the most important skills and hooks and mcps depending on the situation such as yk coding, reasoning, desgining, animation, just images, videos, voice,... yk fully all out but fully organized and pleasing to multiple types of people".
+
+- **By situation** → coding, reasoning, designing, animation, images, video, voice, and the rest of tech work.
+- **Mainly tech**, the author's words: "mainly in tech obv" and "no biology,chem,math that are purely off the tech".
+- **All out, and fully organized**, so it pleases more than one kind of reader.
+- **Heavy examples need no run here**, the author's word: "if its things about some heavy workload etc then obv we dont have to do it here you can find samples free online and reference them, in clean format, and how to do it better".
+
+## The roadmaps
+
+Added 2026-11-11 by the author: "and also include in it the perfect roadmap for 3 careers, AI Engineering one, 2 you choose, not ML researcher or any of that heavy thing" and "full clean steps, milestones, projects,future,cleanest possible".
+
+- **Three careers** → AI Engineering, and two chosen by Claude. Nothing research-heavy.
+- **Each one holds** → full clean steps, milestones, projects and the future, as clean as it can be.
+
 ## What it is not
 
-- Not a skills collection. Those give an agent skills, Vectoralis I gives it a working system.
+- Not a skills dump. The kit names the few that matter in each situation, and Vectoralis I stays a working system, reworded 2026-11-11 with the kit.
 - Not a replacement for the agents' built-in features.
-- Not theory. Every recipe is run before it is written, and shows its real output.
+- Not theory. Every light recipe and every guard is run before it is written, and shows its real output. A heavy example may be a free public sample, linked in a clean format with how to do it better, the author's word of 2026-11-11.
 
 ## Where it comes from
 
@@ -102,7 +131,10 @@ And each states what it **costs**, in tokens and in attention, so a reader adds 
 
 ## Open questions
 
-- The release date.
+Asked in `a.md` at the root, the question round of 2026-11-11, and folded in here once answered.
+
 - The licence.
-- The GitHub account it lives on.
 - How deep the Codex adapter goes in the first release.
+- When it goes public, and what the public text says about the series.
+- How a profile installs, where the records live and how the guards behave.
+- The pages of the guide, the situations of the kit and the two careers Claude chooses.
