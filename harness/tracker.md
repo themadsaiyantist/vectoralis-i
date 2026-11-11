@@ -26,7 +26,8 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `plugins/heavy/skills/` ten skills, used in a live session | ✅ | ⬜ | ⬜ |
 | `plugins/heavy/agents/` two subagents, used in a live session | ✅ | ⬜ | ⬜ |
 | `.claude-plugin/marketplace.json` the marketplace, validated | ✅ | ✅ | ⬜ |
-| Codex: the same package installed and run in Codex | ⬜ | ⬜ | ⬜ |
+| Codex: both plugins install from the same marketplace file | ✅ | ✅ | ⬜ |
+| Codex: the hooks and the skills, in a live Codex session | ⬜ | ⬜ | ⬜ |
 
 ## The guide
 
