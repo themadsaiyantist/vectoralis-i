@@ -215,6 +215,20 @@ class Cli(Project_):
         self.assertEqual((self.root / "CLAUDE.md").read_text(), "@AGENTS.md\n")
         self.assertIn(self.root.name, (self.root / "AGENTS.md").read_text())
 
+    def test_the_starter_sees_an_instructions_file_wherever_the_agent_reads_one(self):
+        self.put(".claude/CLAUDE.md", "mine\n")
+        done = self.cli("init", "light", "--starter")
+        self.assertIn("Your instructions file is yours", done.stdout)
+        self.assertFalse((self.root / "AGENTS.md").exists())
+        self.assertFalse((self.root / "CLAUDE.md").exists())
+
+    def test_a_starter_with_no_command_found_holds_no_placeholder(self):
+        self.cli("init", "light", "--starter")
+        text = (self.root / "AGENTS.md").read_text()
+        self.assertNotIn("none found", text)
+        self.assertNotIn("{", text)
+        self.assertFalse((Path(self.home.name) / "trusted.json").exists())
+
     def test_fail_logs_an_entry_and_asks_for_a_guard_the_second_time(self):
         self.cli("init", "heavy")
         first = self.cli("fail", "A box ticked on a claim", "--class", "false tick")

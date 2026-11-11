@@ -14,7 +14,7 @@ Every command, file, guard, setting and word of this harness, on one page. Look 
 |---|---|
 | `vectoralis init light` | writes `harness/settings.json`, finds the test and format commands |
 | `vectoralis init heavy` | adds the records. `--team` adds an owner column and a to-do section per person |
-| `vectoralis init <profile> --starter` | also writes a starter `AGENTS.md` and a one-line `CLAUDE.md`, only where neither exists |
+| `vectoralis init <profile> --starter` | also writes a starter `AGENTS.md` and a one-line `CLAUDE.md`, only where the project has no instructions file |
 | `vectoralis status` | the briefing, as a session start prints it |
 | `vectoralis check` | staleness, the budget and every guard's proof. Exit 1 on any flag |
 | `vectoralis affirm <path>` | says a ticked file was checked again as it is now |

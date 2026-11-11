@@ -4,8 +4,7 @@ What an agent needs to work here. Keep it short: every line is read in every ses
 
 ## Commands
 
-- Run the tests → `{test}`
-- Format a file → `{format}`
+{commands}
 
 ## Conventions
 

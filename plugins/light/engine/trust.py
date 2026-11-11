@@ -45,6 +45,8 @@ def trusted(proj, kind) -> bool:
 def approve(proj) -> List[Tuple[str, str]]:
     """Approve the project's commands as they are written now. Returns each kind with its command."""
     data, found = _load(), [(kind, command(proj, kind)) for kind in KINDS if command(proj, kind)]
+    if not found and str(proj.root) not in data:
+        return found  # nothing to approve, so nothing is written to the home folder
     data[str(proj.root)] = {kind: _digest(line) for kind, line in found}
     folder = home()
     folder.mkdir(parents=True, exist_ok=True)
