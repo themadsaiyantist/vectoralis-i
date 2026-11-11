@@ -1,8 +1,16 @@
-# Gravity
+# Vectoralis I
 
-The authority on what Gravity is and what it contains: the practical guide to running coding agents on light and heavy work, and the harness that installs each. Read it before writing any part of Gravity. Started 2026-11-11 by the author: "the best guide about practical light and heavy workload and workflow with clear steps, skills, hooks".
+The authority on what Vectoralis I is and what it contains: the practical guide to running coding agents on light and heavy work, and the harness that installs each. Read it before writing any part of it. Started 2026-11-11 by the author: "the best guide about practical light and heavy workload and workflow with clear steps, skills, hooks".
 
-**Contents:** What it is · Who it is for · The two workflows · When to switch · Every piece, the same four things · The harness · What it is not · Where it comes from · Open questions
+**Contents:** The series · What it is · Who it is for · The two workflows · When to switch · Every piece, the same four things · The harness · What it is not · Where it comes from · Open questions
+
+---
+
+## The series
+
+Named 2026-11-11 by the author.
+
+- **Vectoralis I** → this repository, the guide and harness for coding agents.
 
 ---
 
@@ -70,7 +78,7 @@ And each states what it **costs**, in tokens and in attention, so a reader adds 
   - Codex second → `AGENTS.md` and `config.toml`
 - **Loaded when needed:** a small core always loaded, everything else as skills the task calls in.
 - **MCP only for outside systems** that need it, GitHub or an issue tracker, because every server costs context.
-- **On top of the agents' own features, never in place of them:** to-dos, plan mode and memory are theirs. Gravity adds memory of failures, enforcement, and records that stay true.
+- **On top of the agents' own features, never in place of them:** to-dos, plan mode and memory are theirs. Vectoralis I adds memory of failures, enforcement, and records that stay true.
 - **Smart, where the bootcamp's harness was manual:**
   - a staleness check: trackers and rules read against git, and anything out of date flagged
   - every hook shipped with its own test payloads
@@ -79,7 +87,7 @@ And each states what it **costs**, in tokens and in attention, so a reader adds 
 
 ## What it is not
 
-- Not a skills collection. Those give an agent skills, Gravity gives it a working system.
+- Not a skills collection. Those give an agent skills, Vectoralis I gives it a working system.
 - Not a replacement for the agents' built-in features.
 - Not theory. Every recipe is run before it is written, and shows its real output.
 
