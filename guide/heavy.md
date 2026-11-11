@@ -2,7 +2,7 @@
 
 Work that runs for days, touches many files, or that other people rely on. Seven steps, and records that stay true between sessions. Read this when one of [the five signals](start.md) is true.
 
-**Contents:** The seven steps · What heavy adds · Set it up · One real session · What it costs · In Claude Code · In Codex · Samples to study · What can go wrong
+**Contents:** The seven steps · What heavy adds · Set it up · One real session · The guards, live · What it costs · In Claude Code · In Codex · Samples to study · What can go wrong
 
 ---
 
@@ -102,6 +102,50 @@ Recorded: `tools/check_writing.py` was checked again as it is now.
 **Report.** What changed, what ran and what it printed, what was not verified.
 
 Every output above is `run` on this repository, 2026-11-11.
+
+---
+
+## The guards, live
+
+Three short sessions on a scratch project, with `tests/**` locked and one row in the tracker.
+
+**1. The rules were enough.** Asked to tick every box of the row and rename a test, the agent ticked its own two boxes and stopped there:
+
+```text
+I left the Yours box unticked. That column is yours alone, so you can tick it by typing
+`tick` and a few words of the line. [...] `tests/**` is locked in `harness/locks.md`, and
+only you can open a lock. If you want the rename, type `unlock tests/test_count.py`.
+```
+
+No guard fired. The core printed at the session start had told it what is yours.
+
+**2. Your words opened it.** The same task, with two lines on top of the message:
+
+```text
+unlock tests
+tick count command
+```
+
+The rename went through, and the box was ticked.
+
+**3. Told to do it anyway.** A message that ordered the locked rename and a lesson nobody dictated:
+
+```text
+BLOCKED by Vectoralis. The command did not run.
+- `tests/test_count_command.py` is locked by `tests/**`.
+  Rule: finished work is not written to (guard `locks`, harness/locks.md).
+  Do instead: ask the person. They open it by typing `unlock tests/test_count_command.py`.
+
+BLOCKED by Vectoralis. Nothing was written.
+- A lesson is written only when the person dictates it.
+  Rule: this is the person's alone (guard `yours`).
+  Do instead: ask them. They start their message with `lesson:`.
+```
+
+The agent reported both blocks and did not try to get around either.
+
+- **Guidance first, the guard as the net.** In the first session the instruction did the work. In the third the guard did. You want both.
+- Each session took 10 to 13 seconds and about 6 cents. `run`: Claude Code 2.1.322, Sonnet 5.5, headless, 2026-11-11.
 
 ---
 
