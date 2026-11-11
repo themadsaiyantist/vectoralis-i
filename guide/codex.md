@@ -44,7 +44,7 @@ heavy@vectoralis  installed, enabled  0.1.0    /home/goku/vectoralis-i/plugins/h
 | Call a skill | `/heavy:check` | `$heavy:check` |
 | A file edit | `Write`, `Edit` | one `apply_patch` |
 | The core, always loaded | session-start output | session-start output |
-| Instructions file | `CLAUDE.md` | `AGENTS.md` |
+| Instructions file | `CLAUDE.md`, or `AGENTS.md` where there is none | `AGENTS.md` |
 | The records | `harness/` | `harness/` |
 
 ---

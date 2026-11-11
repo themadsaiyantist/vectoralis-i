@@ -13,8 +13,9 @@ Three guards and one settings file. Nothing else is added.
    - In Codex, find it with `ls ~/.codex/plugins/cache/vectoralis/light/*/bin/vectoralis`.
 2. If it found no test command or no formatter, ask the person for the command and set `test` or `format` in `harness/settings.json`.
 3. If it offered a starter instructions file, ask the person first. On a yes, run `vectoralis init light --starter`.
-4. Run `vectoralis guards` and show the table.
-5. Tell the person what is on now:
+4. If it said a command is not approved on this machine, show the person the command and ask. On a yes, run `vectoralis trust`.
+5. Run `vectoralis guards` and show the table.
+6. Tell the person what is on now:
    - no secret is written to a file or printed
    - the formatter runs after every edit
    - the tests run before the agent says done

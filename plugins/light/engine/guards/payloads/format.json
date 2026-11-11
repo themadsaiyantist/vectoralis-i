@@ -75,5 +75,21 @@
       "text": "x   \n"
     },
     "expect": "pass"
+  },
+  {
+    "name": "does not run a formatter nobody approved on this machine",
+    "event": "wrote",
+    "settings": {
+      "format": "python3 -c \"import sys,pathlib;p=pathlib.Path(sys.argv[1]);p.write_text(p.read_text().rstrip()+chr(10))\" {file}"
+    },
+    "files": {
+      "a.txt": "x   \n"
+    },
+    "call": {
+      "path": "a.txt",
+      "text": "x   \n"
+    },
+    "unapproved": true,
+    "expect": "notice"
   }
 ]

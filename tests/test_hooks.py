@@ -22,8 +22,9 @@ class Hooks(unittest.TestCase):
         self.folder = tempfile.TemporaryDirectory(prefix="vectoralis-test-")
         self.root = Path(self.folder.name).resolve()
         self.session = "test-" + uuid.uuid4().hex
+        self.home = tempfile.TemporaryDirectory(prefix="vectoralis-home-")
+        self.addCleanup(self.home.cleanup)
         self.addCleanup(self.folder.cleanup)
-        self.addCleanup(lambda: (Path(tempfile.gettempdir()) / "vectoralis" / (self.session + ".json")).unlink(missing_ok=True))
 
     def put(self, name, text):
         path = self.root / name
@@ -31,15 +32,24 @@ class Hooks(unittest.TestCase):
         path.write_text(text, encoding="utf-8")
         return path
 
-    def settings(self, **more):
+    def settings(self, approve=True, **more):
         base = {"profile": "light", "test": "", "format": ""}
         base.update(more)
         self.put("harness/settings.json", json.dumps(base))
+        if approve:
+            self.trust()
+
+    def trust(self):
+        env = dict(os.environ, VECTORALIS_HOME=self.home.name)
+        env.pop("CLAUDE_PROJECT_DIR", None)
+        subprocess.run([sys.executable, str(ROOT / "plugins" / "light" / "bin" / "vectoralis"), "trust"], cwd=str(self.root),
+                       capture_output=True, env=env, check=True)
 
     def hook(self, event, env=None, **payload):
         payload.setdefault("session_id", self.session)
         payload.setdefault("cwd", str(self.root))
         clean = {k: v for k, v in os.environ.items() if k not in ("CLAUDE_PROJECT_DIR", "PLUGIN_ROOT")}
+        clean.update(VECTORALIS_HOME=self.home.name, TMPDIR=self.home.name)
         clean.update(env or {})
         return subprocess.run([sys.executable, str(RUN), event], input=json.dumps(payload), capture_output=True,
                               text=True, env=clean, timeout=60)
@@ -96,6 +106,20 @@ class Hooks(unittest.TestCase):
         self.settings()
         done = self.hook("stop", env={"PLUGIN_ROOT": str(ROOT / "plugins" / "light")})
         self.assertEqual((done.returncode, json.loads(done.stdout)), (0, {}))
+
+    def test_a_command_from_a_cloned_repository_does_not_run_until_it_is_approved_here(self):
+        self.settings(approve=False, test="echo 'FAILED cloned' && exit 1")
+        write = dict(tool_name="Write", tool_input={"file_path": str(self.put("a.py", "x = 1\n")), "content": "x = 1\n"})
+        self.hook("wrote", **write)
+        waiting = self.hook("stop")
+        self.assertEqual(waiting.returncode, 0)
+        self.assertIn("nobody approved it on this machine", json.loads(waiting.stdout)["systemMessage"])
+        self.trust()
+        self.hook("wrote", **write)
+        self.assertEqual(self.hook("stop").returncode, 2)
+        self.settings(approve=False, test="echo 'FAILED changed' && exit 2")
+        self.hook("wrote", **write)
+        self.assertEqual(self.hook("stop").returncode, 0)
 
     def test_stop_is_silent_when_nothing_changed(self):
         self.settings(test="exit 1")
@@ -163,7 +187,8 @@ class Hooks(unittest.TestCase):
         self.assertIn("unlock docs", out)
 
     def test_a_broken_payload_steps_aside_and_never_blocks(self):
-        done = subprocess.run([sys.executable, str(RUN), "write"], input="not json", capture_output=True, text=True, timeout=60)
+        env = dict(os.environ, TMPDIR=self.home.name, VECTORALIS_HOME=self.home.name)
+        done = subprocess.run([sys.executable, str(RUN), "write"], input="not json", capture_output=True, text=True, timeout=60, env=env)
         self.assertEqual(done.returncode, 0)
 
 

@@ -50,6 +50,19 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · A second review found the guards miss command forms the spec says they stop, and a hook ran commands nobody approved · closed 2026-11-11
+
+**Class.** `claim-without-proof`
+
+**What failed.** The subagent that wrote the safety page tried the guards as an attacker would. `bash -c 'git reset --hard'` and the same behind `env` passed. `rm -rf` on the home by its path only warned, where the spec says it blocks. `find . -delete` passed. `printenv` of a secret variable and a `grep` through `.env` passed. And the `test` and `format` commands of `harness/settings.json` ran inside a hook, with the person's access, with no approval, so a cloned repository could run anything.
+
+**Cause.** The same as the entry below: the payloads proved the forms the author thought of, not the ones the spec's words cover. And the two commands were treated as the project's own, when the project may be someone else's.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → each form is now stopped, with a payload. A hook runs a command only after it was approved on this machine, and the approval lives in the home folder, where a repository cannot write it.
+- The guard → the class failed twice, so it gets what a machine can hold: 106 payloads from 95, one for every form either review found. What a machine cannot hold stays a step: a page about a guard is written by someone who tried to get past it.
+
 ### ✅ 2026-11-11 · Claude · A review found thirteen gaps between what the spec says and what the engine does · closed 2026-11-11
 
 **Class.** `claim-without-proof`

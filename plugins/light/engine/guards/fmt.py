@@ -6,6 +6,7 @@ import subprocess
 from pathlib import Path
 
 from . import Finding
+from .. import trust
 
 NAME = "format"
 
@@ -13,6 +14,12 @@ NAME = "format"
 def check(call, proj, state):
     command = str(proj.settings.get("format") or "").strip()
     out = []
+    if command and not trust.trusted(proj, "format"):
+        if not state.get("format_unapproved_said"):
+            state["format_unapproved_said"] = True
+            out.append(Finding(NAME, "notice", "Vectoralis did not run this project's formatter, because nobody approved it on "
+                                               f"this machine yet: `{command}`. Read it, then approve it with `vectoralis trust`."))
+        return out
     for write in call.writes:
         path = Path(write.path)
         rel = proj.rel(write.path)

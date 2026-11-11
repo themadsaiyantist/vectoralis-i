@@ -49,5 +49,17 @@
       "changed": true
     },
     "expect": "pass"
+  },
+  {
+    "name": "does not run a test command nobody approved on this machine",
+    "event": "stop",
+    "settings": {
+      "test": "exit 1"
+    },
+    "state": {
+      "changed": true
+    },
+    "unapproved": true,
+    "expect": "notice"
   }
 ]

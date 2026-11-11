@@ -24,12 +24,15 @@ KNOWN = [
 LOOKS = re.compile(r"(?i)\b(api[_-]?key|secret|token|passwd|password)\b[\"']?\s*[:=]\s*[\"']([^\"'\s]{20,})[\"']")
 PLACEHOLDER = re.compile(r"(?i)example|your[_-]|xxxx|changeme|placeholder|dummy|<|\$\{|\{\{")
 READS = re.compile(
-    r"\b(?:cat|less|more|head|tail|bat|nl|strings|xxd|od|base64)\b[^|;&\n]*?"
+    r"\b(?:cat|less|more|head|tail|bat|nl|strings|xxd|od|base64|grep|egrep|fgrep|rg|ag|awk|sed|cut|sort|uniq|tac|jq|yq)\b[^|;&\n]*?"
     r"(?P<file>(?:[\w./~-]*/)?(?:\.env(?:\.[\w-]+)*|credentials|id_(?:rsa|ed25519|ecdsa|dsa)|[\w.-]+\.pem|\.netrc"
     r"|secrets?\.(?:json|ya?ml|toml|env)))(?=$|[\s|;&>)])"
 )
 SAFE = re.compile(r"\.env\.(?:example|sample|template|dist)$")
-ECHO = re.compile(r"\b(?:echo|printf)\b[^|;&\n]*\$\{?\w*(?:KEY|TOKEN|SECRET|PASSWORD|PASSWD)\w*")
+ECHO = re.compile(
+    r"\b(?:echo|printf)\b[^|;&\n]*\$\{?\w*(?:KEY|TOKEN|SECRET|PASSWORD|PASSWD)\w*"
+    r"|\bprintenv\s+\w*(?:KEY|TOKEN|SECRET|PASSWORD|PASSWD)\w*"
+)
 DUMP = re.compile(r"(?:^|[;&|]\s*)(?:printenv|env)\s*(?:$|[|;&>])", re.M)
 
 
