@@ -17,7 +17,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-**Next →** heavy: the skills and the subagents → this repository's own records → the guide. `b.md` is answered while it runs.
+**Next →** the guide's pages → the kit → one real run of light on `runlog`. The roadmaps, the topics and the communities are being researched. `b.md` is answered while it runs.
 
 ---
 
@@ -44,7 +44,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Fold the 25 answers into the outline → delete `a.md`
 - ✅ Ask the second round → `b.md`, seven calls
 - ✅ Clean the series text and the history → first push
-- ⬜ Study the similar repositories → notes kept outside the repository
+- ✅ Study the similar repositories → notes kept outside the repository
 - ✅ Check each platform fact in the docs → run only what cannot be read
 - ⬜ Fold the answers of `b.md` into the outline → delete `b.md`
 
@@ -55,9 +55,11 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 **3. The build, in this order**
 
 - ✅ Light → three guards, one settings file
-- ⬜ Heavy → the records, the guards, the skills
-- ⬜ The smart pieces → staleness check, guard tests, dashboard, proposed guard, the compaction prompt
-- ⬜ Codex → the same package, and the table of gaps
+- ✅ Heavy → the records, the guards, the skills
+- ✅ The smart pieces → staleness check, guard tests, dashboard, proposed guard, the compaction prompt
+- ⬜ Codex → the same package, and the table of gaps. Built for both, not yet run in Codex
+- ⬜ One real run → light on `runlog`, in Claude Code, for `guide/light.md`
+- ⬜ Install heavy in this repository → run a live session on its own harness
 - ⬜ The guide → every page listed in `spec.md`
 - ⬜ The kit → 19 situations
 - ⬜ The roadmaps → 3 careers

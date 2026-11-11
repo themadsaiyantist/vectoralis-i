@@ -53,11 +53,13 @@ def stale(proj, seconds=None) -> List[str]:
         path = row["path"]
         if not path or any(c in path for c in "*?"):
             continue
-        if not (proj.root / path).exists():
-            flags.append(f"tracker: `{path}` is gone")
-            continue
         stages = [mark for name, mark in row["marks"].items() if name != row["yours_stage"]]
-        if records.DONE not in stages or (seconds is not None and time.monotonic() - start > seconds):
+        if records.DONE not in stages:
+            continue
+        if not (proj.root / path).exists():
+            flags.append(f"tracker: `{path}` is ticked and the file is gone")
+            continue
+        if seconds is not None and time.monotonic() - start > seconds:
             continue
         if line_times is None:
             line_times = _line_times(proj, "harness/tracker.md")

@@ -11,10 +11,12 @@ What went wrong on Vectoralis I and must not happen twice, the agent's failures 
 - **A failure** is something that went wrong and was caught after the fact. A guard that refuses a write is the system working, and is not logged.
 - **Facts only.** No apology, no blame. The author's failures are written exactly like the agent's.
 - **Three boxes** → the instance fixed → the cause named → the guard in place. An entry closes when all three are ✅.
-- **The same failure twice** gets a guard a machine enforces.
+- **The class** is a short slug. The second entry of one class gets a guard a machine enforces.
 
 ```text
 ### ⬜ 2026-11-11 · Claude · What failed, in a few words
+
+**Class.** `a-short-slug`
 
 **What failed.** The facts, in one or two sentences.
 
@@ -48,7 +50,22 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · The staleness check flagged every unit that was not built yet · closed 2026-11-11
+
+**Class.** `false-flag`
+
+**What failed.** `vectoralis check` reported a tracker row as stale when its file did not exist, even when no box of the row was ticked. A fresh tracker that lists the work ahead would have opened on a wall of flags. It was found the first time this repository ran its own check, after the code was pushed.
+
+**Cause.** The check asked whether the file exists before it asked whether the row claims anything. Its test used a row with no box ticked, so the test agreed with the defect.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → a missing file is a flag only when a box of its row is ticked.
+- The guard → the test now holds both cases: a ticked row whose file is gone must flag, a row not built yet must not.
+
 ### ✅ 2026-11-11 · Claude · An edit was lost in a file the author was typing in · closed 2026-11-11
+
+**Class.** `handed-over-file`
 
 **What failed.** The question round was patched while the author was answering in it. The author's save landed over the patch, and two stale lines stayed in the file.
 
@@ -60,6 +77,8 @@ Newest first.
 - The guard → a file handed over for answers is the author's until they say done. A change goes in the chat, a rule now in `CLAUDE.md`.
 
 ### ✅ 2026-11-11 · Claude · A working rule was written into the outline as a rule of the product · closed 2026-11-11
+
+**Class.** `wrong-home`
 
 **What failed.** A rule the author meant for how the work runs was recorded in `vectoralis-i.md` and committed. The author corrected it in the next message.
 
