@@ -111,24 +111,34 @@ class Parts(unittest.TestCase):
 
 
 class Checks(Project_):
-    def test_a_row_ticked_before_its_file_changed_is_stale(self):
+    def test_a_ticked_row_is_stale_once_its_file_changes_and_clean_once_it_is_affirmed(self):
         self.put("harness/settings.json", json.dumps({"profile": "heavy"}))
         self.put("src/cart.py", "total = 0\n")
-        self.put("harness/tracker.md", f"# Tracker\n\n**Contents:** Checkout\n\n## Checkout\n\n| Unit | Built | Yours |\n|---|---|---|\n| `src/cart.py` cart | {DONE} | {OPEN} |\n| `src/gone.py` gone | {DONE} | {OPEN} |\n| `src/later.py` not built yet | {OPEN} | {OPEN} |\n")
-        git(self.root, "init", "-q", "-b", "main")
-        git(self.root, "add", "-A")
-        git(self.root, "commit", "-q", "-m", "start", when="2026-01-01T10:00:00")
-        self.assertEqual(checks.stale(Project(str(self.root))), ["tracker: `src/gone.py` is ticked and the file is gone"])
+        row = "| `src/cart.py` cart | {} | {} |\n"
+        head = "# Tracker\n\n**Contents:** Checkout\n\n## Checkout\n\n| Unit | Built | Yours |\n|---|---|---|\n"
+        later = f"| `src/later.py` not built yet | {OPEN} | {OPEN} |\n| `src/gone.py` gone | {DONE} | {OPEN} |\n"
+        self.put("harness/tracker.md", head + row.format(DONE, OPEN) + later)
+        first = self.cli("check")
+        self.assertIn("STALE: tracker: `src/gone.py` is ticked and the file is gone", first.stdout)
+        self.assertNotIn("src/later.py", first.stdout)
+        self.assertEqual(list(json.loads((self.root / "harness/.checked.json").read_text())), ["src/cart.py"])
         self.put("src/cart.py", "total = 1\n")
-        git(self.root, "commit", "-q", "-am", "change", when="2026-01-02T10:00:00")
-        flags = checks.stale(Project(str(self.root)))
-        self.assertIn("tracker: `src/cart.py` changed after its row was ticked", flags)
+        self.assertIn("tracker: `src/cart.py` changed after its row was ticked", checks.stale(Project(str(self.root))))
+        self.assertIn("Recorded", self.cli("affirm", "src/cart.py").stdout)
+        self.assertNotIn("tracker: `src/cart.py` changed after its row was ticked", checks.stale(Project(str(self.root))))
+        self.assertEqual(self.cli("affirm", "src/later.py").returncode, 1)
+        self.put("harness/tracker.md", head + row.format(OPEN, OPEN))
+        self.cli("check")
+        self.assertFalse((self.root / "harness/.checked.json").exists())
 
     def test_dead_paths_empty_locks_and_a_contents_line_out_of_step(self):
         self.put("harness/settings.json", json.dumps({"profile": "heavy"}))
         self.put("harness/rules.md", "# Rules\n\n**Contents:** One · Two\n\n## One\n\nSee `docs/missing.md`.\n")
         self.put("harness/locks.md", "# Locks\n\n- `src/nothing/**` → locked\n")
+        self.put("harness/todo.md", f"# To-do\n\n## The agent's\n\n- {OPEN} write `docs/later.md`\n- {DONE} wrote `docs/lost.md`\n")
         flags = checks.stale(Project(str(self.root)))
+        self.assertNotIn("todo.md: `docs/later.md` names nothing", flags)
+        self.assertIn("todo.md: `docs/lost.md` names nothing", flags)
         self.assertIn("rules.md: `docs/missing.md` names nothing", flags)
         self.assertIn("locks: `src/nothing/**` covers no file", flags)
         self.assertIn("rules.md: the Contents line is out of step with the headings", flags)

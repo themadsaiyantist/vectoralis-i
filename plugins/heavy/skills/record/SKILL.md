@@ -19,7 +19,7 @@ A record moves the moment its work is checked, before the next unit starts. A cr
 
 - ✅ is done and checked. ⬜ is not done. Nothing else goes in a cell or a box.
 - A box ticked on a claim is the worst thing a tracker can hold. Tick after the check, never before.
-- A change to a file sets its checked box back to ⬜.
+- A tick refers to the file as it was then. Change a ticked file and `vectoralis check` flags its row: check it again and run `vectoralis affirm` with its path, or untick the box.
 - The last column of the tracker and every box under `## Yours` are the person's. Ask them to type `tick` and a few words of the line. A guard refuses otherwise.
 - A lesson is the person's. They start a message with `lesson:`, and you write it in their words and add nothing.
 - A subagent never writes a record. It reports, and you write.

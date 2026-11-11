@@ -50,6 +50,21 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · The staleness check flagged an open to-do line that names a file not built yet · closed 2026-11-11
+
+**Class.** `false-flag`
+
+**What failed.** One commit after the first false flag was fixed, `vectoralis check` flagged a new to-do line because it named a page that is still to be written. The commit went out with the check not clean, because the command that ran it only showed its last line and did not stop on its exit code.
+
+**Cause.** The first fix covered the tracker and not the to-do list, though both hold work that is ahead. The sweep for siblings was skipped. And a check whose exit code nobody reads is not a check.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → an open box may name a file that is not built yet. A done box may not.
+- Every sibling → the tracker and the to-do list are the two records that hold work ahead, and both are now covered. The rules and the decisions name only what exists.
+- The guard → this is the second failure of the class, so it gets one a machine enforces: a test holds both cases for both records, and the commit step now runs the check on its own line, so a flag stops the commit.
+- What the fix turned up → the check then stopped the very commit that carried this fix, rightly: a ticked file had changed. That showed the rule under it was wrong too, `harness/decisions.md`, a tick refers to a recorded version.
+
 ### ✅ 2026-11-11 · Claude · The staleness check flagged every unit that was not built yet · closed 2026-11-11
 
 **Class.** `false-flag`

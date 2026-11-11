@@ -155,7 +155,7 @@ One Python package, standard library only, written for Python 3.9 and later. One
 | `dashboard.py` | the one HTML page |
 | `cli.py` | the commands of section 7 |
 
-**The state** is one small JSON file per session. It lives in the session's scratchpad when the payload names one, and in the system's temp folder otherwise. Nothing is written to the project.
+**The state** is one small JSON file per session. It lives in the session's scratchpad when the payload names one, and in the system's temp folder otherwise. The engine writes one file in the project and no other: `harness/.checked.json`, section 9.
 
 **A grant** is something only the person can give, by typing it:
 
@@ -257,7 +257,7 @@ All in `harness/`. Light keeps `settings.json` alone. Each record opens with wha
 - ✅ is done and checked, ⬜ is not done, a blank cell does not apply. Nothing else goes in a cell.
 - The stages are the project's. The last column is always the person's, whatever it is called.
 - A unit that opens with a path in backticks is bound to that path. The staleness check reads it.
-- A change to a file sets its "checked" box back to ⬜.
+- A tick refers to the file as it was when the box was ticked. When the file changes, the row is stale until it is checked again.
 
 **`todo.md`** → `## Now`, then `## Yours`, then `## The agent's`. One line per step, ✅ or ⬜, arrows for a sequence. `## Now` is the handoff: where things stand and what is next, in ten lines at most.
 
@@ -303,6 +303,7 @@ All in `harness/`. Light keeps `settings.json` alone. Each record opens with wha
 | `vectoralis init heavy` | adds the records. `--team` adds an owner column and one to-do section per person |
 | `vectoralis status` | the briefing, as a session start prints it |
 | `vectoralis check` | staleness, budget and every guard's proof in one pass. Exit 1 on any flag |
+| `vectoralis affirm <path>` | says a ticked file was checked again as it is now |
 | `vectoralis guards` | every guard, its mode and whether its payloads behave |
 | `vectoralis budget` | what is always loaded, against the cap |
 | `vectoralis dashboard` | writes one HTML page and prints its path |
@@ -347,7 +348,7 @@ A skill holds one procedure. Its description is the only part that is always loa
 
 | The flag | How it is found |
 |---|---|
-| A ✅ older than its work | the tracker row was last changed before its bound path was |
+| A ✅ older than its work | the bound file is no longer what it was when its row was ticked |
 | A path that is gone | a backticked path in a record names no file |
 | A lock on nothing | a lock's pattern matches no file |
 | A Contents line out of step | it differs from the file's `##` headings |
@@ -355,6 +356,11 @@ A skill holds one procedure. Its description is the only part that is always loa
 | Over the cap | section 10 |
 
 The briefing shows the count and the first three.
+
+**How a tick knows its version.** `harness/.checked.json` holds, for every bound and ticked row, a short hash of the file as it was at the tick. The engine writes it the moment the agent ticks a box, and `vectoralis check` records a row it has not seen. It compares content, never dates, so it is right before a commit and after one.
+
+- The file changed and was checked again → `vectoralis affirm <path>`, or untick the box and tick it.
+- The file changed and was not checked → untick the box.
 
 **The guard tests** → section 5. One command proves every guard, in a temporary project, in seconds.
 

@@ -1,6 +1,6 @@
 # Tracker
 
-The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothing else goes in a cell. A unit that opens with a path in backticks is bound to that file, and `vectoralis check` reads it. The last column is the author's.
+The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothing else goes in a cell. A unit that opens with a path in backticks is bound to that file, and `vectoralis check` flags it when the file changes after the tick. The last column is the author's.
 
 - **Built** → the file exists, on the shape `spec.md` gives it.
 - **Checked** → for code, its tests pass and its payloads behave. For a page, every link opens, every claim carries its mark, and the repository checks pass.
