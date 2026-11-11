@@ -86,9 +86,9 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `kit/docs.md` | ⬜ | ⬜ | ⬜ |
 | `kit/testing.md` | ⬜ | ⬜ | ⬜ |
 | `kit/security.md` | ⬜ | ⬜ | ⬜ |
-| `kit/devops.md` | ⬜ | ⬜ | ⬜ |
-| `kit/team-tools.md` | ⬜ | ⬜ | ⬜ |
-| `kit/agents.md` | ⬜ | ⬜ | ⬜ |
+| `kit/devops.md` | ✅ | ✅ | ⬜ |
+| `kit/team-tools.md` | ✅ | ✅ | ⬜ |
+| `kit/agents.md` | ✅ | ✅ | ⬜ |
 
 ## The roadmaps
 

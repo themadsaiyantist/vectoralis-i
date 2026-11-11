@@ -50,7 +50,7 @@ One person and an agent, three months. This page is what that built, and which p
 
 It was started on 11 November 2026 and it runs on its own harness.
 
-- **33 unit tests and 81 guard payloads**, green on three versions of Python.
+- **34 unit tests and 81 guard payloads**, green on three versions of Python.
 - **Its own check stopped its own commit**, twice, and each time the check was right. [`harness/failures.md`](../harness/failures.md) has both.
 - **Its tracker, its decisions and its failures are public**, as they were written, the mistakes included. [`harness/`](../harness/)
 
