@@ -45,6 +45,7 @@ STALE: tracker: `tools/check_writing.py` changed after its row was ticked
 | a path names nothing | a rule, a decision or a finished step points at a file that does not exist |
 | a lock covers no file | the pattern is wrong, or the work moved |
 | the Contents line is out of step | a section was added, removed or renamed |
+| a comment that never closes | a page hides everything after it, and so does the reader. Boxes below it are out of sight for both |
 | a guard without its proof | a payload is missing or misbehaves |
 | over the cap | too much is always loaded |
 

@@ -51,11 +51,10 @@ def check(call, proj, state):
             other = proj.read("todo.md" if name == "tracker.md" else "tracker.md")
             pair = (now, other) if name == "tracker.md" else (other, now)
             after = (write.after, other) if name == "tracker.md" else (other, write.after)
-            before_marks, after_marks = records.yours_marks(*pair), records.yours_marks(*after)
-            owners = records.owners(*after)
+            before_marks, after_marks = records.aligned(records.yours_marks(*pair), records.yours_marks(*after))
             for key in records.newly_ticked(before_marks, after_marks):
                 unit = records.unit_of(key) or ""
-                owner = owners.get(key, "")
+                owner = records.owner_of(key, before_marks.get(key) or after_marks[key])
                 if proj.settings.get("team") and owner and proj.person and owner.lower() != proj.person.lower():
                     block(f"The box of \"{unit}\" is {owner}'s. Only {owner}'s own session can tick it.",
                           "leave it open, and tell them it is ready.")
@@ -66,6 +65,10 @@ def check(call, proj, state):
                 if not grants.unlocked(given, rel):
                     block(f"An open box of the person's would be removed (\"{records.unit_of(key)}\").",
                           "leave it as it is, or ask them to open the file.")
+            for key, what in records.changed_place(before_marks, after_marks):
+                if not grants.unlocked(given, rel):
+                    block(records.PLACE[what].format(unit=records.unit_of(key)),
+                          f"leave it as it is, or ask them to open the file by typing `unlock {rel}`.")
         elif name == "lessons.md" and not given.get("lesson"):
             block("A lesson is written only when the person dictates it.",
                   "ask them. They start their message with `lesson:`.")

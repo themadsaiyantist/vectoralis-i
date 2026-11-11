@@ -33,7 +33,7 @@ A block always says three things: what was stopped → the rule → what to do i
 | `tests` | light | "done" while the tests fail | tells you when they pass, and when the suite ran out of time |
 | `destructive` | heavy | `git reset --hard`, `git clean -f`, a forced push, `rm -rf` on the root, the home or `.` | `rm -r`, `git checkout --`, `git branch -D` |
 | `locks` | heavy | a write to a locked path | |
-| `yours` | heavy | your box ticked or removed, a lesson written, a lock opened, a guard promoted or switched off, by the agent with no grant, through an edit or through the shell | |
+| `yours` | heavy | your box ticked, or taken away: removed, left blank, hidden in a comment, pushed out of the last column, handed to another owner. A lesson written, a lock opened, a guard promoted or switched off. By the agent with no grant, through an edit or through the shell | |
 | `records` | heavy | a subagent writing a record | |
 | `push` | heavy | a push to the default branch, a merge, while the merge is yours | |
 | `sweep` | heavy | a file changed around the write guards that breaks `secrets`, `locks` or `yours` | says when it could not look |
@@ -61,13 +61,13 @@ format                off     warn     6 of 6 payloads behave
 tests                 block   block    6 of 6 payloads behave
 destructive           block   block    21 of 21 payloads behave
 locks                 block   block    11 of 11 payloads behave
-yours                 block   block    28 of 28 payloads behave
+yours                 block   block    65 of 65 payloads behave
 records               block   block    3 of 3 payloads behave
 push                  block   block    6 of 6 payloads behave
-sweep                 block   block    15 of 15 payloads behave
+sweep                 block   block    30 of 30 payloads behave
 nudge                 warn    warn     4 of 4 payloads behave
 rule-of-thumb-tokens  warn    project  its payloads behave
-115 payloads, the slowest answer took 20 ms
+167 payloads, the slowest answer took 21 ms
 ```
 
 `run` on this repository, 2026-11-11. The last row is this repository's own guard, drafted after a third failure of one class. A payload is plain JSON, in [`plugins/light/engine/guards/payloads/`](../plugins/light/engine/guards/payloads/).
@@ -137,5 +137,6 @@ In `harness/settings.json`:
 - **A guard nobody tested.** Without a payload that must pass, you find the false alarm in the middle of real work.
 - **Routing around a block.** When a write is refused, the fix is the cause. Writing the same text through the shell is the same mistake, and the sweep finds it.
 - **A guard is not a sandbox.** It stops honest mistakes. [Safety](safety.md)
+- **A guard that reads a record reads it line by line, the way a page shows it.** `yours` holds against the mistake: a box ticked, blanked, deleted, hidden in a comment, moved out of your column. It does not hold against a record rewritten into another shape of Markdown, and a box folded into a collapsed block is still there for the guard and out of your sight. So read the count: the briefing says how many boxes wait on you.
 
 Verified on Claude Code 2.1.322, 2026-11-11. The table is `run`. The Codex lines are `read`.

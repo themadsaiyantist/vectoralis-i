@@ -227,6 +227,72 @@ class Hooks(unittest.TestCase):
         self.assertEqual(done.returncode, 2)
         self.assertIn("An open box of the person's was removed this turn", done.stderr)
 
+    def test_a_teammates_own_tick_that_arrives_with_their_commit_is_left_alone(self):
+        self.settings(profile="heavy", team=True)
+        head = "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Yours |\n|---|---|---|---|\n"
+        mine, hers = f"| the cart total | goku | {OPEN} | {OPEN} |", f"| refund | vegeta | {DONE} | {OPEN} |"
+        between = "| one more | goku |  |  |\n| and one | goku |  |  |\n| and a third | goku |  |  |\n"
+        tracker = self.put("harness/tracker.md", head + mine + "\n" + between + hers + "\n")
+        self.put("harness/todo.md", f"# To-do\n\n## Yours, goku\n\n- {OPEN} approve the copy\n\n## The agent's\n\n- {OPEN} write the copy\n")
+        run = dict(cwd=str(self.root), capture_output=True, check=True)
+        for step in (["init", "-q"], ["config", "user.name", "goku"], ["config", "user.email", "goku@example.com"],
+                     ["add", "-A"], ["commit", "-q", "-m", "start"]):
+            subprocess.run(["git", *step], **run)
+
+        def change(old, new):
+            tracker.write_text(tracker.read_text(encoding="utf-8").replace(old, new), encoding="utf-8")
+
+        def tick_hers(*how):
+            change(hers, hers.replace(f"| {OPEN} |", f"| {DONE} |"))
+            subprocess.run(["git", *how, "commit", "-q", "-am", "tick the refund"], **run)
+
+        def back():
+            subprocess.run(["git", "reset", "-q", "--hard", "HEAD~1"], **run)
+
+        as_her = ("-c", "user.name=vegeta", "-c", "user.email=vegeta@example.com")
+        self.hook("prompt", prompt="pull what the others pushed")
+        tick_hers(*as_her)
+        self.assertEqual(self.hook("stop").returncode, 0, "her own commit brought her own tick")
+        back()
+        self.hook("prompt", prompt="tick refund")
+        tick_hers()
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 2)
+        self.assertIn("it is vegeta's", done.stderr)
+        back()
+        self.hook("prompt", prompt="tick refund")
+        change(hers, hers.replace(f"| {OPEN} |", f"| {DONE} |"))
+        subprocess.run(["git", "commit", "-q", "-am", "tick the refund", "--author=vegeta <vegeta@example.com>"], **run)
+        self.assertEqual(self.hook("stop").returncode, 2, "an author's name is a claim, the committer is the machine")
+        back()
+        subprocess.run(["git", "checkout", "-q", "-b", "theirs"], **run)
+        tick_hers(*as_her)
+        subprocess.run(["git", "checkout", "-q", "-"], **run)
+        self.hook("prompt", prompt="build the cart total, then pull")
+        change(mine, mine.replace(f"| goku | {OPEN} |", f"| goku | {DONE} |"))
+        subprocess.run(["git", "commit", "-q", "-am", "the cart total is built"], **run)
+        subprocess.run(["git", "merge", "-q", "--no-edit", "theirs"], **run)
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 0, done.stderr)
+        back()
+        subprocess.run(["git", "checkout", "-q", "theirs"], **run)
+        change(hers.replace(f"| {OPEN} |", f"| {DONE} |"), hers)
+        subprocess.run(["git", *as_her, "commit", "-q", "-am", "she takes it back"], **run)
+        subprocess.run(["git", "checkout", "-q", "-"], **run)
+        self.hook("prompt", prompt="tick refund")
+        subprocess.run(["git", "merge", "-q", "--no-edit", "theirs"], **run)
+        change(hers, hers.replace(f"| {OPEN} |", f"| {DONE} |"))
+        self.assertEqual(self.hook("stop").returncode, 2, "a tick she took back is not hers any more")
+        back()
+        subprocess.run(["git", "checkout", "-q", "-b", "again"], **run)
+        tick_hers(*as_her)
+        subprocess.run(["git", "checkout", "-q", "-"], **run)
+        self.hook("prompt", prompt="pull, then rename the section")
+        subprocess.run(["git", "merge", "-q", "--no-edit", "again"], **run)
+        change("## Checkout", "## Cart")
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 0, "her tick is known by where it stood before the rename: " + done.stderr)
+
     def test_a_subagent_cannot_write_a_record(self):
         self.settings(profile="heavy")
         done = self.hook("write", agent_id="agent-7", tool_name="Write",

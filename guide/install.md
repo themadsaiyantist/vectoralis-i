@@ -73,7 +73,7 @@ secrets      block   block    15 of 15 payloads behave
 format       off     warn     6 of 6 payloads behave
 tests        block   block    6 of 6 payloads behave
 ...
-115 payloads, the slowest answer took 20 ms
+167 payloads, the slowest answer took 21 ms
 ```
 
 - **here** is how the guard is set in this project. `off` means it has nothing to run yet: no formatter was found.

@@ -55,7 +55,7 @@ And seven more guards on top of light's three. [Guards](guards.md) has the table
 
 ## Set it up
 
-[Install](install.md) the `heavy` plugin → `/heavy:setup` in Claude Code, `$heavy:setup` in Codex. It adds the records and never overwrites a file that exists. Then fill the first rows of the tracker with the agent.
+[Install](install.md) the `heavy` plugin → `/heavy:setup` in Claude Code, `$heavy:setup` in Codex. It adds the records and never overwrites a file that exists. Then fill the first rows of the tracker with the agent: the sample rows are nobody's, and are there to be replaced.
 
 ---
 
@@ -173,9 +173,9 @@ brief → plan → failure → agents → check → record → report → handof
 
 - A debug print had shipped twice. The second entry made the agent draft a guard at `warn`. [Failures](failures.md)
 - Two builders went out together, each in its own worktree, each told the commit to start from. [Agents](agents.md)
-- The reviewer read both branches and found two defects in one unit. Both were fixed before the merge, and only then did the two boxes move.
+- The reviewer read the work of both. What it found was fixed, and only then did the two boxes move.
 - The last column stayed open. It is the person's.
-- Three minutes and 26 seconds, 69 cents.
+- Three minutes and 16 seconds, 63 cents.
 
 `run`: Claude Code 2.1.322, Sonnet 5.5, headless, 2026-11-11. The second and third ran with permission prompts off and the guards on.
 

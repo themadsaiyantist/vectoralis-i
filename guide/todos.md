@@ -73,6 +73,7 @@ BLOCKED by Vectoralis. Nothing was written.
 - `tick approve the refund copy` opens that one box, until your next message.
 - The agent may add an open box to your list. That is how a step that waits on you reaches you.
 - A new box that arrives already ticked is blocked like a tick (`run`).
+- Your open box cannot be deleted, hidden in a comment, or moved into another list. In the to-do list the section says whose the box is (`run`).
 
 ---
 

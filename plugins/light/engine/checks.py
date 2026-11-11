@@ -156,6 +156,8 @@ def stale(proj, seconds=None) -> List[str]:
         flags += [f"locks: `{lock}` covers no file" for lock in locks if not any(matches(lock, f) for f in files)]
     for name in RECORDS:
         text = proj.read(name)
+        for number in records.unclosed_comments(text):
+            flags.append(f"{name}: a comment opens on line {number} and never closes. A page hides what follows it")
         line = next((l for _, l in records.plain_lines(text) if l.startswith("**Contents:**")), None)
         if line and _names(line.replace("**Contents:**", "").split("·")) != _names(records.headings(text)):
             flags.append(f"{name}: the Contents line is out of step with the headings")
@@ -192,6 +194,15 @@ def plugin_roots(profile) -> List[Path]:
     return roots
 
 
+def plugin_name(root) -> str:
+    """The plugin's own name, from its manifest. An installed plugin sits in a folder named after its version."""
+    try:
+        found = json.loads((root / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")).get("name")
+    except (OSError, ValueError, AttributeError):
+        found = None
+    return str(found or root.name)
+
+
 def budget(proj) -> Dict:
     """What is always loaded, in characters and in estimated tokens, against the cap."""
     from . import briefing
@@ -204,7 +215,7 @@ def budget(proj) -> Dict:
                 continue
             name = path.parent.name if path.name == "SKILL.md" else path.stem
             text = (meta.get("description", "") + " " + meta.get("when_to_use", "")).strip()
-            label = f"{root.name}:{name}"
+            label = f"{plugin_name(root)}:{name}"
             items.append((label, len(label) + len(text) + LISTING))
     if proj.profile == "heavy":
         items.append(("harness/rules.md", len(proj.read("rules.md").strip())))

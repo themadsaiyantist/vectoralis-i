@@ -50,6 +50,32 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · A second reader found a hole the guard fix had opened, and older ways past the guard · closed 2026-11-11
+
+**Class.** `claim-without-proof`
+
+**What failed.** The fix for the sample rows was checked by its author and pushed. A reader who had not written it then went through the same code, five times as the fix grew. It found a hole the fix had opened: a moved row counted as kept when its box had not survived the move. It found a false block left behind: a section could not be renamed once the person had ticked a row in it. And it found ways past the guard that were older than the fix: a cell left blank, a column added after the person's, an Owner cell rewritten, a row hidden in a comment, a line of cells put above a header, a twin box standing in for the real one. Every pass also found a fault that the round before had opened, each one smaller than the last.
+
+**Cause.** The proof was written by the hand that wrote the code, from the cases that hand had thought of. It is the cause of the two older entries of this class, a third time over. The author's own second read found one sibling. The second reader found the rest.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → a box is compared by where it sits: its row, its owner and the last column of its table, with twins lined up like with like and a moved row matched once. The reader takes a record the way a page shows it: the header above the row of dashes, the cell under the last header, a comment block up to its closer. 93 cases run through both guards and 15 through real commits, and all behave.
+- The guard → what a machine holds: 52 new payloads and the tests beside them, most of which fail on the engine as it was. What it cannot hold is one line in `CLAUDE.md`: a change to a guard gets a second reader who did not write it, before it is called checked. What stays a limit is written in the guide: a record rewritten into another shape of Markdown, and a commit made under another person's name on the same machine.
+
+### ✅ 2026-11-11 · Claude · Every commit was attributed to another GitHub account than the author's · closed 2026-11-11
+
+**Class.** `wrong-identity`
+
+**What failed.** All 37 commits made on this machine showed on GitHub under an account that is not `themadsaiyantist`. The author found it and said so. The pushes had gone out under the right account, so nothing looked wrong from here.
+
+**Cause.** GitHub attributes a commit by its email, not by who pushes it. The machine's git identity carries an email that belongs to the other account, and it was never read before the first commit.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → this repository has its own git identity, `themadsaiyantist` with that account's no-reply address. The author and the committer of every commit were rewritten to it and pushed once, on the author's word. Trees, dates and messages were compared commit by commit first, and the old history is kept in a bundle outside the repository. One trace stays: pull request 1 lists its commit under the other account, and GitHub does not let that be rewritten.
+- The guard → one line in `CLAUDE.md`: read `git config user.email` before the first commit in a repository, and after the first push ask GitHub who it thinks wrote it.
+
 ### ✅ 2026-11-11 · Claude · The fix for the sample rows let a to-do box move from one person's list to another's · closed 2026-11-11
 
 **Class.** `fix-too-wide`

@@ -84,17 +84,106 @@ class Parts(unittest.TestCase):
         self.assertEqual(records.headings(text), ["Real"])
 
     def test_a_box_that_moved_is_not_a_box_that_was_removed(self):
-        before = {"tracker|First area|cart": OPEN, "tracker|First area|refund": OPEN}
-        renamed = {"tracker|Checkout|cart": OPEN, "tracker|Checkout|refund": OPEN}
-        self.assertEqual(records.removed_open(before, renamed), [])
-        self.assertEqual(records.removed_open(before, {"tracker|Checkout|cart": OPEN}), ["tracker|First area|refund"])
-        twice = {"tracker|A|cart": OPEN, "tracker|B|cart": DONE}
-        self.assertEqual(records.removed_open(twice, {"tracker|B|cart": DONE}), ["tracker|A|cart"])
-        mine, theirs = {"todo|Yours, goku|approve": OPEN}, {"todo|Yours, vegeta|approve": OPEN}
-        self.assertEqual(records.removed_open(mine, theirs), ["todo|Yours, goku|approve"])
-        self.assertEqual(records.removed_open({"tracker|First area|the first unit of work": OPEN}, {}), [])
-        self.assertIn("the first unit of work", records.samples())
-        self.assertIn("the first thing only you can do", records.samples())
+        head = "| Unit | Built | Yours |\n|---|---|---|\n"
+        rows = f"| cart | {DONE} | {OPEN} |\n| refund | {OPEN} | {OPEN} |\n"
+
+        def gone(old, new):
+            return [records.unit_of(key) for key in records.removed_open(records.yours_marks(old, ""), records.yours_marks(new, ""))]
+
+        def ticked(old, new):
+            return [records.unit_of(key) for key in records.newly_ticked(records.yours_marks(old, ""), records.yours_marks(new, ""))]
+
+        first = "## First area\n\n" + head + rows
+        self.assertEqual(gone(first, "## Checkout\n\n" + head + rows), [])
+        self.assertEqual(gone(first, "## Checkout\n\n" + head + f"| cart | {DONE} | {OPEN} |\n"), ["refund"])
+        self.assertEqual(gone(first, first.replace(f"| cart | {DONE} | {OPEN} |", f"| cart | {DONE} |  |")), ["cart"])
+        moved_blank = "## First area\n\n" + head + f"| refund | {OPEN} | {OPEN} |\n\n## Dropped\n\n" + head + f"| cart | {DONE} |  |\n"
+        self.assertEqual(gone(first, moved_blank), ["cart"])
+        def placed(old, new):
+            return sorted((records.unit_of(key), what) for key, what in records.changed_place(records.yours_marks(old, ""), records.yours_marks(new, "")))
+
+        after_notes = "## First area\n\n| Unit | Built | Yours | Notes |\n|---|---|---|---|\n" + f"| cart | {DONE} | {DONE} | {OPEN} |\n| refund | {OPEN} | {OPEN} | {OPEN} |\n"
+        self.assertEqual(placed(first, after_notes), [("cart", "column"), ("refund", "column")])
+        twice = after_notes.replace("| Yours | Notes |", "| Yours | Yours |")
+        self.assertEqual(placed(first, twice), [("cart", "column"), ("refund", "column")])
+        self.assertEqual(ticked(first, first.replace(f"| cart | {DONE} | {OPEN} |", f"| cart | {DONE} | {DONE} | {OPEN} |")), ["cart"])
+        self.assertEqual(gone(first, first.replace(f"| refund | {OPEN} | {OPEN} |", f"| refund | {OPEN} |")), ["refund"])
+        signed = first.replace(f"| cart | {DONE} | {OPEN} |", f"| cart | {DONE} | {DONE} |")
+        self.assertEqual(ticked(first, signed), ["cart"])
+        self.assertEqual(ticked(signed, signed.replace("First area", "Checkout")), [])
+        self.assertEqual(ticked(first, signed.replace("First area", "Checkout")), ["cart"])
+        team = "## Checkout\n\n| Unit | Owner | Yours |\n|---|---|---|\n" + f"| refund | vegeta | {OPEN} |\n"
+        self.assertEqual(placed(team, team.replace("vegeta", "goku")), [("refund", "owner")])
+        self.assertEqual(placed(team, team.replace("vegeta", "Vegeta")), [])
+        self.assertEqual(placed(team, team.replace("vegeta", "go" + records.SEP + "ku")), [("refund", "owner")])
+        twins = "## A\n\n" + head + f"| tests | {DONE} | {DONE} |\n\n## B\n\n" + head + f"| tests | {OPEN} | {OPEN} |\n"
+        self.assertEqual(gone(twins, "## UI\n\n" + head + f"| tests | {DONE} | {DONE} |\n\n## B\n\n" + head), ["tests"])
+        notes = f"## Yours\n\n- {DONE} review the notes\n- {OPEN} review the notes\n"
+
+        def todo(old, new):
+            a, b = records.yours_marks("", old), records.yours_marks("", new)
+            return len(records.removed_open(a, b)), len(records.newly_ticked(a, b))
+
+        self.assertEqual(todo(notes, f"## Yours\n\n- {OPEN} review the notes\n"), (0, 0))
+        self.assertEqual(todo(notes, f"## Yours\n\n- {OPEN} review the notes\n- {DONE} review the notes\n"), (0, 0))
+        self.assertEqual(todo(f"## Yours\n\n- {DONE} review the notes\n", f"## Yours\n\n- {OPEN} review the notes\n- {DONE} review the notes\n"), (0, 0))
+        self.assertEqual(todo(notes, f"## Yours\n\n- {DONE} review the notes\n"), (1, 0))
+        self.assertEqual(todo(notes, f"## Yours\n\n- {DONE} review the notes\n- {DONE} review the notes\n"), (0, 1))
+        pair = f"## Yours\n\n- {OPEN} approve\n"
+        both = records.yours_marks("", pair), records.yours_marks("", f"## Yours\n\n- {DONE} approve\n- {OPEN} approve\n")
+        self.assertEqual([records.unit_of(key) for key in records.newly_ticked(*both)], ["approve"])
+        mine, theirs = f"## Yours, goku\n\n- {OPEN} approve\n", f"## Yours, vegeta\n\n- {OPEN} approve\n"
+        self.assertEqual([records.unit_of(key) for key in records.removed_open(records.yours_marks("", mine), records.yours_marks("", theirs))],
+                         ["approve"])
+        piped = "## API | CLI\n\n" + head + rows
+        self.assertEqual(gone(piped, piped.replace("API | CLI", "API and CLI")), [])
+        self.assertEqual(gone("## First area\n\n" + head + f"| the first unit of work | {OPEN} | {OPEN} |\n", ""), [])
+
+    def test_a_reading_kept_from_an_older_engine_still_compares(self):
+        old = {"tracker|Checkout|cart": OPEN, "todo|Yours|approve": OPEN}
+        now = records.yours_marks(f"## Checkout\n\n| Unit | Yours |\n|---|---|\n| cart | {OPEN} |\n", f"## Yours\n\n- {OPEN} approve\n")
+        self.assertEqual(records.removed_open(old, now), [])
+        self.assertEqual(records.newly_ticked(old, now), [])
+        self.assertEqual([records.unit_of(k) for k in records.removed_open(old, {})], ["cart", "approve"])
+        self.assertEqual(records.changed_place(old, now), [])
+        moved = records.yours_marks(f"## Cart\n\n| Unit | Yours |\n|---|---|\n| cart | {OPEN} |\n", f"## Yours\n\n- {OPEN} approve\n")
+        self.assertEqual([records.unit_of(k) for k in records.removed_open(old, moved)], ["cart"])
+
+    def test_the_sample_boxes_are_the_ones_the_templates_write(self):
+        written = set()
+        for tracker, todo in (("tracker.md", "todo.md"), ("tracker.team.md", "todo.team.md")):
+            folder = ROOT / "plugins" / "light" / "templates"
+            marks = records.yours_marks((folder / tracker).read_text(encoding="utf-8"), (folder / todo).read_text(encoding="utf-8"))
+            written |= {records.unit_of(key) for key in marks}
+        self.assertEqual(written, set(records.SAMPLES))
+
+    def test_a_reader_skips_what_a_fence_or_a_comment_hides(self):
+        text = (f"- {OPEN} one\n<!-- - {OPEN} two -->\n<!--\n- {OPEN} three\n-->\n~~~\n- {OPEN} four\n~~~\n"
+                f"```\n- {OPEN} five\n```\n- {OPEN} six <!-- a note -->\n")
+        self.assertEqual([box["text"] for box in records.todo_boxes("## Yours\n\n" + text)], ["one", "six"])
+        table = f"## A\n\n| Unit | Yours |\n|---|---|\n| cart | {OPEN} |\n<!-- | old | {OPEN} | -->\n| refund | {OPEN} |\n"
+        self.assertEqual([row["unit"] for row in records.tracker_rows(table)], ["cart", "refund"])
+        named = f"A row inside `<!--` is not read.\n\n- {OPEN} one\n"
+        self.assertEqual([box["text"] for box in records.todo_boxes("## Yours\n\n" + named)], ["one"])
+        self.assertEqual(records.unclosed_comments(named), [])
+        stray = f"<!-- to tidy later\n\n- {OPEN} one\n"
+        self.assertEqual([box["text"] for box in records.todo_boxes("## Yours\n\n" + stray)], [])
+        self.assertEqual(records.unclosed_comments("## Yours\n\n" + stray), [3])
+        inline = f"Next: see how <!-- is read.\n\n- {OPEN} one\n\n```\nfoo --> bar\n```\n"
+        self.assertEqual([box["text"] for box in records.todo_boxes("## Yours\n\n" + inline)], ["one"])
+        spans = f"A span ``with ` and <!--`` in it.\n\n- {OPEN} ship a --> b\n"
+        self.assertEqual([box["text"] for box in records.todo_boxes("## Yours\n\n" + spans)], ["ship a --> b"])
+        fake = f"| . | Unit | Yours |\n| Unit | Yours |\n|---|---|\n| cart | {DONE} | {OPEN} |\n"
+        self.assertEqual([(row["unit"], row["yours"]) for row in records.tracker_rows(fake)], [("cart", DONE)])
+        inside = f"| Unit | Yours |\n|---|---|\n| cart | {OPEN} |\n|---|---|\n| emails | {DONE} |\n| Unit | Yours |\n| refund | {OPEN} |\n"
+        self.assertEqual([row["unit"] for row in records.tracker_rows(inside)], ["cart", "---", "emails", "Unit", "refund"])
+        self.assertEqual(records.tracker_rows(f"| cart | {OPEN} |\n| refund | {OPEN} |\n"), [])
+        for opener in ("- <!--", "> <!--", "  <!--"):
+            self.assertEqual(records.todo_boxes(f"## Yours\n\n{opener}\n- {OPEN} one\n"), [], opener)
+        for whole in ("<!-->", "<!--->", "- <!-- a note -->", "<!-- a note -->"):
+            self.assertEqual([box["text"] for box in records.todo_boxes(f"## Yours\n\n{whole}\n- {OPEN} one\n")], ["one"], whole)
+        wide = f"| Unit | Built | Yours |\n|---|---|---|\n| a \\| b | {DONE} | {OPEN} | {DONE} |\n| short | {OPEN} |\n"
+        self.assertEqual([(row["unit"], row["yours"]) for row in records.tracker_rows(wide)], [("a \\| b", OPEN), ("short", "")])
 
     def test_the_failure_log_reader(self):
         text = f"### {OPEN} 2026-01-02 · agent · A stale box\n\n**Class.** `stale-record`\n\n### {DONE} 2026-01-01 · goku · A lost edit · closed 2026-01-01\n"
@@ -183,6 +272,15 @@ class Checks(Project_):
         self.assertIn("rules.md: `docs/missing.md` names nothing", flags)
         self.assertIn("locks: `src/nothing/**` covers no file", flags)
         self.assertIn("rules.md: the Contents line is out of step with the headings", flags)
+
+    def test_a_comment_that_never_closes_is_flagged(self):
+        self.cli("init", "heavy")
+        self.assertEqual([f for f in checks.stale(Project(str(self.root))) if "comment" in f], [])
+        todo = self.root / "harness" / "todo.md"
+        todo.write_text(todo.read_text(encoding="utf-8") + "\n<!-- to tidy later\n", encoding="utf-8")
+        flags = [f for f in checks.stale(Project(str(self.root))) if "comment" in f]
+        self.assertEqual(len(flags), 1)
+        self.assertIn("todo.md: a comment opens on line", flags[0])
 
     def test_the_budget_holds_light_and_heavy_under_their_caps(self):
         self.put("harness/settings.json", json.dumps({"profile": "light"}))

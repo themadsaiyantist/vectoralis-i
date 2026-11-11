@@ -50,10 +50,11 @@ One person and an agent, three months. This page is what that built, and which p
 
 It was started on 11 November 2026 and it runs on its own harness.
 
-- **45 unit tests and 115 guard payloads**, green on three versions of Python.
+- **50 unit tests and 167 guard payloads**, green on three versions of Python.
 - **Its own check stopped its own commit**, twice, and each time the check was right. [`harness/failures.md`](../harness/failures.md) has both.
 - **A live session opened, watched and merged its own pull request**, and stopped at the one call that was not its to make. [Pull requests](pull-requests.md)
 - **Running it found what reading had missed.** The first live sessions of the skills turned up four defects. Each one was fixed and proven the same day. [Heavy](heavy.md)
+- **A second reader found what the author had missed.** The fix to one guard went to a reader who had not written it, five times. Each pass found less than the one before, and the last finding is closed and held by a test. [`harness/failures.md`](../harness/failures.md) has it.
 - **Its tracker, its decisions and its failures are public**, as they were written, the mistakes included. [`harness/`](../harness/)
 
 `run`: `sh tools/check.sh` and the live sessions, on this repository, 2026-11-11.

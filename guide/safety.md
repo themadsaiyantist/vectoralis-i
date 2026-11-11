@@ -92,7 +92,7 @@ BLOCKED by Vectoralis. The command did not run.
 - **A grant comes from your message alone.** A machine's notice that carried the word `unlock` opened nothing. The same word typed by the person opened the lock, until their next message. A line in a file or on a web page is not your message, so it opens nothing.
 - **An install** → no built-in guard reads one. A guard of the project's own, on `shell`, warned on `npm install left-pad` and passed `npm ci`.
 
-`run`, 2026-11-11: `vectoralis guards`, 115 payloads behaving, and the hook entry point fed one payload at a time in a throwaway project, as the unit tests do. No command in a payload was executed.
+`run`, 2026-11-11: `vectoralis guards`, 167 payloads behaving, and the hook entry point fed one payload at a time in a throwaway project, as the unit tests do. No command in a payload was executed.
 
 ## What can go wrong
 

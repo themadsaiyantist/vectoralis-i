@@ -38,7 +38,7 @@ The to-do list it wrote has one section for you, `## Yours, goku`. A second pers
 ## Whose grant counts
 
 - **The person at the keyboard, in the session they type in.** `tick refund webhook`, typed in goku's session, opened nothing in a second session running at the same time (`run`).
-- **A row is ticked only in its owner's session.** With `"team": true`, the guard reads the row's `Owner` and the name git is set up with on this machine. goku typing `tick refund` does not open vegeta's row (`run`: the guard's payload). The name is git's, so it is as honest as the machine it runs on.
+- **A row is ticked only in its owner's session.** With `"team": true`, the guard reads the row's `Owner` and the name git is set up with on this machine. goku typing `tick refund` does not open vegeta's row, through an edit or through the shell, and the agent cannot rewrite the `Owner` of an open row to get there (`run`: the guards' payloads). A teammate's own tick that arrives with their commit is left alone, as long as it still stands in the record: the guard reads who committed, not who is named as author (`run`: a test with real commits). A branch of theirs squashed on this machine carries this machine's name, so squash after the merge, not before. The name is git's, so it is as honest as the machine it runs on.
 - **A machine's notice is never read as anyone's words.** A notice that said `unlock all` opened nothing (`run`).
 
 ---
@@ -100,8 +100,8 @@ BLOCKED by Vectoralis. The command did not run.
 
 ## What can go wrong
 
-- **`--team` on a project that already has records.** It keeps every file, sets `"team": true`, and tells you to add the owner column and a section per person by hand (`run`). It does not rewrite your records.
-- **The agent renames `## Yours` for you.** With a ticked box under it, the rename read as a new tick and was blocked (`run`). Do it in your editor.
+- **`--team` on a project that already has records.** It keeps every file, sets `"team": true`, and tells you to add the owner column and a section per person by hand (`run`). It does not rewrite your records. Ask the agent to do it and the guard asks for `unlock harness/tracker.md` first: handing out owners is yours to allow (`run`).
+- **The agent renames `## Yours` for you.** In the to-do list the heading says whose the boxes are, so the rename is blocked (`run`). Do it in your editor. A section of the tracker is an area of work, and the agent may rename it.
 - **A heading that does not start with `Yours`.** `## Vegeta` is not protected, and the agent's tick there passed (`run`).
 - **A teammate has no guards.** They pulled the settings and never ran the install. In Codex they also never opened `/hooks`.
 - **The briefing counts everyone.** `Open for the person: 2` is the sum of every section, and the first box it names may be a teammate's (`run`).

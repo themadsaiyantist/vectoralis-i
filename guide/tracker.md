@@ -65,6 +65,8 @@ BLOCKED by Vectoralis. Nothing was written.
 
 - `tick cart total` opens that one box until your next message, and so does `tick src/cart.py`. `do not tick cart total yet` opens nothing.
 - The words must stand in the row as you type them. `tick the endpoint for orders` opens nothing when the row says "the orders endpoint".
+- **Your box cannot be taken away either.** An open row deleted, your cell left blank, the row hidden in a comment, a column added after yours: each one is blocked, through an edit and through the shell (`run`: the guard's payloads).
+- **A row may move.** Rename a section, or move a row to another one, and its box goes with it, open or ticked. The sample row that `vectoralis init` wrote is nobody's, and is there to be replaced.
 
 **`nudge`** speaks when work changed, no record moved and the agent says it is done. Once a turn, and it sends the agent back (`run`). The other guards → [Guards](guards.md).
 

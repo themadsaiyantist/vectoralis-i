@@ -31,7 +31,7 @@ Then `/light:setup` in a session. Check it on your own machine:
 
 ```text
 $ vectoralis guards
-115 payloads, the slowest answer took 20 ms
+167 payloads, the slowest answer took 21 ms
 ```
 
 <details>

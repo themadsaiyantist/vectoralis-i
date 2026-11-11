@@ -183,7 +183,7 @@ One Python package, standard library only, written for Python 3.9 and later. One
 | `tests` | light | stop | "done" while the test command fails | the suite ran out of time |
 | `destructive` | heavy | shell | `git reset --hard`, `git clean -f`, `git push --force`, `rm -rf` on the root, the home or `.` | `rm -r`, `git checkout --`, `git branch -D` |
 | `locks` | heavy | write, shell | a write to a locked path with no grant | |
-| `yours` | heavy | write, shell | a "yours" box ticked or removed, a lesson written, a lock opened, a guard promoted or switched off, with no grant. The same through a shell command | |
+| `yours` | heavy | write, shell | a "yours" box ticked, or taken away: removed, left blank, hidden in a comment, pushed out of the last column, handed to another owner. A lesson written, a lock opened, a guard promoted or switched off, with no grant. The same through a shell command | |
 | `records` | heavy | write | a subagent writing a record | |
 | `push` | heavy | shell | a push to the default branch or a merge, while `merge` is `yours` | |
 | `sweep` | heavy | stop | a file changed around the write guards that breaks `secrets`, `locks` or `yours` | says when it could not look |
@@ -258,6 +258,7 @@ All in `harness/`. Light keeps `settings.json` alone. Each record opens with wha
 
 - ✅ is done and checked, ⬜ is not done, a blank cell does not apply. Nothing else goes in a cell.
 - The stages are the project's. The last column is always the person's, whatever it is called.
+- The reader takes a record as a page shows it. A table's header is the line above its row of dashes, and the person's cell is the one under the last header. A fenced example is not read, and neither is a comment.
 - A unit that opens with a path in backticks is bound to that path. The staleness check reads it.
 - A tick refers to the file as it was when the box was ticked. When the file changes, the row is stale until it is checked again.
 
@@ -324,7 +325,7 @@ A skill holds one procedure. Its description is the only part that is always loa
 
 | Skill | Plugin | Who calls it | What it does |
 |---|---|---|---|
-| `setup` | light, heavy | the person | runs `vectoralis init`, shows what it found, asks before a starter file. Heavy also offers the one setting that starts a builder from the work in hand |
+| `setup` | light, heavy | the person | runs `vectoralis init`, shows what it found, asks before a starter file. Heavy also offers the one setting that starts a builder from the last commit |
 | `brief` | heavy | the agent | reads `## Now` and the next open boxes, states the session's goal |
 | `plan` | heavy | the agent | every question in one round, before the first edit: the crucial few in the dialog, the rest in a file, the pick first |
 | `check` | heavy | the agent | check, then re-check a different way: read the diff, sweep for siblings, re-run what found it |
@@ -343,7 +344,7 @@ A skill holds one procedure. Its description is the only part that is always loa
 | `reviewer` | the re-check, read with fresh eyes | cannot write or edit |
 | `builder` | checks the commit it stands on, then builds one unit it owns, in its own worktree | reports, never writes a record |
 
-- **A worktree starts from the remote's default branch**, not from the checkout, unless `"worktree": {"baseRef": "head"}` is in the project's `.claude/settings.json`. So the brief names the commit, and the builder goes there with a fast-forward or builds nothing. `read` in Claude Code's docs. `run`: both builders of a live session started 79 files away from the work in hand.
+- **A worktree starts from the remote's default branch**, not from the checkout, unless `"worktree": {"baseRef": "head"}` is in the project's `.claude/settings.json`. Either way it gets what is committed, never an edit that is not. So the session commits first, the brief names the commit, and the builder goes there with a fast-forward or builds nothing. `read` in Claude Code's docs. `run`: both builders of a live session started 79 files away from the work in hand.
 
 ---
 

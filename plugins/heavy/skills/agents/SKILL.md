@@ -19,15 +19,15 @@ An agent knows only what the brief says. Give it all of this:
 
 1. The goal, and what done looks like.
 2. The files it owns. One owner per file. Two agents never edit one file.
-3. The commit it starts from → `git rev-parse --short HEAD`.
+3. The commit it starts from → `git rev-parse --short HEAD`. Commit first: a worktree gets what is committed, never an edit that is not. Name the commit and leave the way there to the builder.
 4. The rules that bind it, in the person's own words where the person gave them.
-5. What to report back: what changed, what ran and what it printed, what it could not verify.
+5. What to report back: what changed, what ran and what it printed, what it could not verify, the commit it started from.
 6. That it never commits to the default branch, never asks the person, never writes in `harness/`.
 
 ## The run
 
 - Edits that could collide → each agent in its own worktree. The `builder` subagent works in one.
-- A worktree starts from the remote's default branch, not from your checkout. It starts from your work only when `.claude/settings.json` holds `"worktree": {"baseRef": "head"}`.
+- A worktree starts from the remote's default branch, not from your checkout. It starts from your last commit only when `.claude/settings.json` holds `"worktree": {"baseRef": "head"}`.
 - A read-only second opinion → the `reviewer` subagent.
 - Independent agents go out together, in one message.
 

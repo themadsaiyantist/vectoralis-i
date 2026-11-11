@@ -17,10 +17,10 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → built, checked and pushed: the spec, the harness (45 tests, 115 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people. Every skill and both subagents ran in live sessions. CI is green.
+- **Where it stands** → built, checked and pushed: the spec, the harness (50 tests, 167 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people. Every skill and both subagents ran in live sessions. CI is green, and every commit is `themadsaiyantist`.
 - **Next →** nothing the agent can do alone. The open boxes are under **Yours**.
-- **Open** → a live Codex session needs the author's login. Kit entries are `read`, not tried.
-- **Mind** → commit through the hook. A ticked file that changed needs `vectoralis affirm` after it is checked again. A script a background job runs is not edited.
+- **Open** → a live Codex session needs the author's login. Kit entries are `read`, not tried. How the history goes public is the author's call.
+- **Mind** → commit through the hook, as `themadsaiyantist`. A ticked file that changed needs `vectoralis affirm` after it is checked again. A change to a guard gets a second reader. A script a background job runs is not edited.
 
 ---
 
@@ -33,6 +33,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ⬜ Trust the hooks once in Codex → `/hooks` → then say so, and I run the first live Codex session
 - ⬜ Open the subreddits of `community/README.md` once → Reddit refuses a checker
 - ⬜ Give the address of the Coding Agents course → for the README's one link
+- ⬜ Say how the history goes public → as it is, or as one release commit. Today every commit carries one date
 - ⬜ Say release → the repository goes public
 
 ---

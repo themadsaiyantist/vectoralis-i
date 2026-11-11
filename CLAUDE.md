@@ -29,6 +29,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 - **Scope is the author's.** Anything else found on the way is reported, never fixed on the side.
 - **Scratch stays out of the repository.**
 - **A script a background job is running is not edited.** A shell reads it as it goes. Change a copy.
+- **A change to a guard gets a second reader** who did not write it, before it is called checked.
 
 ---
 
@@ -46,6 +47,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 ## Git
 
 - Commit locally without asking → `type: what changed`, with `feat`, `fix`, `docs`, `refactor` or `chore`.
+- **Commits are the author's:** `themadsaiyantist`, with that account's no-reply address, set in this repository's own git config. Read `git config user.email` before the first commit of a session, and never use the machine's global identity here.
 - Push without asking. **The repository stays private** until the author says release.
 - Never force-push, reset or delete without the author's yes.
 

@@ -21,7 +21,7 @@ An agent knows only what the brief says. Give it all of this:
 
 1. The goal, and what done looks like.
 2. The files it owns.
-3. The commit it starts from.
+3. The commit it starts from. Commit first.
 4. The rules that bind it, in the person's own words where the person gave them.
 5. What to report: what changed, what ran and what it printed, what it could not verify.
 6. That it never writes a record, never pushes, never asks the person.
@@ -32,7 +32,7 @@ An agent knows only what the brief says. Give it all of this:
 
 - Two agents never edit one file.
 - Edits that could collide run in separate worktrees: each agent gets its own copy of the repository on its own branch.
-- **A worktree starts from the remote's default branch**, not from your checkout. So a builder does not see your unpushed commits, unless one line in `.claude/settings.json` says otherwise: `"worktree": {"baseRef": "head"}`. `/heavy:setup` offers it.
+- **A worktree starts from the remote's default branch**, not from your checkout. So a builder does not see your unpushed commits, unless one line in `.claude/settings.json` says otherwise: `"worktree": {"baseRef": "head"}`. `/heavy:setup` offers it. Either way it gets what is committed, never an edit that is not. Commit first.
 - A worktree's branch is merged only after its check passed, and only when it started from your commit. Otherwise take its files, never its branch.
 - **An agent's "done" is a claim.** The session that sent it re-checks every file it touched before a box moves.
 
@@ -88,7 +88,9 @@ forward with `git merge --ff-only 505dcdd` instead of `git reset --hard`, and no
 - **The session treated both reports as claims.** It sent the reviewer, which read both branches and found two defects in one unit. Both were fixed before the merge.
 - **Then the records** → two rows ticked Built and Checked, by the session. No builder wrote under `harness/`.
 
-The run before this one is why a builder checks. The same two builders started on the remote's default branch, 79 files away from the work in hand. One tried `git reset --hard` to get there, and the `destructive` guard blocked it. The session refused to trust either report: it took only the four files the builders owned, and ran the tests itself.
+A later run showed the net under the instruction. The session's own brief told the builders to get to its commit with `git reset --hard`. The `destructive` guard blocked that, and each builder went by a fast-forward, as its own steps say.
+
+The run before these two is why a builder checks. The same two builders started on the remote's default branch, 79 files away from the work in hand. One tried `git reset --hard` to get there, and the `destructive` guard blocked it. The session refused to trust either report: it took only the four files the builders owned, and ran the tests itself.
 
 `run`: Claude Code 2.1.322, Sonnet 5.5, headless, permission prompts off, 2026-11-11. Three minutes and 26 seconds, 69 cents.
 
@@ -106,7 +108,7 @@ The run before this one is why a builder checks. The same two builders started o
 
 - The agent sends subagents itself. `/heavy:agents` loads the brief's steps.
 - A subagent file sets its tools, its model and its isolation: `isolation: worktree` gives it its own copy.
-- That copy starts from the remote's default branch. `"worktree": {"baseRef": "head"}` in `.claude/settings.json` starts it from your checkout.
+- That copy starts from the remote's default branch. `"worktree": {"baseRef": "head"}` in `.claude/settings.json` starts it from your last commit.
 - A hook sees a subagent's call, which is how `records` tells it from the main session.
 
 `read`: [subagents](https://code.claude.com/docs/en/sub-agents.md) and [worktrees](https://code.claude.com/docs/en/worktrees.md), 2026-11-11. Agent teams are still experimental there, so this guide leaves them out.

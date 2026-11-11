@@ -492,5 +492,594 @@
     "expect": "block",
     "profile": "heavy",
     "event": "write"
+  },
+  {
+    "name": "blocks a row moved to a section where its last cell is blank",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| refund | ⬜ | ⬜ | ⬜ |\n\n## Dropped\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ |  |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks the person's cell being left blank in place",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ |  |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a column added after the person's, with their cell ticked",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours | Notes |\n|---|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ |  |\n| refund | ⬜ | ⬜ | ⬜ |  |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks the person's column being renamed",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Signed |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a stage added before the person's column",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Reviewed | Checked | Yours |\n|---|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ⬜ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a section renamed with a row the person had ticked",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks the Owner cell of an open row being rewritten",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | goku | ✅ | ✅ | ⬜ |\n| the cart total | goku | ✅ | ✅ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | vegeta | ✅ | ✅ | ⬜ |\n| the cart total | goku | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours, goku\n\n- ⬜ approve the copy\n\n## Yours, vegeta\n\n- ⬜ read the spec\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku"
+  },
+  {
+    "name": "blocks another person's row being taken over and ticked in one edit",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | goku | ✅ | ✅ | ✅ |\n| the cart total | goku | ✅ | ✅ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | vegeta | ✅ | ✅ | ⬜ |\n| the cart total | goku | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours, goku\n\n- ⬜ approve the copy\n\n## Yours, vegeta\n\n- ⬜ read the spec\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "prompt": "tick refund",
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku"
+  },
+  {
+    "name": "blocks a table with an open row being wrapped in an HTML comment",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| refund | ⬜ | ⬜ | ⬜ |\n\n## Cart\n\n<!--\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n-->\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| refund | ⬜ | ⬜ | ⬜ |\n\n## Cart\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes an example inside a tilde fence being deleted",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n\nAn example:\n\n~~~\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| an example row | ⬜ | ⬜ | ⬜ |\n~~~\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a section with a pipe in its name being renamed",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## API and CLI\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## API | CLI\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a cell added after the person's, under no header, with their cell ticked",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a row cut short of the person's cell",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a to-do box ticked with an open twin put under it",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n- ✅ approve the copy\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks an open row deleted while a done twin stays",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| refund | ✅ | ✅ | ✅ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| refund | ⬜ | ⬜ | ⬜ |\n| refund | ✅ | ✅ | ✅ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a line that only names a comment opener",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\nA row inside `<!--` is not read.\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a tick under a line that only names a comment opener",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\nA row inside `<!--` is not read.\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\nA row inside `<!--` is not read.\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks one arriving row standing in for two that left",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## UI\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| tests | ✅ | ✅ | ✅ |\n\n## Backend\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Frontend\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| tests | ✅ | ✅ | ✅ |\n\n## Backend\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| tests | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a second column with the person's name added after theirs",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours | Yours |\n|---|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks an open row moved into a table whose last column is another one",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n\n## Later\n\n| Unit | Built | Checked | Notes |\n|---|---|---|---|\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks an Owner column added with every row handed out",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| the cart total | goku | ✅ | ✅ | ✅ |\n| refund | goku | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| the cart total | ✅ | ✅ | ✅ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku"
+  },
+  {
+    "name": "passes an Owner column added once the person opened the tracker",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| the cart total | goku | ✅ | ✅ | ✅ |\n| refund | goku | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| the cart total | ✅ | ✅ | ✅ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "prompt": "unlock harness/tracker.md",
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku"
+  },
+  {
+    "name": "passes an owner's name corrected in its case",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| the cart total | goku | ✅ | ✅ | ✅ |\n| refund | goku | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| the cart total | Goku | ✅ | ✅ | ✅ |\n| refund | Goku | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku"
+  },
+  {
+    "name": "blocks a tick below a line that only names an opener, with an arrow in a fence further down",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Now\n\nNext: see how <!-- is read.\n\n## Yours\n\n- ✅ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n\n```\nfoo --> bar\n```\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Now\n\nNext: see how <!-- is read.\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n\n```\nfoo --> bar\n```\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a comment block that never closes being put above the person's boxes",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n<!-- to tidy later\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a line of cells put above the header to shift the person's column",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| . | Unit | Built | Checked | Yours |\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks the row of dashes being deleted, which leaves no table on the page",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes the done one of two twins being deleted",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n- ⬜ review the release notes\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ✅ review the release notes\n- ⬜ review the release notes\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes two twins swapping places",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n- ⬜ review the release notes\n- ✅ review the release notes\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ✅ review the release notes\n- ⬜ review the release notes\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks the open one of two twins being ticked",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n- ✅ review the release notes\n- ✅ review the release notes\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ✅ review the release notes\n- ⬜ review the release notes\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks one arriving row standing in for two that left, even on the person's tick",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## UI\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| tests | ✅ | ✅ | ✅ |\n\n## Backend\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Frontend\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| tests | ✅ | ✅ | ✅ |\n\n## Backend\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| tests | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "prompt": "tick tests"
+  },
+  {
+    "name": "blocks a tick on another person's row though the person here opened the file and typed tick",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | goku | ✅ | ✅ | ✅ |\n| the cart total | goku | ✅ | ✅ | ⬜ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | vegeta | ✅ | ✅ | ⬜ |\n| the cart total | goku | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours, goku\n\n- ⬜ approve the copy\n\n## Yours, vegeta\n\n- ⬜ read the spec\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "prompt": "unlock harness/tracker.md and tick refund",
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku"
+  },
+  {
+    "name": "blocks a row added already ticked under a row of dashes put inside the table",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n|---|---|---|---|\n| emails | ✅ | ✅ | ✅ |\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a row of dashes put between two rows",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n|---|---|---|---|\n| refund | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a comment opener that begins a list item above the person's boxes",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n- <!--\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a box added already ticked under the shortest comment there is",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n<!-->\n\n- ⬜ approve the copy\n- ✅ sign the contract\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n<!-->\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a list item that holds a whole comment",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "# To-do\n\n## Yours\n\n- <!-- a note for later -->\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "event": "write",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    }
   }
 ]

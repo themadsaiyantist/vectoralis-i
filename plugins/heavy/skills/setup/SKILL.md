@@ -15,7 +15,7 @@ The records, on top of light: a tracker, two to-do lists, a failure log, lessons
 3. If it found no test command or no formatter, ask the person for the command. If it said a command is not approved on this machine, show the person the command and ask. On a yes, run `vectoralis trust`.
 4. If it offered a starter instructions file, ask the person first. On a yes, run it again with `--starter`.
 5. Fill the first rows with the person: the units of the work in `harness/tracker.md`, the first steps in `harness/todo.md`. The sample rows are there to be replaced.
-6. In Claude Code, offer one line for `.claude/settings.json`: `"worktree": {"baseRef": "head"}`. With it a `builder` starts from the work in hand. Without it, from the remote's default branch. Add it on a yes.
+6. In Claude Code, offer one line for `.claude/settings.json`: `"worktree": {"baseRef": "head"}`. With it a `builder` starts from your last commit. Without it, from the remote's default branch. Add it on a yes.
 7. Run `vectoralis check` and show the result.
 8. Tell the person the three things that stay theirs, and the words that give them:
    - a box in their column → `tick` and a few words of the line
