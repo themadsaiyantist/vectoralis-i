@@ -114,11 +114,11 @@ class Checks(Project_):
     def test_a_row_ticked_before_its_file_changed_is_stale(self):
         self.put("harness/settings.json", json.dumps({"profile": "heavy"}))
         self.put("src/cart.py", "total = 0\n")
-        self.put("harness/tracker.md", f"# Tracker\n\n**Contents:** Checkout\n\n## Checkout\n\n| Unit | Built | Yours |\n|---|---|---|\n| `src/cart.py` cart | {DONE} | {OPEN} |\n| `src/gone.py` gone | {OPEN} | {OPEN} |\n")
+        self.put("harness/tracker.md", f"# Tracker\n\n**Contents:** Checkout\n\n## Checkout\n\n| Unit | Built | Yours |\n|---|---|---|\n| `src/cart.py` cart | {DONE} | {OPEN} |\n| `src/gone.py` gone | {DONE} | {OPEN} |\n| `src/later.py` not built yet | {OPEN} | {OPEN} |\n")
         git(self.root, "init", "-q", "-b", "main")
         git(self.root, "add", "-A")
         git(self.root, "commit", "-q", "-m", "start", when="2026-01-01T10:00:00")
-        self.assertEqual(checks.stale(Project(str(self.root))), ["tracker: `src/gone.py` is gone"])
+        self.assertEqual(checks.stale(Project(str(self.root))), ["tracker: `src/gone.py` is ticked and the file is gone"])
         self.put("src/cart.py", "total = 1\n")
         git(self.root, "commit", "-q", "-am", "change", when="2026-01-02T10:00:00")
         flags = checks.stale(Project(str(self.root)))

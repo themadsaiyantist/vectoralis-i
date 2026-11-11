@@ -1,0 +1,10 @@
+{
+  "profile": "heavy",
+  "test": "python3 -m unittest discover -s tests -q",
+  "test_timeout": 120,
+  "format": "",
+  "guards": {},
+  "skip": {},
+  "merge": "agent",
+  "team": false
+}

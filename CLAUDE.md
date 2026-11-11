@@ -10,6 +10,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 
 - **`harness/todo.md`** → everything left, in order, yours and the agent's. Loaded in full below. The first open box of the agent's list is the next step.
 - **`harness/failures.md`** → what went wrong, and the traps ahead. Read it before starting work.
+- **`harness/tracker.md`** → the build state, unit by unit. **`harness/decisions.md`** → every call made, and why.
 - **`vectoralis-i.md`** → the authority on what Vectoralis I contains, and the absolute rules. A change to what it contains is made there first.
 - **`spec.md`** → the authority on how it is built, once it is written.
 
