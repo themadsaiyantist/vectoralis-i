@@ -74,7 +74,7 @@ The agent read the reason, wrote the script to use an environment variable, and 
 | The kit | the few skills, guards and MCP servers that matter, for 19 kinds of work | [kit/](kit/README.md) |
 | The roadmaps | three careers, stage by stage, with ranked resources and a project per stage | [roadmaps/](roadmaps/README.md) |
 | The topics | five topics beyond the roadmaps | [topics/](topics/README.md) |
-| The communities | where the people of each topic talk | [community/](community/README.md) |
+| The communities | where the people of each topic talk, and the few worth following | [community/](community/README.md) |
 
 ---
 
@@ -104,7 +104,7 @@ guide/        how to run an agent on light and heavy work
 kit/          what to install, by situation
 roadmaps/     three careers
 topics/       five topics beyond the roadmaps
-community/    where people talk, topic by topic
+community/    where people talk, and who to follow
 plugins/      the harness: light and heavy
 harness/      this repository's own records
 tests/        the unit tests and the guard payloads

@@ -56,4 +56,4 @@ Not sure → walk the first two stages of the agentic road. Every road stands on
 
 - [The topics](../topics/README.md) → five more, none of them a stage of a road.
 - [The kit](../kit/README.md) → what to install for the work in front of you.
-- [The communities](../community/README.md) → where the people of each road talk.
+- [The communities](../community/README.md) → where the people of each road talk, and the few worth following.

@@ -17,10 +17,10 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → everything is built, checked and pushed but one page: the spec, the harness (41 tests, 106 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics. Light and heavy ran for real in Claude Code. Both plugins install in Codex.
-- **Next →** `community/README.md`: when its subagent reports, check it → add the section of people from the research → fix any subreddit the feed check could not open → tick its row → commit.
+- **Where it stands** → every page is written, checked and pushed: the spec, the harness (41 tests, 106 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people worth following. Light and heavy ran for real in Claude Code. Both plugins install in Codex.
+- **Next →** the ten heavy skills and the two subagents in a live session, on a copy of this repository → tick their two rows in the tracker.
 - **Then** → one last pass: `sh tools/check.sh`, the tracker against the files, this block, the report to the author.
-- **Open** → the heavy skills were never called in a live session. A Codex session needs the author's login.
+- **Open** → a Codex session needs the author's login.
 - **Mind** → commit through the hook, with explicit paths while a subagent writes. A ticked file that changed needs `vectoralis affirm` after it is checked again.
 
 ---
@@ -71,7 +71,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ The kit → 19 situations, and the index
 - ✅ The roadmaps → 3 careers
 - ✅ The five topics → 5 pages
-- ⬜ The communities → the subreddits and the rest, topic by topic, and the few people worth following
+- ✅ The communities → the subreddits and the rest, topic by topic, and the few people worth following
 - ✅ The proof → one page, built on the pick of `b.md` until it is answered
 
 **4. The release**

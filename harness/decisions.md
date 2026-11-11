@@ -10,6 +10,7 @@ Every call that was made on Vectoralis I, and every exception to a rule, each on
 
 Newest first. One line: the date, the call in bold, then why.
 
+- 2026-11-11 · **The people worth following are one table at the foot of the communities page, a row per topic, with no date per person.** Why: a fourth column does not fit the community tables, and the page's own form, a name → what it is good for, carries over. One line at the foot says when everyone was checked, as it does for the communities. Twenty-six dates would read as stale within a month.
 - 2026-11-11 · **A hook runs only a command the person approved on this machine.** Why: `test` and `format` sit in a file a cloned repository can set, and a hook runs outside the agent's permission prompts. The approval lives in the home folder, so a repository cannot approve itself. It is the one file this harness keeps outside the project.
 - 2026-11-11 · **Planned has one meaning: the tracker lists it and no box is ticked.** Why: three false flags came from three separate patches. The staleness check and the link check now ask the tracker.
 - 2026-11-11 · **A tick refers to a recorded version of its file, not to a date.** Why: the first design compared git times. A file changed and checked again in one commit would have stayed flagged for good, because its row reads the same before and after. Content compared with content is right before a commit and after one.

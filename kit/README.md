@@ -87,4 +87,4 @@ What to install for the work in front of you: one skill, one guard and one MCP s
 
 - [MCP](../guide/mcp.md) → when a server earns its context, and when a command is the better choice.
 - [Safety](../guide/safety.md) → read it before you install anything that runs with your access.
-- [The communities](../community/README.md) → where the people of each situation talk.
+- [The communities](../community/README.md) → where the people of each situation talk, and the few worth following.
