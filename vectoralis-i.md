@@ -114,6 +114,15 @@ Added 2026-11-11 by the author: "and also include in it the perfect roadmap for 
 - **Three careers** → AI Engineering, and two chosen by Claude. Nothing research-heavy.
 - **Each one holds** → full clean steps, milestones, projects and the future, as clean as it can be.
 
+Widened 2026-11-11 by the author: "add where needed additional free/paid resources that go deeper into a topic/milestone whatever, and about the project say the best resources direct url links free that can give ideas and ispirations to the users (perhaps great github repos of great difficutly), rank things in tables if needed, 1-10 stars in each category and also for any free resource if theres a paid thing thats greeatly better then state it as in () and the price (not too heavy priced tho ofc). also for each stage if needed there can be multiple resources free/paid and in () to be said what they excel at and what are they better in compared to the others on that list), yk cool arrows and thigns to shwocase".
+
+- **Deeper resources** → free or paid, wherever a topic or a milestone needs more.
+- **Project inspiration** → the best free direct links that give ideas, great GitHub repositories among them, the hard ones included.
+- **Ranked in tables** where it helps → 1 to 10 stars in each category.
+- **A paid option beside a free one** → only when it is greatly better, in brackets with its price, and never a heavy price.
+- **Several resources per stage** where needed → each with what it excels at, and what it does better than the others on the list, in brackets.
+- **Arrows and visuals** → the road is shown, not only listed.
+
 ## What it is not
 
 - Not a skills dump. The kit names the few that matter in each situation, and Vectoralis I stays a working system, reworded 2026-11-11 with the kit.
