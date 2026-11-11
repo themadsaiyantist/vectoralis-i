@@ -10,5 +10,5 @@ Issues are open and pull requests are welcome. Ten lines, and that is all of it.
 6. **Plain words.** Bullets and arrows, no em or en dash, one line per paragraph.
 7. **One fact, one home.** Link to it, never repeat it.
 8. **Free and open first.** A paid tool is marked paid, with its price.
-9. **Before you push:** `python3 -m unittest discover -s tests -q`, `python3 plugins/light/bin/vectoralis guards` and `python3 tools/check_writing.py`.
+9. **Before you push:** `sh tools/check.sh`. It runs the tests, proves every guard, checks the records and the writing rules, and stops at the first failure.
 10. **Be kind in review.** Say what is wrong, how you know, and what would fix it.

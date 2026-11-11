@@ -17,3 +17,7 @@ jobs:
         run: python -m unittest discover -s tests -q
       - name: Every guard proves itself
         run: python plugins/light/bin/vectoralis guards
+      - name: The records and the writing rules
+        run: |
+          python plugins/light/bin/vectoralis check
+          python tools/check_writing.py

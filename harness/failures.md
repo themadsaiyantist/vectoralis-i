@@ -50,6 +50,19 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · A commit went out while the check still showed a flag, a second time · closed 2026-11-11
+
+**Class.** `unread-check`
+
+**What failed.** Two commits went out with `vectoralis check` reporting one flag. The first time the check's last line was printed and its exit code dropped. The entry above then said the commit step stops on a flag. It did not: the next commit ran the check on its own line, saw `1 flag(s)`, and committed anyway.
+
+**Cause.** The guard was a habit, written down as if it were a mechanism. Nothing a machine ran stood between a failing check and the commit.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → the flagged file was checked again and affirmed.
+- The guard → `tools/check.sh` runs every check and stops at the first failure. It is installed as the pre-commit hook here, and CI runs the same checks, so a commit cannot be made while one fails.
+
 ### ✅ 2026-11-11 · Claude · The staleness check flagged an open to-do line that names a file not built yet · closed 2026-11-11
 
 **Class.** `false-flag`
@@ -62,7 +75,7 @@ Newest first.
 
 - The instance → an open box may name a file that is not built yet. A done box may not.
 - Every sibling → the tracker and the to-do list are the two records that hold work ahead, and both are now covered. The rules and the decisions name only what exists.
-- The guard → this is the second failure of the class, so it gets one a machine enforces: a test holds both cases for both records, and the commit step now runs the check on its own line, so a flag stops the commit.
+- The guard → this is the second failure of the class, so it gets one a machine enforces: a test holds both cases for both records, and the commit step was meant to stop on a flag. It did not, see the entry above.
 - What the fix turned up → the check then stopped the very commit that carried this fix, rightly: a ticked file had changed. That showed the rule under it was wrong too, `harness/decisions.md`, a tick refers to a recorded version.
 
 ### ✅ 2026-11-11 · Claude · The staleness check flagged every unit that was not built yet · closed 2026-11-11
