@@ -50,6 +50,19 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · The fix for the sample rows let a to-do box move from one person's list to another's · closed 2026-11-11
+
+**Class.** `fix-too-wide`
+
+**What failed.** The first fix for the sample rows matched a box that left one place with one that arrived, by its words, in both records. In the to-do list that let an open box move from one person's list to another's without a word from either. It was on `main` for under an hour, and no live session met the case.
+
+**Cause.** The fix was written for the tracker, where a section is an area of work, and applied to both records without asking what a section means in each. In the to-do list the section is the owner.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → the match by words holds for the tracker alone. In the to-do list a box that changed section is gone from its owner, and the guard blocks.
+- The guard → a payload that moves one person's box into another's list and must block, and a unit test on the function. It was found by reading the fix again a different way before the last pass, which is the re-check the `check` skill asks for.
+
 ### ✅ 2026-11-11 · Claude · The builder and the agents skill assumed a worktree starts from the work in hand · closed 2026-11-11
 
 **Class.** `unread-docs`
@@ -86,8 +99,9 @@ Newest first.
 
 **Fix.** ✅ the instance · ✅ the cause · ✅ the guard
 
-- The instance → a sample box that `init` wrote is nobody's until someone rewrites it, and a box that only moved keeps its place by its words. A third live run of the skill finished clean: rows replaced, section renamed, `vectoralis check` clean, the harness committed.
-- The guard → the fourth failure of the class. Six payloads hold both sides: the sample row, the sample box and the renamed section pass, and a real box removed, a box ticked during a rename and a box moved into the agent's list still block. One test walks from `init` to the first real rows through the hook.
+- The instance → a sample box that `init` wrote is nobody's until someone rewrites it, and a tracker row that only moved keeps its place by its words. A third live run of the skill finished clean: rows replaced, section renamed, `vectoralis check` clean, the harness committed.
+- One sibling → the end-of-turn sweep judged a removed box by its own copy of the rule, and would have blocked the same work one turn later, when the person had run `init` first. Both guards now ask one function. That case ran live too, and ended clean.
+- The guard → the fourth failure of the class. Nine payloads hold both sides: the sample row, the sample box and the renamed section pass, for the write guard and for the sweep, and a real box removed, a box ticked during a rename and a box moved out of its owner's list still block. Two tests walk from `init` to the first real rows, one through the write hook and one through a whole turn.
 
 ### ✅ 2026-11-11 · Claude · A script was edited while a background run was executing it, and the run started a second live session · closed 2026-11-11
 

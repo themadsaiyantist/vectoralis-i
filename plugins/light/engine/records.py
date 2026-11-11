@@ -127,22 +127,24 @@ def newly_ticked(before: Dict[str, str], after: Dict[str, str]) -> List[str]:
 
 
 def removed_open(before: Dict[str, str], after: Dict[str, str]) -> List[str]:
-    """The person's boxes that were open and are gone. A box that only moved, its words unchanged, is still there.
+    """The person's boxes that were open and are gone.
 
-    A renamed section moves every box in it. So a box that left one place is matched with one that arrived, by the
-    record it is in and by its words, before it is called removed.
+    Two things are not a removal. A sample box that `vectoralis init` wrote is nobody's until someone rewrites it.
+    And a tracker row that only moved, to a renamed or another section with its words unchanged, is still there.
+    In the to-do list the section says whose the box is, so a box that changed section there is gone from its owner.
     """
     def words(key):
         kind, _, unit = (key.split("|", 2) + ["", ""])[:3]
         return kind, unit
 
+    sample = samples()
     arrived: Dict[Tuple[str, str], int] = {}
     for key in after:
-        if key not in before:
+        if key not in before and key.startswith("tracker|"):
             arrived[words(key)] = arrived.get(words(key), 0) + 1
     gone = []
     for key, mark in before.items():
-        if mark != OPEN or key in after:
+        if mark != OPEN or key in after or unit_of(key) in sample:
             continue
         if arrived.get(words(key), 0) > 0:
             arrived[words(key)] -= 1

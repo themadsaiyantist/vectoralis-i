@@ -471,5 +471,26 @@
       "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
       "src/cart.py": "total = 0\n"
     }
+  },
+  {
+    "name": "blocks an open box of one person's being moved into another person's list",
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku",
+    "files": {
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | goku | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours, goku\n\n- ⬜ approve the copy\n\n## Yours, vegeta\n\n- ⬜ read the spec\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "call": {
+      "path": "harness/todo.md",
+      "old": "- ⬜ approve the copy\n\n## Yours, vegeta\n\n- ⬜ read the spec",
+      "text": "\n## Yours, vegeta\n\n- ⬜ approve the copy\n- ⬜ read the spec"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "event": "write"
   }
 ]

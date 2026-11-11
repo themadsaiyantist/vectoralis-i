@@ -205,6 +205,28 @@ class Hooks(unittest.TestCase):
         self.assertEqual(done.returncode, 2)
         self.assertIn("An open box of the person's would be removed", done.stderr)
 
+    def test_a_turn_that_fills_the_first_rows_of_a_new_harness_ends_clean(self):
+        env = dict(os.environ, VECTORALIS_HOME=self.home.name)
+        env.pop("CLAUDE_PROJECT_DIR", None)
+        run = dict(cwd=str(self.root), capture_output=True, env=env, check=True)
+        subprocess.run([sys.executable, str(ROOT / "plugins" / "light" / "bin" / "vectoralis"), "init", "heavy"], **run)
+        subprocess.run(["git", "init", "-q"], **run)
+        subprocess.run(["git", "add", "-A"], **run)
+        subprocess.run(["git", "-c", "user.name=goku", "-c", "user.email=goku@example.com", "commit", "-q", "-m", "start"], **run)
+        self.hook("prompt", prompt="fill the first rows of the tracker and the to-do list")
+        tracker, todo = self.root / "harness" / "tracker.md", self.root / "harness" / "todo.md"
+        text = tracker.read_text(encoding="utf-8").replace("First area", "Checkout")
+        text = text.replace(f"| the first unit of work | {OPEN} | {OPEN} | {OPEN} |", f"| the cart total | {OPEN} | {OPEN} | {OPEN} |")
+        tracker.write_text(text, encoding="utf-8")
+        todo.write_text(todo.read_text(encoding="utf-8").replace("the first thing only you can do", "approve the copy"), encoding="utf-8")
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.hook("prompt", prompt="tidy the to-do list")
+        todo.write_text(todo.read_text(encoding="utf-8").replace(f"- {OPEN} approve the copy\n", ""), encoding="utf-8")
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 2)
+        self.assertIn("An open box of the person's was removed this turn", done.stderr)
+
     def test_a_subagent_cannot_write_a_record(self):
         self.settings(profile="heavy")
         done = self.hook("write", agent_id="agent-7", tool_name="Write",

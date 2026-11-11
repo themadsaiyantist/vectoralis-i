@@ -272,5 +272,44 @@
     },
     "git": true,
     "event": "stop"
+  },
+  {
+    "name": "passes the sample rows of a new harness replaced during the turn",
+    "then": {
+      "harness/tracker.md": "# Tracker\n\n**Contents:** Checkout\n\n---\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ read the cart total once it is built\n\n## The agent's\n\n- ⬜ build the cart total\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n",
+      "src/cart.py": "total = 0\n",
+      "harness/tracker.md": "# Tracker\n\n**Contents:** First area\n\n---\n\n## First area\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| the first unit of work | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ the first thing only you can do\n\n## The agent's\n\n- ⬜ the first step\n"
+    },
+    "git": true,
+    "event": "stop",
+    "state": {
+      "turn": 1
+    }
+  },
+  {
+    "name": "passes a tracker section renamed during the turn, its open boxes kept",
+    "then": {
+      "harness/tracker.md": "# Tracker\n\n**Contents:** Cart\n\n---\n\n## Cart\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n",
+      "src/cart.py": "total = 0\n",
+      "harness/tracker.md": "# Tracker\n\n**Contents:** Checkout\n\n---\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| `src/cart.py` the cart total | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ read the cart total once it is built\n\n## The agent's\n\n- ⬜ build the cart total\n"
+    },
+    "git": true,
+    "event": "stop",
+    "state": {
+      "turn": 1
+    }
   }
 ]

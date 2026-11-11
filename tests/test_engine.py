@@ -90,6 +90,9 @@ class Parts(unittest.TestCase):
         self.assertEqual(records.removed_open(before, {"tracker|Checkout|cart": OPEN}), ["tracker|First area|refund"])
         twice = {"tracker|A|cart": OPEN, "tracker|B|cart": DONE}
         self.assertEqual(records.removed_open(twice, {"tracker|B|cart": DONE}), ["tracker|A|cart"])
+        mine, theirs = {"todo|Yours, goku|approve": OPEN}, {"todo|Yours, vegeta|approve": OPEN}
+        self.assertEqual(records.removed_open(mine, theirs), ["todo|Yours, goku|approve"])
+        self.assertEqual(records.removed_open({"tracker|First area|the first unit of work": OPEN}, {}), [])
         self.assertIn("the first unit of work", records.samples())
         self.assertIn("the first thing only you can do", records.samples())
 

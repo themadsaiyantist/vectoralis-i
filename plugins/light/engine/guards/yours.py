@@ -62,10 +62,7 @@ def check(call, proj, state):
                 elif not grants.ticked(given, unit):
                     block(f"The box of \"{unit}\" is the person's to tick.",
                           "ask them. They give it by typing `tick` and a few words of that line.")
-            samples = records.samples()
             for key in records.removed_open(before_marks, after_marks):
-                if records.unit_of(key) in samples:
-                    continue
                 if not grants.unlocked(given, rel):
                     block(f"An open box of the person's would be removed (\"{records.unit_of(key)}\").",
                           "leave it as it is, or ask them to open the file.")

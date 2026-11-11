@@ -10,6 +10,7 @@ Every call that was made on Vectoralis I, and every exception to a rule, each on
 
 Newest first. One line: the date, the call in bold, then why.
 
+- 2026-11-11 · **In the tracker a section is an area of work. In the to-do list it is the owner.** Why: a tracker row keeps its box when its section is renamed. A to-do box does not change lists without its owner's word, so the guard matches a moved box by its words in the tracker alone.
 - 2026-11-11 · **A builder is told its commit, and goes there or builds nothing.** Why: a worktree starts from the remote's default branch, and a result on another base proves nothing. A fast-forward is the only move it makes alone. `git reset --hard` stays blocked.
 - 2026-11-11 · **The skills were proven in headless sessions: on a scratch project, and on a copy of this repository with the plugins loaded from their own folders.** Why: a session cannot load a plugin into itself, and a copy keeps a second writer out of the working tree. What the copy pushed came in through pull request 1.
 - 2026-11-11 · **The budget counts 2.7 characters to a token, and ten more for each name in a list.** Why: three live sessions measured it. Light added 0, the descriptions 419, and two heavy projects 1,444 and 1,746, where four characters to a token read a third too low. The estimate lands within 2% of them. Another model counts differently, so the tool still says it is an estimate.

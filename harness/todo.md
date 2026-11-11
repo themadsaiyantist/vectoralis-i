@@ -17,7 +17,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → built, checked and pushed: the spec, the harness (44 tests, 112 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people. Every skill and both subagents ran in live sessions. CI is green.
+- **Where it stands** → built, checked and pushed: the spec, the harness (45 tests, 115 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people. Every skill and both subagents ran in live sessions. CI is green.
 - **Next →** nothing the agent can do alone. The open boxes are under **Yours**.
 - **Open** → a live Codex session needs the author's login. Kit entries are `read`, not tried.
 - **Mind** → commit through the hook. A ticked file that changed needs `vectoralis affirm` after it is checked again. A script a background job runs is not edited.
