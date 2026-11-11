@@ -58,7 +58,7 @@ $light:setup
 - `/hooks` → review the hooks and trust them. Codex runs no hook before that, and asks again when a hook changes.
 - For heavy → `codex plugin add heavy@vectoralis` as well. Codex has no plugin dependencies, so you add both.
 
-`read`: [Codex plugins](https://learn.chatgpt.com/docs/plugins) and [Codex hooks](https://learn.chatgpt.com/docs/hooks), 2026-11-11. Not run in Codex yet, see [Codex](codex.md).
+The two install commands are `run` on Codex 0.167.0, see [Codex](codex.md). The hooks step is `read`: [Codex hooks](https://learn.chatgpt.com/docs/hooks), 2026-11-11.
 
 ---
 
@@ -112,4 +112,4 @@ Your records are plain files in `harness/`. Removing a plugin leaves them where 
 
 Next → [Light](light.md).
 
-Verified on Claude Code 2.1.322 and Codex 0.167.1, 2026-11-11. The guard table is `run`. The install commands of both agents are `read` in their docs. The plugin itself was loaded into live Claude Code sessions with `--plugin-dir`, see [Light](light.md).
+Verified on Claude Code 2.1.322 and Codex 0.167.0, 2026-11-11. The guard table and the Codex install are `run`. The Claude Code install commands are `read` in its docs. The plugin itself was loaded into live Claude Code sessions with `--plugin-dir`, see [Light](light.md).

@@ -654,7 +654,7 @@ The research for 6 to 9 runs beside the build of 1 to 4, because neither waits o
 
 Each is marked `read` or `run` on its page before that page is called done.
 
-- One plugin folder installs in Codex as it does in Claude Code.
+- The hooks fire inside a Codex session, once trusted. The install itself is proven: `run`, Codex 0.167.0, 2026-11-11.
 - Codex's `apply_patch` payload gives the paths and the new text.
 - Session-start output works as the always-loaded core in Codex.
 - Codex prints a compaction prompt from a hook, or it is a gap.

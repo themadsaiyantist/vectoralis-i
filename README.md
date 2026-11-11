@@ -91,7 +91,7 @@ The agent read the reason, wrote the script to use an environment variable, and 
 ## The limits
 
 - **A guard is a guardrail, not a wall.** It stops the mistakes a machine can be sure of. It is not a sandbox.
-- **Run in Claude Code, read for Codex.** The Codex side is built and tested against Codex's payloads, and not yet run in Codex.
+- **Run in Claude Code, installed in Codex.** Codex installs both plugins from the same package. The guards are tested against Codex's payloads, and not yet run inside a Codex session.
 - **A kit entry marked `read` was read in its maker's docs**, not installed here.
 - **Linux, macOS and WSL.**
 

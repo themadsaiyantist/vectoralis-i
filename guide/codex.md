@@ -10,7 +10,24 @@ The same harness in Codex: the same two plugins, the same guards, the same recor
 
 - **Built for both.** One marketplace file, one hooks file, one engine. The engine reads a Codex payload and a Claude Code payload into one shape, and its tests feed it both.
 - **Run in Claude Code.** Every output in this guide marked `run` came from there.
-- **Not run in Codex yet.** Each Codex line in this guide is `read` in Codex's own docs on 2026-11-11. The first run in Codex is an open box in this repository's [to-do list](../harness/todo.md).
+- **Installed in Codex.** Codex reads the same marketplace file and installs both plugins from it:
+
+```text
+$ codex plugin marketplace add /home/goku/vectoralis-i
+Added marketplace `vectoralis` from /home/goku/vectoralis-i.
+$ codex plugin add light@vectoralis
+Added plugin `light` from marketplace `vectoralis`.
+$ codex plugin add heavy@vectoralis
+Added plugin `heavy` from marketplace `vectoralis`.
+$ codex plugin list
+PLUGIN            STATUS              VERSION  SOURCE
+light@vectoralis  installed, enabled  0.1.0    /home/goku/vectoralis-i/plugins/light
+heavy@vectoralis  installed, enabled  0.1.0    /home/goku/vectoralis-i/plugins/heavy
+```
+
+`run`: Codex 0.167.0, from a local copy of this repository, in a scratch Codex home, 2026-11-11.
+
+- **Not yet run in a Codex session.** The hooks firing inside Codex, and the skills called there, are `read` in Codex's own docs. That run is an open box in this repository's [to-do list](../harness/todo.md).
 
 ---
 
@@ -93,4 +110,4 @@ The grants are the same words in both agents, because the engine reads them from
 - **A push is refused** → in a `workspace-write` sandbox the network is off by default.
 - **You find a gap this page does not list** → [open an issue](../CONTRIBUTING.md). A gap table is only as good as its last run.
 
-Verified on Codex 0.167.1 and Claude Code 2.1.322, 2026-11-11. Every Codex line is `read`.
+Verified 2026-11-11. The install is `run` on Codex 0.167.0. Every other Codex line is `read` in the docs of Codex 0.167.1.

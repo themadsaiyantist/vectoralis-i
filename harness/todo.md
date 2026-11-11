@@ -27,7 +27,9 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Say start
 - ⬜ Answer `b.md` → seven short calls, while the build runs
 - ⬜ Read `spec.md` while the build runs → say what to change
-- ⬜ Trust the hooks once in Codex → `/hooks` → when the Codex part lands
+- ⬜ Trust the hooks once in Codex → `/hooks` → then say so, and I run the first live Codex session
+- ⬜ Open the subreddits of `community/README.md` once → Reddit refuses a checker
+- ⬜ Give the address of the Coding Agents course → for the README's one link
 - ⬜ Say release → the repository goes public
 
 ---
@@ -57,15 +59,16 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Light → three guards, one settings file
 - ✅ Heavy → the records, the guards, the skills
 - ✅ The smart pieces → staleness check, guard tests, dashboard, proposed guard, the compaction prompt
-- ⬜ Codex → the same package, and the table of gaps. Built for both, not yet run in Codex
-- ⬜ One real run → light on `runlog`, in Claude Code, for `guide/light.md`
+- ✅ Codex → the same package installs in Codex, and the table of gaps is written
+- ⬜ Codex, live → the hooks and the skills in a real Codex session. It needs your Codex login
+- ✅ One real run → light on `runlog`, in Claude Code, for `guide/light.md`
 - ⬜ Install heavy in this repository → run a live session on its own harness
 - ⬜ The guide → every page listed in `spec.md`
 - ⬜ The kit → 19 situations
 - ⬜ The roadmaps → 3 careers
 - ⬜ The five topics → 5 pages
 - ⬜ The communities → the subreddits and the rest, topic by topic
-- ⬜ The proof → one page, and beside each piece it proves
+- ✅ The proof → one page, built on the pick of `b.md` until it is answered
 
 **4. The release**
 
