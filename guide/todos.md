@@ -2,7 +2,7 @@
 
 Everything left on the work, in order, in two lists that never mix: yours and the agent's. `## Now` sits on top and is the handoff. Read this when steps that wait on you get lost in the chat, or when a new session has to ask where things stand.
 
-**Contents:** When to add it · The steps · The file · The guard · What it costs · In Claude Code · In Codex · What can go wrong
+**Contents:** When to add it · The steps · The file · The guard · What it costs · In Claude Code · In Codex · Another tool for the agent's list · What can go wrong
 
 ---
 
@@ -97,6 +97,21 @@ BLOCKED by Vectoralis. Nothing was written.
 - None of this was run in a Codex session yet. [Codex](codex.md)
 
 `read`: [Claude Code hooks](https://code.claude.com/docs/en/hooks), [Claude Code skills](https://code.claude.com/docs/en/skills), [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Codex skills](https://learn.chatgpt.com/docs/build-skills), [the `$plugin:skill` form](https://learn.chatgpt.com/docs/security/plugin/changelog), 2026-11-11.
+
+---
+
+## Another tool for the agent's list
+
+Two trackers made for agents, for when one list in one file is no longer enough: many tasks that wait on each other, or several agents taking work from one queue.
+
+| Tool | It is better at | It costs | What this harness loses beside it |
+|---|---|---|---|
+| [Beads](https://github.com/gastownhall/beads) · MIT | tasks that block each other. `bd ready` lists only what can start, `bd update <id> --claim` takes one task for one agent at once, so several agents share a queue. Synced between machines over Dolt | about 1,000 to 2,000 tokens at every session start, by its own count. A Dolt database. `bd init` writes `AGENTS.md` and the Claude Code, Codex and Cursor hooks unless you pass `--skip-agents` | the `yours` guard reads `harness/todo.md` alone. A task closed in Beads is closed with no one asked |
+| [Backlog.md](https://github.com/MrLesk/Backlog.md) · MIT | one Markdown file per task in `backlog/`, a board in the terminal (`backlog board`) and in the browser (`backlog browser`), a definition of done per task | an instruction file, or an MCP server whose tools load in every request | the same: no guard reads `backlog/` |
+
+- Install → `npm install -g @beads/bd`, then `bd init`. `npm i -g backlog.md`, then `backlog init "<name>"`. Both on the reader's machine, as the kit's rule says.
+- **Keep `## Yours` and `## Now` here either way.** They are what the briefing prints and what the guards protect. The other tool holds the agent's queue.
+- `read` 2026-11-11: the [Beads README](https://github.com/gastownhall/beads), [its Claude Code page](https://github.com/gastownhall/beads/blob/main/docs/integrations/claude-code.md), the [Backlog.md README](https://github.com/MrLesk/Backlog.md). Neither was run here.
 
 ---
 

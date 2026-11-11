@@ -36,6 +36,7 @@ Each row was read in that agent's own docs on 2026-11-11, and the link goes ther
 | [Devin](https://docs.devin.ai/onboard-devin/agents-md), [Devin Local](https://docs.devin.ai/desktop/devin-local/customizations) | Devin looks for it before it codes, and takes the first 16 KiB of each file. Devin Local reads it as an always-on rule |
 | [Factory Droid](https://docs.factory.com/harness/agents-md) | carries it into every session |
 | [Kilo Code](https://kilo.ai/docs/customize/agents-md), [Roo Code](https://roocodeinc.github.io/Roo-Code/features/custom-instructions/) | load the one in the project root by default |
+| [OpenHands](https://docs.openhands.dev/overview/skills) | puts the root one in full in the first system prompt, and also knows `CLAUDE.md` and `GEMINI.md`. Skills in `.agents/skills/` |
 
 - **Only after a setting** → [Gemini CLI](https://geminicli.com/docs/cli/gemini-md/) reads `GEMINI.md`. It reads `AGENTS.md` once `context.fileName` in its `settings.json` lists it.
 - **Not listed** → [Aider](https://aider.chat/docs/usage/conventions.html): its docs load a conventions file you name with `--read`, and name no `AGENTS.md`. [Jules](https://jules.google/docs/) looks for the file and calls itself experimental.
@@ -91,6 +92,7 @@ STALE: tracker: `cart.py` changed after its row was ticked
 - **An instruction is not a guard.** In another agent nothing blocks a secret, a write to locked work or a ticked box → the check in a pre-commit hook and in CI, and your own eyes on `harness/` in every pull request.
 - **Two instruction files that drift.** `CLAUDE.md` says one thing, `AGENTS.md` another, and Claude Code reads the first alone → one file, imported.
 - **A file that hides `AGENTS.md`.** Zed takes the first match of its list, so an old `.cursorrules` wins. Warp prefers `WARP.md`. Gemini CLI needs its setting → ask the agent which instruction files it loaded before you trust that it read yours.
+- **A hook format that looks the same.** OpenHands reads hooks from `.openhands/hooks.json` in Claude Code's format, with its own tool names, such as `terminal` for `Bash`. The engine reads neither its file nor its names, so no guard runs there → the pre-commit hook and CI. `read`: [OpenHands hooks](https://docs.openhands.dev/openhands/usage/customization/hooks), 2026-11-11.
 - **A file past its limit.** Codex stops at 32 KiB in all. Devin takes the first 16 KiB of each file → keep `AGENTS.md` to pointers, and let `harness/rules.md` hold the rules.
 - **The rules loaded twice.** A plain "read `harness/rules.md`" costs about 740 tokens a second time where the hook already printed them → the "if" that opens the first line above. `run`: `vectoralis budget`.
 

@@ -2,11 +2,11 @@
 
 Running without you: one command in a script, a job in CI, or a loop that comes back on its own. Read this before the first run you will not watch, and again when one surprised you.
 
-**Contents:** The three ways · Before you leave it alone · What was left out · In Claude Code · In Codex · With the harness · What can go wrong
+**Contents:** The four ways · Before you leave it alone · What was left out · In Claude Code · In Codex · With the harness · What can go wrong
 
 ---
 
-## The three ways
+## The four ways
 
 | The way | Claude Code | Codex | The result lands in |
 |---|---|---|---|
@@ -14,6 +14,8 @@ Running without you: one command in a script, a job in CI, or a loop that comes 
 | A job in CI | `anthropics/claude-code-action@v1` | `openai/codex-action@v1` | the run log, a comment, a pull request |
 | A loop on a timer | `/loop 5m <prompt>`, in a session you keep open | none in the CLI. A scheduled task is made in the ChatGPT desktop app or on the web | the session |
 | A loop until a condition holds | `/goal <condition>` | `/goal <objective>` | the session |
+
+- **GitHub's own way** → [GitHub Agentic Workflows](https://github.com/github/gh-aw), MIT, release v1.2.2 on 2026-11-10. The workflow is a Markdown file, `gh aw compile` turns it into the YAML that Actions runs, and Claude Code, Codex, Copilot, Gemini or Pi is the engine. The agent job is read-only, every write waits in a separate job until a threat check has read the output, and the agent reaches the network through a proxy with an allowlist ([architecture](https://github.github.com/gh-aw/introduction/architecture/)). The two jobs of the Codex Action below, built in. Install → `gh extension install github/gh-aw`. Its own README: "Use it with caution, and at your own risk."
 
 ## Before you leave it alone
 
@@ -100,6 +102,7 @@ codex exec --sandbox workspace-write --json -o result.md \
 
 ## What can go wrong
 
+- **The guards stay home.** A Claude Code cloud session, started from the browser or with `claude --cloud`, runs the hooks of the repository's `.claude/settings.json`, but "A cloud session doesn't install the plugins a repository turns on under `enabledPlugins`", and it reads no user settings. Light and heavy do not run there, and nothing says so → keep work that needs the guards on your machine, or in a container you run. `read`: [what carries over](https://code.claude.com/docs/en/cloud-environments), 2026-11-11.
 - **A run with no guard, and no sign of it.** `--bare` loads no hook. A fresh Codex runner trusted none. Neither says so in the result → keep `--bare` out of a run that needs the guards, and stop the job when `light` is missing from the `plugins` list of the `system/init` event that `--output-format stream-json --verbose` prints. In Codex let the sandbox and the two jobs be the boundary.
 - **"Done" with failing tests.** The `tests` guard sends the agent back once. `/goal` judges from the transcript and runs nothing itself → the script runs the test command after the agent, and trusts that exit code alone.
 - **Someone else's text in the prompt.** An issue body or a pull request title pasted into the prompt is read as instructions. Heavy reads the prompt for grants too: a headless `claude -p` run whose prompt carried `unlock tests` opened that lock. `run`, in a live session, see [Heavy](heavy.md) → write that text to a file and name the file in the prompt. Both Actions start only for people with write access by default. Keep it so.

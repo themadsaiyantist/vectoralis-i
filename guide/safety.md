@@ -2,7 +2,7 @@
 
 What stands between an agent and your machine: its own permission rules and sandbox first, then the guards of this harness. Read this before you give an agent a shell, before you loosen a mode, and before any run from [Unattended](unattended.md).
 
-**Contents:** Four promises, kept apart · The four ways it goes wrong · What a guard is not · In Claude Code · In Codex · With the harness · What can go wrong
+**Contents:** Four promises, kept apart · The four ways it goes wrong · What a guard is not · When a guard is not enough · In Claude Code · In Codex · With the harness · What can go wrong
 
 ---
 
@@ -54,6 +54,33 @@ NOT DONE YET, says Vectoralis.
   Do instead: put it back as it was, then ask the person to type `unlock src/payments/cart.py`.
 ```
 
+## When a guard is not enough
+
+A guard stops an honest mistake. A boundary stops what a guard cannot see: a script, a second shell, a fooled agent, a package that runs code when it installs. For a run with no prompts, put the whole agent inside one, so its file tools, its MCP servers and the guards run inside it too.
+
+| Boundary | What it puts inside | Agents | It needs | Start |
+|---|---|---|---|---|
+| **A Docker container** | what you run in it, with only the folders you mount | any | Docker | `docker run --rm --network none -v "$PWD:/work" -w /work <image> <command>` |
+| **A dev container** | the agent, its shell and its tools, with the project mounted. Anthropic's reference adds a firewall that denies every host not on its list | any agent you install in it | Docker, and an editor that opens dev containers | the `claude-code` feature in `.devcontainer/devcontainer.json` → [the docs](https://code.claude.com/docs/en/devcontainer) |
+| **[Docker Sandboxes](https://docs.docker.com/ai/sandboxes/)** | each agent in a microVM, with its own kernel and its own Docker | Claude Code, Codex, Copilot, Cursor, OpenCode and more | macOS 14 on Apple silicon, Windows 11, or Ubuntu 24.04 with KVM. A Docker sign-in. Free locally, closed source | `sbx run --name my-sandbox claude` |
+| **[Sandbox runtime](https://github.com/anthropics/sandbox-runtime)** | the whole Claude Code process, under the operating system's own sandbox. No Docker. A beta research preview | any process | a settings file that names every folder it may write and every host it may reach | `npm install -g @anthropic-ai/sandbox-runtime`, then `srt claude` |
+| **A virtual machine** | a whole operating system | any | a hypervisor, or a cloud session | → [Claude Code's comparison](https://code.claude.com/docs/en/sandbox-environments) |
+
+The first row, run on this machine. The project folder holds one file, and the container gets nothing else:
+
+```text
+$ docker run --rm --network none --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work python:3.12-slim sh -c '...'
+app.py                                                   ← the project, and only the project
+ls: cannot access '//.ssh': No such file or directory     ← no home folder, no keys
+urlopen error [Errno -3] Temporary failure in name resolution   ← no network
+wrote-inside                                             ← a write still lands in the project
+```
+
+- **No boundary makes a mounted project safe.** Claude Code's docs: "Any approach that allows network egress can still leak data the agent can read, and any approach that mounts your project directory writable can still modify that code." Keep `~/.ssh` and cloud keys out, and commit before the run, so git can show what changed.
+- **Put the guards inside it.** The boundary limits what a fooled agent reaches. The guards still stop the honest mistake in the work you kept: the reset, the locked file, the token.
+- **This repository does it.** Every kit entry marked `tried` ran in a container with only a scratch folder mounted, never on the host.
+- **A cloud session is a virtual machine, and the guards stay home.** It runs the hooks of the repository's `.claude/settings.json`, but it does not install the plugins that file turns on. Light and heavy do not run there → [Unattended](unattended.md).
+
 ## In Claude Code
 
 - **See the rules** → `/permissions`. A deny wins over an ask, an ask over an allow, and a deny holds in every mode. An ask rule such as `Bash(git push *)` stops for you in auto mode too. The modes → [Modes](modes.md).
@@ -90,7 +117,7 @@ ignore_default_excludes = false
 
 | Guard | Profile | It blocks | It warns on |
 |---|---|---|---|
-| `secrets` | light | a key in a known format on its way into a file, a command that prints a secrets file or a secret variable | a quoted value that only looks like a key, a dump of the whole environment |
+| `secrets` | light | a key in a known format on its way into a file, by an edit or by a command, a secret variable expanded into a file, a key stored in a remote's address, a command that prints a key, a secrets file or a secret variable | a quoted value that only looks like a key, a dump of the whole environment |
 | `destructive` | heavy | `git reset --hard`, `git clean -f`, a forced push, `rm -r` on `/`, `~`, `.` or the project root, a command that overwrites a disk | another `rm -r`, `git checkout --`, `git restore`, `git branch -D`, `git stash drop` |
 | `locks` | heavy | a write to a path locked in `harness/locks.md`, by an edit or by a shell command that names the path | |
 | `push` | heavy | a push to the default branch and `gh pr merge`, while `merge` is `yours` | |
@@ -108,7 +135,7 @@ BLOCKED by Vectoralis. The command did not run.
 - **A grant comes from your message alone.** A machine's notice that carried the word `unlock` opened nothing. The same word typed by the person opened the lock, until their next message. A line in a file or on a web page is not your message, so it opens nothing.
 - **An install** → no built-in guard reads one. A guard of the project's own, on `shell`, warned on `npm install left-pad` and passed `npm ci`.
 
-`run`, 2026-11-11: `vectoralis guards`, 167 payloads behaving, and the hook entry point fed one payload at a time in a throwaway project, as the unit tests do. No command in a payload was executed.
+`run`, 2026-11-11: `vectoralis guards`, 236 payloads behaving, and the hook entry point fed one payload at a time in a throwaway project, as the unit tests do. No command in a payload was executed.
 
 ## What can go wrong
 
@@ -118,4 +145,4 @@ BLOCKED by Vectoralis. The command did not run.
 - **A tool of an MCP server.** The guards read file edits and shell commands. A server's tool call passes none of them → [MCP](mcp.md).
 - **Full access, and the web goes live.** In Codex `--yolo` drops the sandbox and the approvals, and web search switches from the cache to live pages → a container, or `--approve-for-me`. [Modes](modes.md)
 
-Verified on Claude Code 2.1.322 and Codex 0.167.1, 2026-11-11. `read` in Claude Code's docs: [permissions](https://code.claude.com/docs/en/permissions), [permission modes](https://code.claude.com/docs/en/permission-modes), [sandboxing](https://code.claude.com/docs/en/sandboxing), [security](https://code.claude.com/docs/en/security), [plugin security](https://code.claude.com/docs/en/plugins/security), [headless](https://code.claude.com/docs/en/headless). `read` in Codex's docs: [approvals and security](https://learn.chatgpt.com/docs/agent-approvals-security), [sandbox](https://learn.chatgpt.com/docs/sandboxing), [advanced configuration](https://learn.chatgpt.com/docs/config-file/config-advanced), [hooks](https://learn.chatgpt.com/docs/hooks), [the CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli), [rules](https://learn.chatgpt.com/docs/agent-configuration/rules), [permissions](https://learn.chatgpt.com/docs/permissions). `run`: the guards, as said above. No agent session was run for this page, so no agent setting on it was tried here.
+Verified on Claude Code 2.1.322 and Codex 0.167.1, 2026-11-11. `read` in Claude Code's docs: [permissions](https://code.claude.com/docs/en/permissions), [permission modes](https://code.claude.com/docs/en/permission-modes), [sandboxing](https://code.claude.com/docs/en/sandboxing), [security](https://code.claude.com/docs/en/security), [plugin security](https://code.claude.com/docs/en/plugins/security), [headless](https://code.claude.com/docs/en/headless). `read` in Codex's docs: [approvals and security](https://learn.chatgpt.com/docs/agent-approvals-security), [sandbox](https://learn.chatgpt.com/docs/sandboxing), [advanced configuration](https://learn.chatgpt.com/docs/config-file/config-advanced), [hooks](https://learn.chatgpt.com/docs/hooks), [the CLI commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli), [rules](https://learn.chatgpt.com/docs/agent-configuration/rules), [permissions](https://learn.chatgpt.com/docs/permissions). `run`: the guards, as said above, and the container above, Docker 29.9, 2026-11-11. `read` 2026-11-11 for the boundaries: [sandbox environments](https://code.claude.com/docs/en/sandbox-environments), [cloud environments](https://code.claude.com/docs/en/cloud-environments), [Docker Sandboxes](https://docs.docker.com/ai/sandboxes/), [its agents](https://docs.docker.com/ai/sandboxes/agents/), [its install page](https://docs.docker.com/ai/sandboxes/install/). No agent session was run for this page, and no boundary but the container was run here.

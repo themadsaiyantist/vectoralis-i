@@ -127,6 +127,7 @@ The ground → serving and gateways → infrastructure → evals and CI for agen
 | [promptfoo: intro](https://www.promptfoo.dev/docs/intro/) | free | ★ 8 | ★ 7 | ★ 9 | ★ 9 | Prompt and model comparisons from one config file, run locally, plus red teaming. Better at speed: the shortest path to a result on a pull request. |
 | [Claude Code: GitHub Actions](https://code.claude.com/docs/en/github-actions) | free | ★ 8 | ★ 8 | ★ 9 | ★ 10 | An agent that answers `@claude` or runs on any event, with secrets, permissions and cost limits spelled out. Better on Claude Code in CI. |
 | [Codex: non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode) | free | ★ 8 | ★ 8 | ★ 8 | ★ 10 | `codex exec` in scripts and CI: sandbox modes, machine-readable output, a sample workflow. Better on Codex in CI. |
+| [Harbor](https://github.com/harbor-framework/harbor) | free, Apache-2.0 | ★ 7 | ★ 8 | ★ 9 | ★ 10 | The runner of Terminal-Bench: Claude Code, Codex, OpenHands and more on the same tasks, in containers, locally or in a cloud sandbox. Better at comparing agents, not models. |
 
 ## Stage 5: Tracing, monitoring and cost
 
@@ -211,12 +212,13 @@ The ground → serving and gateways → infrastructure → evals and CI for agen
 
 ## Project inspiration
 
-Twelve public repositories to study or extend, easiest first. Difficulty is how hard the code is to read and to change. What it teaches is how much you take from the read. None is archived, and each was pushed to on or after 2026-11-07.
+Thirteen public repositories to study or extend, easiest first. Difficulty is how hard the code is to read and to change. What it teaches is how much you take from the read. None is archived, and each was pushed to on or after 2026-11-07.
 
 | Repository | Difficulty | What it teaches | Why look |
 |---|---|---|---|
 | [open-telemetry/opentelemetry-demo](https://github.com/open-telemetry/opentelemetry-demo) | ★ 4 | ★ 8 | A shop made of microservices, instrumented end to end, on Docker or Kubernetes. See good traces before you write your own. |
 | [BerriAI/litellm](https://github.com/BerriAI/litellm) | ★ 6 | ★ 9 | The gateway of stage 2. Read how one proxy checks a key, counts spend and picks a fallback, then add a routing rule of your own. |
+| [e2b-dev/E2B](https://github.com/e2b-dev/E2B) | ★ 6 | ★ 8 | Sandboxes for code an agent writes, one SDK call each, and self-hostable. Run one agent's commands in it, then read how a sandbox starts and dies. |
 | [vllm-project/production-stack](https://github.com/vllm-project/production-stack) | ★ 6 | ★ 8 | A reference Kubernetes deployment for vLLM: a serving engine, a request router, a Prometheus and Grafana stack, one Helm chart. Run it, then change the routing. |
 | [UKGovernmentBEIS/inspect_ai](https://github.com/UKGovernmentBEIS/inspect_ai) | ★ 6 | ★ 9 | The eval framework of the UK AI Security Institute: tasks, solvers, scorers and sandboxes for code an agent runs. Write an eval for your own agent. |
 | [langfuse/langfuse](https://github.com/langfuse/langfuse) | ★ 7 | ★ 8 | A whole observability product in the open, built on OpenTelemetry: traces, prompt versions, datasets, evals. Self-host it with Docker Compose and follow one trace from the SDK to the screen. |

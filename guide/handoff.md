@@ -2,7 +2,7 @@
 
 Three ways to carry a long session over: a handoff document and a new session, a compaction with a prompt you give, and an auto compaction. Read this before a session gets long, not after it forgot something.
 
-**Contents:** The three ways · What survives a compaction · Automatic and idle compaction · In Claude Code · In Codex · With the harness · What can go wrong
+**Contents:** The three ways · What survives a compaction · Automatic and idle compaction · In Claude Code · In Codex · With the harness · A memory tool beside the handoff · What can go wrong
 
 ---
 
@@ -99,6 +99,19 @@ Drop any tool output that a file already holds. The records in harness/ are read
 - The text is `compact_text` in [`plugins/light/engine/briefing.py`](../plugins/light/engine/briefing.py). The two parts in angle brackets are filled in from the session. `run`: its unit test passes here, 2026-11-11. After one write and an `unlock docs`, the output names that file and that grant.
 - **This prompt is a Claude Code feature, and a gap in Codex.** `read`: Claude Code uses a `PreCompact` hook's stdout as instructions for the summary, up to 10,000 characters. Codex has the same hook, and its docs say plain text on its stdout is ignored. [Claude Code](https://code.claude.com/docs/en/hooks.md#precompact), [Codex](https://learn.chatgpt.com/docs/hooks)
 - Not stated in Claude Code's docs: how the hook's lines combine with the words you type after `/compact`. Say what matters most in your own words too.
+
+## A memory tool beside the handoff
+
+A handoff is what you decided to keep. A memory tool keeps everything that happened, and lets the agent search it later.
+
+| Tool | How it remembers | It costs |
+|---|---|---|
+| [claude-mem](https://github.com/thedotmack/claude-mem) · Apache-2.0 | hooks record what the agent does, a second model compresses it, and the next session starts with an index it can search | a local worker, a model call for your tool activity, usage analytics on until `npx claude-mem telemetry disable`. The engine is free. `paid` a hosted observer from $30 a month, with a 30-day trial that asks for a payment method |
+| [Basic Memory](https://github.com/basicmachines-co/basic-memory) · AGPL-3.0 | notes as plain Markdown that you and the agent both read and edit, served to any agent over MCP | the server's tools in every request. Free locally. Install → `uv tool install basic-memory --prerelease=allow` |
+
+- Install claude-mem → `/plugin marketplace add thedotmack/claude-mem`, then `/plugin install claude-mem`, or `npx claude-mem install`.
+- **A memory is what happened. `## Now` is what must happen next.** Neither replaces the other, and only the second is checked by a guard.
+- `read` 2026-11-11: the [claude-mem README](https://github.com/thedotmack/claude-mem), [its pricing](https://cmem.ai/pricing), the [Basic Memory README](https://github.com/basicmachines-co/basic-memory). Neither was run here.
 
 ## What can go wrong
 

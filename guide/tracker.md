@@ -11,6 +11,7 @@ The build state of a project as tables: one row per unit of work, one column per
 - The work will not fit in one session, so "where are we" has to live in a file.
 - You asked "is that done?" and the answer was a paragraph.
 - Someone else relies on the work, and needs to see what was checked and what was only built.
+- Several agents take work from one queue at once → a tracker with claims, such as Beads, beside this one. [To-dos](todos.md#another-tool-for-the-agents-list)
 
 ---
 

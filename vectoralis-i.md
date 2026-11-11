@@ -145,6 +145,7 @@ Settled 2026-11-11 by the author's answers, each list open to "improve and refin
 - **Twelve topics, each owned by a page** → harness engineering · context · skills and plugins · hooks as guards · parallel agents · unattended runs · permissions and safety · verification · a harness that learns · cost · spec and plan first · MCP.
 - **The worked examples** → light is run on `runlog`, the course's public starter. Heavy is shown two ways: this repository's own records, and free public samples, each linked with what it does well and how to do it better. The author's word: "seek sources online for free and legal to share".
 - **No version is pinned** → every page closes with the agent versions, the model and the date it was verified on.
+- **Isolation has its place**, the author's word of 2026-11-11: "mention docker ofc, isolated sandboxes etc yk" → `guide/safety.md` names the boundaries that isolate an agent, Docker first, beside the guards that do not.
 - **The writing** → plain words that make a reader want to build, bullets and arrows, no em or en dash, one line per paragraph, `goku` and `vegeta`.
 
 ## The kit

@@ -155,6 +155,7 @@ Foundations → Prompts and context → Evals → Retrieval → Tools and agents
 | [Writing effective tools for agents](https://www.anthropic.com/research/writing-tools-for-agents) · Anthropic | free | ★ 9 | ★ 9 | ★ 7 | ★ 9 | Which tools to build, what they should return, and how to test them with an eval. Deeper on tool design than any other row. |
 | [AI Agents Course](https://huggingface.co/learn/agents-course/unit0/introduction) · Hugging Face | free | ★ 8 | ★ 8 | ★ 9 | ★ 8 | A full course with three frameworks, a final assignment and a free certificate. The widest row, with a bonus unit on observability and evaluation. |
 | [Build an MCP server](https://modelcontextprotocol.io/docs/develop/build-server) · MCP docs | free | ★ 9 | ★ 6 | ★ 10 | ★ 10 | A working server with two tools, connected to a client. The only row on the MCP step. |
+| [LangGraph](https://github.com/langchain-ai/langgraph) · README | free, MIT | ★ 7 | ★ 8 | ★ 7 | ★ 10 | State saved at every step, so a run survives a crash, waits for a person and resumes. The row for the agent that must stop and ask. |
 
 ## Stage 6: Shipping
 
@@ -211,7 +212,7 @@ Foundations → Prompts and context → Evals → Retrieval → Tools and agents
 
 ## Project inspiration
 
-Twelve public repositories to study or extend, easiest first. Difficulty is how hard the code is to change. What it teaches is how much of this road you learn by working in it. None is archived, and each was pushed to on or after 2026-11-03.
+Thirteen public repositories to study or extend, easiest first. Difficulty is how hard the code is to change. What it teaches is how much of this road you learn by working in it. None is archived, and each was pushed to on or after 2026-11-03.
 
 | Repository | Difficulty | What it teaches | Why look |
 |---|---|---|---|
@@ -221,6 +222,7 @@ Twelve public repositories to study or extend, easiest first. Difficulty is how 
 | [vercel/chatbot](https://github.com/vercel/chatbot) | ★ 5 | ★ 7 | A streaming chat app end to end: Next.js, the AI SDK, sign-in and stored history in one template. Swap its chat route for your agent. |
 | [anthropics/claude-quickstarts](https://github.com/anthropics/claude-quickstarts) | ★ 5 | ★ 7 | Starter apps you can deploy, among them a support agent over a knowledge base and an agent that builds an app across sessions. Take one as the base of your own. |
 | [promptfoo/promptfoo](https://github.com/promptfoo/promptfoo) | ★ 6 | ★ 8 | How an eval runner is built: evals, red teaming and CI checks in one tool. Write a grader of your own for it. |
+| [langchain-ai/deepagents](https://github.com/langchain-ai/deepagents) | ★ 6 | ★ 8 | A coding agent's harness as a library on LangGraph: a to-do tool, file tools, subagents with their own context, `AGENTS.md` as memory. Compare each piece with Claude Code's, then swap one. |
 | [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | ★ 6 | ★ 8 | Handoffs, guardrails, sessions and tracing in a lightweight SDK with few abstractions. Follow one run and see where a guardrail stops it. |
 | [UKGovernmentBEIS/inspect_ai](https://github.com/UKGovernmentBEIS/inspect_ai) | ★ 7 | ★ 9 | Evals as tasks, solvers and scorers, from the UK AI Security Institute, with more than 200 ready evals. Write a task for your own agent. |
 | [BerriAI/litellm](https://github.com/BerriAI/litellm) | ★ 8 | ★ 8 | A gateway over more than 100 providers: routing, fallbacks, spend tracking. Trace one request through the router and its fallback. |
@@ -228,7 +230,7 @@ Twelve public repositories to study or extend, easiest first. Difficulty is how 
 | [langfuse/langfuse](https://github.com/langfuse/langfuse) | ★ 9 | ★ 9 | The platform from Stage 7 in the open, built on OpenTelemetry: tracing and evals at scale. Follow one trace from the SDK to the screen. |
 | [openai/codex](https://github.com/openai/codex) | ★ 10 | ★ 10 | A production coding agent in Rust: the agent loop, the sandbox, the execution policy. Read how it decides what needs approval. |
 
-Read the license before you reuse code → seven are MIT or Apache-2.0, and GitHub reports no single license for the MCP servers, the chatbot template, litellm, onyx and langfuse.
+Read the license before you reuse code → eight are MIT or Apache-2.0, and GitHub reports no single license for the MCP servers, the chatbot template, litellm, onyx and langfuse.
 
 ## The future
 

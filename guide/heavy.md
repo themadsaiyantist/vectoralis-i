@@ -204,12 +204,13 @@ brief → plan → failure → agents → check → record → report → handof
 
 ## Samples to study
 
-Two public projects worth reading beside this one. Both are `referenced`, not run here.
+Three public projects worth reading beside this one. All three are `referenced`, not run here.
 
 | Sample | What it does well | What to add when you use it |
 |---|---|---|
 | [superpowers](https://github.com/obra/superpowers) | a full path of skills from the first idea to the review | a guard for each rule you cannot afford to break. A skill asks, it does not stop |
 | [spec-kit](https://github.com/github/spec-kit) | the spec comes first, and the plan and the tasks are cut from it | a check that the spec and the work still agree a week later |
+| [OpenSpec](https://github.com/Fission-AI/OpenSpec) | each change lives in its own folder under `openspec/changes/`, from the proposal to its archive, with the specs it touches beside it | the same check, and a guard on the folder of a change that was archived |
 
 ---
 
