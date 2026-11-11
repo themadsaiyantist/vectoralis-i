@@ -1,0 +1,242 @@
+[
+  {
+    "name": "blocks a hard reset",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git reset --hard HEAD~1"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a forced clean",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git clean -fd"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a forced push",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git push --force origin feature"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a forced push written with a plus",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git push origin +feature"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks rm -rf on the folder itself",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "rm -rf ."
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks rm -rf on the home",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "cd /tmp && rm -rf ~"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "warns on rm -r of one folder",
+    "expect": "warn",
+    "event": "shell",
+    "call": {
+      "command": "rm -r build"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "warns on a checkout that discards changes",
+    "expect": "warn",
+    "event": "shell",
+    "call": {
+      "command": "git checkout -- src/a.py"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "warns on a forced branch delete",
+    "expect": "warn",
+    "event": "shell",
+    "call": {
+      "command": "git branch -D old"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a status",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "git status"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a soft reset",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "git reset --soft HEAD~1"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a plain push of a branch",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "git push origin feature"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes rm of one file",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "rm notes.txt"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a dry run of clean",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "cd app && git clean -n"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "is off in a light project",
+    "profile": "light",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "git reset --hard"
+    },
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  }
+]

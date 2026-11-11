@@ -1,0 +1,9 @@
+{
+  "name": "light",
+  "version": "0.1.0",
+  "description": "The light harness: three guards and one settings file. No secret written or printed, the formatter after every edit, the tests before done.",
+  "author": { "name": "themadsaiyantist" },
+  "repository": "https://github.com/themadsaiyantist/vectoralis-i",
+  "license": "MIT",
+  "keywords": ["harness", "hooks", "guards"]
+}

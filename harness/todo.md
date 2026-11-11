@@ -17,7 +17,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-**Next →** the similar repositories → the spec → the build, in the order below. `b.md` is answered while it runs.
+**Next →** heavy: the skills and the subagents → this repository's own records → the guide. `b.md` is answered while it runs.
 
 ---
 
@@ -45,16 +45,16 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Ask the second round → `b.md`, seven calls
 - ✅ Clean the series text and the history → first push
 - ⬜ Study the similar repositories → notes kept outside the repository
-- ⬜ Check each platform fact in the docs → run only what cannot be read
+- ✅ Check each platform fact in the docs → run only what cannot be read
 - ⬜ Fold the answers of `b.md` into the outline → delete `b.md`
 
 **2. The spec**
 
-- ⬜ Write `spec.md`
+- ✅ Write `spec.md`
 
 **3. The build, in this order**
 
-- ⬜ Light → three guards, one settings file
+- ✅ Light → three guards, one settings file
 - ⬜ Heavy → the records, the guards, the skills
 - ⬜ The smart pieces → staleness check, guard tests, dashboard, proposed guard, the compaction prompt
 - ⬜ Codex → the same package, and the table of gaps
