@@ -1,6 +1,7 @@
 """The tests pass before the agent says done.
 
 Runs the project's test command at the end of a turn, only when something changed since the last green run.
+A green run leaves one line for the person, so the proof is seen.
 """
 from __future__ import annotations
 
@@ -40,7 +41,7 @@ def check(call, proj, state):
         return [Finding(NAME, "notice", f"The test command could not run ({error}).")]
     if done.returncode == 0:
         state["green"] = mark
-        return []
+        return [Finding(NAME, "notice", f"Vectoralis ran the tests after this turn's changes, and they pass (`{command}`).")]
     lines = [line for line in (done.stdout + "\n" + done.stderr).splitlines() if line.strip()]
     tail = [line for line in lines if SIGNS.search(line)][:12] or lines[-12:]
     return [Finding(

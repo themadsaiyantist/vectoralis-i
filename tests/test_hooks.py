@@ -85,6 +85,13 @@ class Hooks(unittest.TestCase):
         self.assertIn("FAILED test_total", done.stderr)
         self.assertEqual(self.hook("stop", stop_hook_active=True).returncode, 0)
 
+    def test_stop_tells_the_person_when_the_tests_pass(self):
+        self.settings(test="true")
+        self.hook("wrote", tool_name="Write", tool_input={"file_path": str(self.put("a.py", "x = 1\n")), "content": "x = 1\n"})
+        done = self.hook("stop")
+        self.assertEqual(done.returncode, 0)
+        self.assertIn("they pass", json.loads(done.stdout)["systemMessage"])
+
     def test_stop_is_silent_when_nothing_changed(self):
         self.settings(test="exit 1")
         self.assertEqual(self.hook("stop").returncode, 0)

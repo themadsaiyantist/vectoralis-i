@@ -11,7 +11,7 @@
     "expect": "block"
   },
   {
-    "name": "passes when the tests pass",
+    "name": "tells the person when the tests pass",
     "event": "stop",
     "settings": {
       "test": "true"
@@ -19,7 +19,7 @@
     "state": {
       "changed": true
     },
-    "expect": "pass"
+    "expect": "notice"
   },
   {
     "name": "does not run when nothing changed",
