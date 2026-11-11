@@ -102,7 +102,7 @@ Which model and what effort for which job → [Models](models.md).
 
 - **An instructions file that grows.** It is paid in every turn of every session. Move a procedure into a skill.
 - **A piece added "to be safe".** Each one costs attention. Add it when its signal is true.
-- **An MCP server for what a command does.** A server puts its tools in the context. A command costs nothing until it runs. [MCP](mcp.md)
+- **An MCP server for what a command does.** A server adds to the context before you use it: its tool names and instructions in Claude Code, its tools in Codex unless you limit them. A command costs nothing until it runs. [MCP](mcp.md)
 - **A number nobody measured.** Run `vectoralis budget` before you believe a cost, this page's included.
 
 Verified on Claude Code 2.1.322, 2026-11-11. Every number on this page is `run`.

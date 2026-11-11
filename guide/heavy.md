@@ -81,7 +81,7 @@ Stale: 1 · tracker: `plugins/light/engine/guards` changed after its row was tic
 
 **Plan.** Twenty-five questions went to the author in one file, each with a pick. The answers came back as letters, and each went to its home the same turn.
 
-**Build, check.** The engine, then its proof: 33 unit tests and 81 guard payloads.
+**Build, check.** The engine, then its proof: 34 unit tests and 81 guard payloads.
 
 **Re-check.** The repository ran its own check on itself, and the check stopped a commit:
 
