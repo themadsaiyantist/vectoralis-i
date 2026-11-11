@@ -10,7 +10,11 @@ from typing import Dict, Optional
 
 from .project import matches
 
-NOTICE = re.compile(r"<task-notification>|\[SYSTEM NOTIFICATION|<cross-session-message|<system-reminder>", re.I)
+NOTICE = re.compile(
+    r"<task-notification>|\[SYSTEM NOTIFICATION|<cross-session-message|<system-reminder>"
+    r"|BLOCKED by Vectoralis|says Vectoralis|Vectoralis, guard|hook feedback|hook error",
+    re.I,
+)
 VERB = re.compile(
     r"\b(?:(unlock|promote)\b[ \t]+(\S+)"
     r"|(tick)\b[ \t]+(.+?)(?=$|\n|[,.;!?](?:\s|$)|\s+and\s+(?:unlock|tick|promote)\b))",
@@ -21,7 +25,7 @@ REFUSAL = re.compile(r"\b(not|never|no|dont|don't|do not|won't|n't)\W*$", re.I)
 
 
 def is_notice(prompt) -> bool:
-    """Whether a message is a machine's notice and not the person's own words."""
+    """Whether a message is a machine's notice, or a guard's own answer fed back, and not the person's own words."""
     return bool(NOTICE.search(prompt or ""))
 
 

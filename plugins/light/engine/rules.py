@@ -68,5 +68,6 @@ def check(call, proj, event) -> List[Finding]:
             if hits(rule, path, text):
                 where = f"`{path}`: " if path else ""
                 out.append(Finding(rule["id"], mode, where + str(rule["message"]),
-                                   f"the project's own guard `{rule['id']}` (harness/guards/{rule['id']}.json)"))
+                                   f"the project's own guard `{rule['id']}` (harness/guards/{rule['id']}.json)",
+                                   str(rule.get("instead", ""))))
     return out

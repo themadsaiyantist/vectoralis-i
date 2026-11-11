@@ -245,5 +245,135 @@
       "src/cart.py": "total = 0\n"
     },
     "event": "write"
+  },
+  {
+    "name": "blocks a shell command that changes the settings",
+    "event": "shell",
+    "call": {
+      "command": "sed -i s/block/off/ harness/settings.json"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks rm of a project guard",
+    "event": "shell",
+    "call": {
+      "command": "rm harness/guards/debug-print.json"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a redirect into the lessons",
+    "event": "shell",
+    "call": {
+      "command": "echo taught >> harness/lessons.md"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "passes a shell command that only reads the settings",
+    "event": "shell",
+    "call": {
+      "command": "cat harness/settings.json"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks an open box of the person's being removed",
+    "event": "write",
+    "call": {
+      "path": "harness/todo.md",
+      "old": "- ⬜ approve the copy\n",
+      "text": ""
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
+  },
+  {
+    "name": "blocks a tick on a row another person owns, even when asked",
+    "event": "write",
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | vegeta | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "prompt": "tick refund",
+    "call": {
+      "path": "harness/tracker.md",
+      "old": "| refund | vegeta | ✅ | ✅ | ⬜ |",
+      "text": "| refund | vegeta | ✅ | ✅ | ✅ |"
+    },
+    "expect": "block",
+    "profile": "heavy"
+  },
+  {
+    "name": "passes a tick on a row the person at this machine owns",
+    "event": "write",
+    "settings": {
+      "team": true
+    },
+    "git": true,
+    "person": "goku",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Owner | Built | Checked | Yours |\n|---|---|---|---|---|\n| refund | goku | ✅ | ✅ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "prompt": "tick refund",
+    "call": {
+      "path": "harness/tracker.md",
+      "old": "| refund | goku | ✅ | ✅ | ⬜ |",
+      "text": "| refund | goku | ✅ | ✅ | ✅ |"
+    },
+    "expect": "pass",
+    "profile": "heavy"
   }
 ]

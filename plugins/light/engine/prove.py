@@ -53,6 +53,8 @@ def run_case(case) -> Dict:
             subprocess.run(["git", "init", "-q", "-b", "main", str(root)], **quiet)
             subprocess.run(["git", "-C", str(root), "add", "-A"], **quiet)
             subprocess.run(["git", "-C", str(root), *identity, "commit", "-q", "-m", "start"], **quiet)
+            if case.get("person"):
+                subprocess.run(["git", "-C", str(root), "config", "user.name", case["person"]], **quiet)
         kept = os.environ.pop("CLAUDE_PROJECT_DIR", None)
         try:
             proj = Project(str(root))

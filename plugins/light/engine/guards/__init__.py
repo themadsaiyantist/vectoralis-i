@@ -4,7 +4,7 @@ A guard answers with findings. A finding blocks, warns or leaves a notice for th
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import List
 
 
@@ -24,19 +24,24 @@ def run(event, call, proj, state) -> List[Finding]:
 
     order = {
         "write": (secrets, locks, yours, records),
-        "shell": (secrets, destructive, locks, push),
+        "shell": (secrets, destructive, locks, yours, push),
         "wrote": (fmt,),
         "stop": (tests, sweep, nudge),
     }.get(event, ())
     guards = list(order)
     if event == "shell" and call.writes:
-        guards += [g for g in (yours, records) if g not in guards]
+        guards += [g for g in (records,) if g not in guards]
     out: List[Finding] = []
     for guard in guards:
         mode = proj.mode(guard.NAME)
         if mode == "off":
             continue
-        for finding in guard.check(call, proj, state):
+        view = call
+        if call.writes:
+            kept = [w for w in call.writes if not proj.skipped(guard.NAME, proj.rel(w.path) or "")]
+            if len(kept) != len(call.writes):
+                view = replace(call, writes=kept)
+        for finding in guard.check(view, proj, state):
             if mode == "warn" and finding.level == "block":
                 finding.level = "warn"
             out.append(finding)

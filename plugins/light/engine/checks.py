@@ -57,6 +57,17 @@ def load_checked(proj) -> Dict[str, str]:
     return data if isinstance(data, dict) else {}
 
 
+def checked_broken(proj) -> bool:
+    """Whether the version file is there and cannot be read, as after a merge that left its markers in."""
+    target = proj.root / CHECKED
+    if not target.is_file():
+        return False
+    try:
+        return not isinstance(json.loads(target.read_text(encoding="utf-8")), dict)
+    except (OSError, ValueError):
+        return True
+
+
 def save_checked(proj, data) -> None:
     target = proj.root / CHECKED
     if data:
@@ -67,6 +78,8 @@ def save_checked(proj, data) -> None:
 
 def sync(proj) -> List[str]:
     """Record the version of every newly ticked file, and forget the ones no longer ticked. Returns what was recorded."""
+    if checked_broken(proj):
+        return []
     rows, data = ticked_rows(proj), load_checked(proj)
     fresh = [path for path in rows if path not in data and (proj.root / path).exists()]
     kept = {path: mark for path, mark in data.items() if path in rows}
@@ -103,6 +116,14 @@ def stale(proj, seconds=None) -> List[str]:
     """
     start, flags = time.monotonic(), []
     checked = load_checked(proj)
+    if checked_broken(proj):
+        flags.append("harness/.checked.json cannot be read. Fix it by hand, or delete it and run the check again: "
+                     "every tick is then recorded against the files as they are now")
+    for row in records.tracker_rows(proj.read("tracker.md")):
+        for stage, mark in row["marks"].items():
+            if stage.lower() != "owner" and mark not in (records.DONE, records.OPEN, ""):
+                flags.append(f"tracker: the cell of \"{row['unit']}\" under {stage} holds `{mark}`. "
+                             f"A cell holds {records.DONE}, {records.OPEN} or nothing")
     for path in ticked_rows(proj):
         target = proj.root / path
         if not target.exists():

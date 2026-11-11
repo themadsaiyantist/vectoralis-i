@@ -33,10 +33,10 @@ A block always says three things: what was stopped → the rule → what to do i
 | `tests` | light | "done" while the tests fail | tells you when they pass, and when the suite ran out of time |
 | `destructive` | heavy | `git reset --hard`, `git clean -f`, a forced push, `rm -rf` on the root, the home or `.` | `rm -r`, `git checkout --`, `git branch -D` |
 | `locks` | heavy | a write to a locked path | |
-| `yours` | heavy | your box ticked, a lesson written, a lock opened, a guard promoted or switched off, by the agent with no grant | |
+| `yours` | heavy | your box ticked or removed, a lesson written, a lock opened, a guard promoted or switched off, by the agent with no grant, through an edit or through the shell | |
 | `records` | heavy | a subagent writing a record | |
 | `push` | heavy | a push to the default branch, a merge, while the merge is yours | |
-| `sweep` | heavy | a file changed around the write guards that breaks `secrets` or `locks` | |
+| `sweep` | heavy | a file changed around the write guards that breaks `secrets`, `locks` or `yours` | says when it could not look |
 | `nudge` | heavy | | work changed and no record moved, said once when the agent says done |
 
 ---

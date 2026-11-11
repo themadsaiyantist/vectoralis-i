@@ -168,5 +168,29 @@
       "src/payments/refund.py": "total = 0\n",
       "src/cart.py": "total = 0\n"
     }
+  },
+  {
+    "name": "passes a path the project excused from the guard",
+    "event": "write",
+    "settings": {
+      "skip": {
+        "locks": [
+          "src/payments/generated/**"
+        ]
+      }
+    },
+    "call": {
+      "path": "src/payments/generated/a.py",
+      "text": "x = 1\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    }
   }
 ]

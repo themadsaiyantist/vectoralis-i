@@ -13,6 +13,7 @@ from ..project import DEFAULT_MODES
 NAME = "yours"
 RULE = "this is the person's alone (guard `yours`)"
 PROTECTED = ("guards", "skip", "merge", "profile", "test", "format", "test_timeout")
+BY_HAND = ("harness/settings.json", "harness/lessons.md", "harness/locks.md")
 RANK = {"off": 0, "warn": 1, "block": 2}
 
 
@@ -31,6 +32,14 @@ def check(call, proj, state):
     def block(what, instead):
         out.append(Finding(NAME, "block", what, RULE, instead))
 
+    if call.event == "shell":
+        from .locks import write_targets
+
+        for target in write_targets(call.command):
+            rel = proj.rel(target if target.startswith("/") else str(proj.root / target))
+            if rel and (rel in BY_HAND or rel.startswith("harness/guards/")) and not grants.unlocked(given, rel):
+                block(f"`{rel}` is the person's, and a shell command would change it.",
+                      "make the change with the edit tool, so the guard can read it, or ask them to open the file.")
     for write in call.writes:
         rel = proj.rel(write.path)
         if rel is None or not rel.startswith("harness/"):
@@ -41,11 +50,21 @@ def check(call, proj, state):
             other = proj.read("todo.md" if name == "tracker.md" else "tracker.md")
             pair = (now, other) if name == "tracker.md" else (other, now)
             after = (write.after, other) if name == "tracker.md" else (other, write.after)
-            for key in records.newly_ticked(records.yours_marks(*pair), records.yours_marks(*after)):
+            before_marks, after_marks = records.yours_marks(*pair), records.yours_marks(*after)
+            owners = records.owners(*after)
+            for key in records.newly_ticked(before_marks, after_marks):
                 unit = records.unit_of(key) or ""
-                if not grants.ticked(given, unit):
+                owner = owners.get(key, "")
+                if proj.settings.get("team") and owner and proj.person and owner.lower() != proj.person.lower():
+                    block(f"The box of \"{unit}\" is {owner}'s. Only {owner}'s own session can tick it.",
+                          "leave it open, and tell them it is ready.")
+                elif not grants.ticked(given, unit):
                     block(f"The box of \"{unit}\" is the person's to tick.",
                           "ask them. They give it by typing `tick` and a few words of that line.")
+            for key in records.removed_open(before_marks, after_marks):
+                if not grants.unlocked(given, rel):
+                    block(f"An open box of the person's would be removed (\"{records.unit_of(key)}\").",
+                          "leave it as it is, or ask them to open the file.")
         elif name == "lessons.md" and not given.get("lesson"):
             block("A lesson is written only when the person dictates it.",
                   "ask them. They start their message with `lesson:`.")

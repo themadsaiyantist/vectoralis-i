@@ -90,6 +90,14 @@ class Project:
                 self.broken = True
         self.profile = "heavy" if self.settings.get("profile") == "heavy" else "light"
         self._tops: Dict[str, Optional[Path]] = {}
+        self._person: Optional[str] = None
+
+    @property
+    def person(self) -> str:
+        """Who sits at this machine, by the name git is set up with."""
+        if self._person is None:
+            self._person = git(self.root, "config", "user.name").strip()
+        return self._person
 
     def rel(self, path) -> Optional[str]:
         """A path as the project names it, also when the file sits in a worktree of the same repository."""

@@ -124,5 +124,23 @@ def newly_ticked(before: Dict[str, str], after: Dict[str, str]) -> List[str]:
     return [key for key, mark in after.items() if mark == DONE and before.get(key) != DONE]
 
 
+def removed_open(before: Dict[str, str], after: Dict[str, str]) -> List[str]:
+    """The person's boxes that were open and are no longer there at all."""
+    return [key for key, mark in before.items() if mark == OPEN and key not in after]
+
+
+def owners(tracker_text, todo_text) -> Dict[str, str]:
+    """Whose each of the person's boxes is, in a team layout: the row's Owner cell, or the name in the section's heading."""
+    out = {}
+    for row in tracker_rows(tracker_text):
+        name = next((value for column, value in row["marks"].items() if column.lower() == "owner"), "")
+        out["tracker|" + row["section"] + "|" + row["unit"]] = name.strip()
+    for box in todo_boxes(todo_text):
+        if box["yours"]:
+            name = re.sub(r"(?i)^yours?\b[\s,:]*", "", box["section"]).strip()
+            out["todo|" + box["section"] + "|" + box["text"]] = name
+    return out
+
+
 def unit_of(key) -> Optional[str]:
     return key.split("|", 2)[2] if key.count("|") >= 2 else None

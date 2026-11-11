@@ -5,6 +5,7 @@ Exit 0 passes. Exit 2 blocks, with the reason on stderr. Exit 1 means the engine
 from __future__ import annotations
 
 import json
+import re
 import sys
 
 from . import briefing, grants, guards, records
@@ -77,7 +78,7 @@ def run(event) -> int:
         if given is None:
             return 0
         state.update(
-            grants=given, base=states.snapshot(proj.root), touched=[],
+            grants=given, base=states.snapshot(proj.root), touched=[], init=False,
             yours=records.yours_marks(proj.read("tracker.md"), proj.read("todo.md")),
             locks=records.locks(proj.read("locks.md")), turn=int(state.get("turn") or 0) + 1,
         )
@@ -95,6 +96,8 @@ def run(event) -> int:
         state["written"] = sorted(set(state.get("written") or []) | {n for n in names if n})
     elif event == "shell":
         state["shell"] = True
+        if re.search(r"\bvectoralis\b[^|;&\n]*\binit\b", call.command):
+            state["init"] = True
     elif event == "stop" and not any(f.level == "block" for f in findings):
         state["changed"] = state["shell"] = False
     states.save(call, state)

@@ -20,7 +20,7 @@ Generative media is making images, video and sound with models, as a pipeline yo
 
 ## Start here
 
-- ⬜ Pick a lane → an NVIDIA RTX card with 8 GB of VRAM runs FLUX 3 Image Klein at home ([Black Forest Labs](https://bfl.ai/blog/flux-3-image-klein)) → no GPU: [Comfy Cloud](https://www.comfy.org/cloud/pricing) (`paid`, $20 a month) or a hosted API that bills per output, such as fal under Resources.
+- ⬜ Pick a lane → an NVIDIA RTX card with 8 GB of VRAM runs FLUX 3 Image Klein at home ([Black Forest Labs](https://bfl.ai/blog/flux-3-image-klein)) → no GPU: [Comfy Cloud](https://comfy.org/pricing/) (`paid`, $20 a month) or a hosted API that bills per output, such as fal under Resources.
 - ⬜ Install ComfyUI → `pip install comfy-cli` → `comfy install` → `comfy launch` ([Comfy CLI](https://docs.comfy.org/comfy-cli/getting-started) · [system requirements](https://docs.comfy.org/installation/system_requirements)).
 - ⬜ Make one image by hand → seven nodes, one picture → after this you can read any graph ([your first image](https://docs.comfy.org/get_started/first_generation)).
 - ⬜ Export it for code → File → Export Workflow (API) → a JSON file of numbered nodes, the form scripts and agents use ([workflow API format](https://docs.comfy.org/development/api-development/workflow-api-format)) → run it from the terminal: `comfy run --workflow my_workflow.json --wait`.

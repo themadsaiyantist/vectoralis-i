@@ -1,10 +1,13 @@
 """What the engine prints into the agent's context: the core and the briefing at session start, and the compaction prompt."""
 from __future__ import annotations
 
+from pathlib import Path
+
 from . import records
 from .project import git
 
 CORE_MAX = 6000
+COMMAND = Path(__file__).resolve().parents[1] / "bin" / "vectoralis"
 
 
 def status_text(proj, flags=None) -> str:
@@ -36,6 +39,7 @@ def status_text(proj, flags=None) -> str:
     lines.append("Locks: " + (", ".join(f"`{lock}`" for lock in locks[:5]) if locks else "none"))
     lines.append("Stale: " + (f"{len(flags)} · " + " · ".join(flags[:3]) if flags else "nothing"))
     lines.append("The person's alone: a box in their column, a lesson, a lock. They type `tick`, `lesson:` or `unlock`.")
+    lines.append(f"The command: `vectoralis`. Where it is not on the path: `python3 {COMMAND}`.")
     return "\n".join(lines)
 
 

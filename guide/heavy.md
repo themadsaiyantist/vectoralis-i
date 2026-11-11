@@ -107,7 +107,7 @@ Every output above is `run` on this repository, 2026-11-11.
 
 ## What it costs
 
-- **Tokens** → about 840 always loaded on a fresh project: the skill descriptions about 240, `rules.md` about 500, the briefing about 100. The briefing grows with your handoff, and this repository's total is near 1,040. The cap is 2,000, and `vectoralis check` fails over it. [Cost](cost.md)
+- **Tokens** → about 870 always loaded on a fresh project: the skill descriptions about 240, `rules.md` about 500, the briefing about 130. The briefing grows with your handoff, and this repository's total is near 1,070. The cap is 2,000, and `vectoralis check` fails over it. [Cost](cost.md)
 - **Attention** → you answer one round of questions before the build, and you tick your own boxes.
 - **Time** → one more test run at the end of a turn that changed something.
 
