@@ -71,14 +71,24 @@ def detect_format(root) -> str:
     return ""
 
 
+def _ignore_dashboard(proj) -> bool:
+    """Keep the dashboard out of git. True when the line had to be added."""
+    ignore = proj.root / ".gitignore"
+    lines = ignore.read_text(encoding="utf-8").splitlines() if ignore.is_file() else []
+    if "harness/dashboard.html" in lines:
+        return False
+    ignore.write_text("\n".join(lines + ["harness/dashboard.html"]) + "\n", encoding="utf-8")
+    return True
+
+
 def cmd_init(args) -> int:
     proj = Project()
     proj.harness.mkdir(exist_ok=True)
     path = proj.harness / "settings.json"
     made, kept = [], []
-    if path.is_file() and not proj.broken:
+    existed = path.is_file() and not proj.broken
+    if existed:
         settings = dict(proj.settings)
-        kept.append("harness/settings.json")
     else:
         settings = {
             "profile": "light", "test": detect_test(proj.root), "test_timeout": 120,
@@ -89,6 +99,10 @@ def cmd_init(args) -> int:
         settings["profile"] = "heavy"
     if args.team:
         settings["team"] = True
+    if existed:
+        moved = [f"{key} is now {settings[key]}" for key in ("profile", "team") if settings.get(key) != proj.settings.get(key)]
+        (made if moved else kept).append("harness/settings.json" + (" (" + ", ".join(moved) + ")" if moved else ""))
+    had_records = (proj.harness / "tracker.md").exists() or (proj.harness / "todo.md").exists()
     path.write_text(json.dumps(settings, indent=2) + "\n", encoding="utf-8")
     if settings["profile"] == "heavy":
         person = git(proj.root, "config", "user.name").strip() or "you"
@@ -101,10 +115,7 @@ def cmd_init(args) -> int:
             source = team if settings.get("team") and team.is_file() else TEMPLATES / name
             target.write_text(source.read_text(encoding="utf-8").replace("{person}", person), encoding="utf-8")
             made.append(f"harness/{name}")
-        ignore = proj.root / ".gitignore"
-        lines = ignore.read_text(encoding="utf-8").splitlines() if ignore.is_file() else []
-        if "harness/dashboard.html" not in lines:
-            ignore.write_text("\n".join(lines + ["harness/dashboard.html"]) + "\n", encoding="utf-8")
+        if _ignore_dashboard(proj):
             made.append(".gitignore, one line")
     starter = not (proj.root / "AGENTS.md").exists() and not (proj.root / "CLAUDE.md").exists()
     if args.starter and starter:
@@ -118,6 +129,9 @@ def cmd_init(args) -> int:
     print("Written: " + (", ".join(made) if made else "nothing"))
     if kept:
         print("Kept as they were: " + ", ".join(kept))
+    if args.team and had_records:
+        print("The tracker and the to-do list were kept. For a team, add an `Owner` column to the tracker "
+              "and one `## Yours, name` section per person to the to-do list.")
     print("Tests: " + (f"`{settings['test']}`" if settings.get("test") else "no test command found. The `tests` guard is off until `test` is set in harness/settings.json."))
     print("Formatter: " + (f"`{settings['format']}`" if settings.get("format") else "none found. The `format` guard is off until `format` is set."))
     if starter:
@@ -208,7 +222,10 @@ def cmd_affirm(args) -> int:
 
 def cmd_dashboard(args) -> int:
     proj = Project()
-    proj.harness.mkdir(exist_ok=True)
+    if not proj.ready:
+        print("No harness here. Run `vectoralis init heavy` first.")
+        return 1
+    _ignore_dashboard(proj)
     target = proj.harness / "dashboard.html"
     target.write_text(dashboard.build(proj), encoding="utf-8")
     print(target)
@@ -227,7 +244,7 @@ def cmd_fail(args) -> int:
     today = datetime.date.today().isoformat()
     entry = (
         f"### {records.OPEN} {today} · {args.who} · {args.title}\n\n**Class.** `{slug}`\n\n"
-        f"**What failed.** \n\n**Cause.** \n\n**Fix.** {records.OPEN} the instance · {records.OPEN} the cause · {records.OPEN} the guard\n"
+        f"**What failed.**\n\n**Cause.**\n\n**Fix.** {records.OPEN} the instance · {records.OPEN} the cause · {records.OPEN} the guard\n"
     )
     marker = "Newest first.\n"
     if marker in text:

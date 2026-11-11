@@ -52,7 +52,7 @@ def check(call, proj, state):
         paths += [str((proj.root / t)) if not t.startswith("/") else t for t in write_targets(call.command)]
     for path in paths:
         rel = proj.rel(path)
-        if rel is None or rel in seen:
+        if rel is None or rel in seen or proj.skipped(NAME, rel):
             continue
         seen.add(rel)
         lock = locked_by(proj, rel, state)

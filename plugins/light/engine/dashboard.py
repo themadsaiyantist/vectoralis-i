@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import datetime
 import html
+import re
 
 from . import checks, records
 
@@ -25,7 +26,8 @@ ul{margin:0;padding:0;list-style:none}li{padding:6px 0;border-top:1px solid var(
 def _list(items, empty) -> str:
     if not items:
         return f'<p class="none">{html.escape(empty)}</p>'
-    return "<ul>" + "".join(f"<li>{html.escape(item)}</li>" for item in items) + "</ul>"
+    plain = [re.sub(r"\*\*|`", "", item) for item in items]
+    return "<ul>" + "".join(f"<li>{html.escape(item)}</li>" for item in plain) + "</ul>"
 
 
 def build(proj) -> str:

@@ -167,7 +167,7 @@ One Python package, standard library only, written for Python 3.9 and later. One
 | `promote <guard>` | that guard goes from warn to block | until their next message |
 
 - A word of refusal before it cancels it: "do not unlock", "never tick".
-- A message that is not the person's is never read for grants: a background task's notice, a message from another session.
+- A message that is not the person's is never read for grants: a background task's notice, a message from another session, a guard's own answer fed back to the agent.
 
 **Speed.** Every event but `stop` answers in under 200 ms. The turn's baseline is skipped when more than 500 files are dirty, and the sweep says so.
 
@@ -182,16 +182,16 @@ One Python package, standard library only, written for Python 3.9 and later. One
 | `tests` | light | stop | "done" while the test command fails | the suite ran out of time |
 | `destructive` | heavy | shell | `git reset --hard`, `git clean -f`, `git push --force`, `rm -rf` on the root, the home or `.` | `rm -r`, `git checkout --`, `git branch -D` |
 | `locks` | heavy | write, shell | a write to a locked path with no grant | |
-| `yours` | heavy | write | a "yours" box ticked, a lesson written, a lock opened, a guard promoted or switched off, with no grant | |
+| `yours` | heavy | write, shell | a "yours" box ticked or removed, a lesson written, a lock opened, a guard promoted or switched off, with no grant. The same through a shell command | |
 | `records` | heavy | write | a subagent writing a record | |
 | `push` | heavy | shell | a push to the default branch or a merge, while `merge` is `yours` | |
-| `sweep` | heavy | stop | a file changed around the write guards that breaks `secrets` or `locks` | |
+| `sweep` | heavy | stop | a file changed around the write guards that breaks `secrets`, `locks` or `yours` | says when it could not look |
 | `nudge` | heavy | stop | | work changed and no record moved. Said once a turn |
 
 - **`tests` runs only when something changed** since the last green run. The fingerprint is the commit plus the diff.
 - **`stop` sends the agent back at most once a turn.**
 - **Every guard can be set to `block`, `warn` or `off`** in `harness/settings.json`. Switching one off, and promoting one, are the person's.
-- **A path can be excused** from one guard in `settings.json`, with its reason in `harness/decisions.md`.
+- **A path can be excused** from one guard that reads files, in `settings.json`, with its reason in `harness/decisions.md`.
 
 **Every built-in guard ships with its payloads**, in `engine/guards/payloads/<guard>.json`: at least one that must block or warn, at least one that must pass. `vectoralis guards` runs them all.
 
@@ -407,7 +407,7 @@ One harness, the same files. A team adds four things.
 | A change to a rule or a guard | the person edits it | goes through a pull request |
 
 - The records are committed, so the team reads one truth.
-- A grant belongs to the person at the keyboard. Nobody's agent can tick another person's box.
+- A row with an owner is ticked only in that person's own session. The engine reads the name git is set up with on the machine.
 - Asked in `b.md`. Built on this until answered.
 
 ---

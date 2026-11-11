@@ -50,6 +50,20 @@ The hardest things in this work, each with what keeps us out of it.
 
 Newest first.
 
+### ✅ 2026-11-11 · Claude · A review found thirteen gaps between what the spec says and what the engine does · closed 2026-11-11
+
+**Class.** `claim-without-proof`
+
+**What failed.** A subagent that wrote eight guide pages ran the real engine instead of trusting the spec, and found thirteen things wrong after the code was pushed. The worst: a shell command could switch a guard off in `harness/settings.json`, write a lesson or delete a project guard, and nothing spoke. The sweep went blind past 500 changed files without saying so, though the spec says it does. The spec said nobody's agent can tick another person's box, and nothing checked whose box it was. A version file with merge markers in it was rebuilt in silence and reported Clean. The engine's own block text, fed back as a prompt, parsed as a grant.
+
+**Cause.** The spec was written first and the engine after it, and no one walked each sentence of the spec against a payload. The payloads proved what the code did, not what the spec promised.
+
+**Fix.** ✅ the instance · ✅ the cause · ✅ the guard
+
+- The instance → all thirteen are fixed. The person's files are closed to the shell and swept at the end of a turn. A row is ticked only in its owner's session. A broken version file is a flag. A guard's own answer is never read as the person's words.
+- Every sibling → the eight pages that had documented the gaps were brought in line the same turn, and the spec's tables with them.
+- The guard → each fix has a payload or a test that fails without it: 95 payloads and 37 tests, from 81 and 34. And a page is ticked only after someone ran the engine against what the page says.
+
 ### ✅ 2026-11-11 · Claude · The staleness check flagged a handoff line that names a page the tracker lists as not built · closed 2026-11-11
 
 **Class.** `false-flag`

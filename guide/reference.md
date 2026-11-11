@@ -76,7 +76,7 @@ What each one stops → [Guards](guards.md).
 | `test_timeout` | seconds, 120 by default | past it, the guard leaves a notice |
 | `format` | a command, `{file}` for the path | what the `format` guard runs. Empty switches it off |
 | `guards` | a guard → `block`, `warn`, `off` | overrides a default |
-| `skip` | a guard → a list of paths | excuses paths from one guard |
+| `skip` | a guard → a list of paths | excuses paths from one guard that reads files |
 | `merge` | `yours`, `agent` | who may push to the default branch and merge |
 | `team` | `true`, `false` | the team layout of the records |
 

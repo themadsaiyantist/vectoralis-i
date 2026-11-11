@@ -60,6 +60,7 @@ heavy@vectoralis  installed, enabled  0.1.0    /home/goku/vectoralis-i/plugins/h
 | The compaction prompt | Codex runs the hook and ignores what it prints | set `compact_prompt` in `.codex/config.toml`, and write the handoff before a long session ends |
 | The CLI is not on the path | `vectoralis` is not found | the skills call it by its path, under `~/.codex/plugins/cache/vectoralis/light/` |
 | No "ask" from a hook | a guard cannot hand a decision to you | here a guard blocks or warns, in both agents |
+| A hook cannot tell a subagent | Codex sends no subagent mark with a tool call, so the `records` guard has nothing to go on | tell a subagent in its instructions to stay out of `harness/` |
 | Command rules are experimental | Codex has allow, prompt and forbidden rules for commands, and labels them experimental, so nothing here builds on them | `sandbox_mode` and `approval_policy` |
 
 Each row is `read`: [plugins](https://learn.chatgpt.com/docs/plugins), [hooks](https://learn.chatgpt.com/docs/hooks), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), [approvals and sandbox](https://learn.chatgpt.com/docs/agent-approvals-security), [command rules](https://learn.chatgpt.com/docs/agent-configuration/rules), [the config reference](https://learn.chatgpt.com/docs/config-file/config-reference), 2026-11-11.

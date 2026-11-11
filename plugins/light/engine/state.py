@@ -51,14 +51,15 @@ def snapshot(root) -> Dict:
             if entry[0] in "RC":
                 i += 1
         i += 1
+    inside = bool(head or git(root, "rev-parse", "--git-dir").strip())
     if len(paths) > MAX_DIRTY:
-        return {"head": head, "dirty": {}, "skipped": True}
+        return {"head": head, "dirty": {}, "skipped": True, "git": inside}
     real = [p for p in paths if (Path(root) / p).is_file()]
     hashes = git(root, "hash-object", "--stdin-paths", stdin="\n".join(real) + "\n").split() if real else []
     dirty = dict(zip(real, hashes)) if len(hashes) == len(real) else {}
     for gone in set(paths) - set(real):
         dirty[gone] = "gone"
-    return {"head": head, "dirty": dirty, "skipped": False}
+    return {"head": head, "dirty": dirty, "skipped": False, "git": inside}
 
 
 def changed(root, base, now) -> Set[str]:

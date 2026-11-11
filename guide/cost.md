@@ -23,12 +23,12 @@ The cheapest piece is a guard: it reads nothing until it speaks.
 | The skill descriptions | 0 | about 195 |
 | The subagent descriptions | 0 | about 47 |
 | `harness/rules.md`, the core | 0 | about 500 |
-| The briefing | 0 | about 100 |
-| **Total** | **0** | **about 840** |
+| The briefing | 0 | about 130 |
+| **Total** | **0** | **about 870** |
 | **The cap** | **300** | **2,000** |
 
 - `run`: `vectoralis budget` on a fresh heavy project, 2026-11-11. It counts characters and divides by four, and says it is an estimate.
-- The briefing grows with your handoff. This repository's is about 300 today, which puts its total near 1,040.
+- The briefing grows with your handoff. This repository's is about 325 today, which puts its total near 1,070.
 - In Codex the two `setup` descriptions are listed as well, about 30 tokens: the field that hides them is Claude Code's.
 - Over the cap, `vectoralis check` fails. The cap is a test, not a hope.
 - Light's one skill is called by you alone, so its description is never loaded.

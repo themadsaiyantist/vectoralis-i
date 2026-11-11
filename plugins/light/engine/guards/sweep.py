@@ -10,6 +10,7 @@ from . import Finding, secrets
 from .. import grants, records
 from ..project import matches
 from ..state import changed, snapshot
+from .yours import BY_HAND
 
 NAME = "sweep"
 RULE = "a write made around the write guards is held to the same rules (guard `sweep`)"
@@ -22,12 +23,30 @@ def moved(proj, state):
 
 
 def check(call, proj, state):
-    if call.stop_active or not state.get("base"):
+    base = state.get("base")
+    if call.stop_active or not base:
         return []
-    paths, _ = moved(proj, state)
+    paths, now = moved(proj, state)
     given = state.get("grants") or {}
     out = []
+    if not base.get("git", True):
+        if not state.get("no_git_said"):
+            state["no_git_said"] = True
+            out.append(Finding(NAME, "notice", "Vectoralis could not sweep this turn: the project is not a git repository, "
+                                               "so a write made through the shell is not checked here."))
+        return out
+    if base.get("skipped") or now.get("skipped"):
+        return [Finding(NAME, "notice", "Vectoralis could not sweep this turn: more than 500 files changed at once.")]
     for rel in sorted(paths - set(state.get("touched") or [])):
+        if proj.skipped(NAME, rel):
+            continue
+        mine = rel in BY_HAND or rel.startswith("harness/guards/")
+        allowed = grants.unlocked(given, rel) or (rel == "harness/settings.json" and state.get("init")) \
+            or (rel == "harness/lessons.md" and given.get("lesson"))
+        if mine and not allowed:
+            out.append(Finding(NAME, "block", f"`{rel}` changed this turn outside the edit tool, and it is the person's.", RULE,
+                               "put it back as it was. Then make the change with the edit tool, or ask them to open the file."))
+            continue
         for lock in records.locks(proj.read("locks.md")):
             if matches(lock, rel) and not grants.unlocked(given, rel, lock):
                 out.append(Finding(NAME, "block", f"`{rel}` changed this turn and it is locked by `{lock}`.", RULE,
@@ -44,6 +63,10 @@ def check(call, proj, state):
                                    "take the value out and read it from the environment."))
     before = state.get("yours") or {}
     after = records.yours_marks(proj.read("tracker.md"), proj.read("todo.md"))
+    for key in records.removed_open(before, after):
+        if not (grants.unlocked(given, "harness/todo.md") or grants.unlocked(given, "harness/tracker.md")):
+            out.append(Finding(NAME, "block", f"An open box of the person's was removed this turn (\"{records.unit_of(key)}\").", RULE,
+                               "put the line back as it was."))
     for key in records.newly_ticked(before, after):
         unit = records.unit_of(key) or ""
         if before and not grants.ticked(given, unit):

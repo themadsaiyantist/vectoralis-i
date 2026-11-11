@@ -79,10 +79,10 @@ What is always loaded on the day you set it up, in tokens:
 | The guards | 0 | 0 | hooks. A guard costs context only when it speaks |
 | The skill and subagent descriptions | 0 | about 240 | with the plugin |
 | `harness/rules.md`, the core | 0 | about 500 | printed by the session-start hook |
-| The briefing | 0 | about 100 | printed right after it |
-| **Always loaded** | **0** | **about 840** | the caps are 300 and 2,000 |
+| The briefing | 0 | about 130 | printed right after it |
+| **Always loaded** | **0** | **about 870** | the caps are 300 and 2,000 |
 
-- `run`: `vectoralis budget` printed 841 in a project fresh from `vectoralis init heavy`, and 0 for light, 2026-11-11. It counts characters and divides by four, and says it is an estimate.
+- `run`: `vectoralis budget` printed 871 in a project fresh from `vectoralis init heavy`, and 0 for light, 2026-11-11. It counts characters and divides by four, and says it is an estimate.
 - **The briefing is the piece that moves.** It prints up to ten lines of `## Now`, the next three boxes, the open failures, the locks and the stale flags. In this repository it read 191 and, later the same afternoon, 303, when `## Now` went from one line to five. That is why the total in [Cost](cost.md), measured on this repository, is higher. `run`.
 - **Over the cap, `vectoralis check` fails.** What each skill weighs when it loads is in [Cost](cost.md).
 - The core arrives through a hook because your instructions file is yours. Both agents run that hook again after a compaction, so the core comes back by itself.
