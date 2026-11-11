@@ -31,11 +31,15 @@
   "plugins/light/hooks/hooks.json": "b34925bc7bca781ae8bb7de82158863179f10e02",
   "roadmaps/README.md": "21f06bfbdf1610972cbd24ac65d95d2b78d57c99",
   "roadmaps/agentic-software-engineer.md": "fd76b1ed677e05b55e5e339d0eab21c53052a383",
+  "roadmaps/ai-engineer.md": "46255ebdff4541cf7b068d240c97941c53c09794",
   "roadmaps/ai-platform-engineer.md": "242e7d4c3001e78322383414bbf57b106a49e2a1",
   "spec.md": "5d24b32283cfce7576ff656568686108465bc0cc",
   "tools/check.sh": "64d599ae900ced55a47fc402adb4392853c4c65b",
   "tools/check_writing.py": "0a901341463cfd799d0b6678a07b0cb81959fa2d",
   "topics/README.md": "1942540acbaaec2d887a4aec03ebeaff533312af",
   "topics/ai-security.md": "88382e16b042d1af0dcb0902746984d97562aa1b",
-  "topics/generative-media.md": "b7c7823af317786910bc0ad06491a3a106e906b3"
+  "topics/computer-use.md": "96224af9cccab2ab81582af9ec5fc956423bebe5",
+  "topics/generative-media.md": "b7c7823af317786910bc0ad06491a3a106e906b3",
+  "topics/local-models.md": "be7917ca4221c9029bf6750d18cb2c541effcb8d",
+  "topics/voice-agents.md": "a02d9e0ccae803311792a2e2e84d24135b13f511"
 }
