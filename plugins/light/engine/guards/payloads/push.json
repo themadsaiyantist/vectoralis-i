@@ -1,0 +1,107 @@
+[
+  {
+    "name": "blocks a bare push on the default branch",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git push"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true
+  },
+  {
+    "name": "blocks a push that names the default branch",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git push origin main"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true
+  },
+  {
+    "name": "blocks a push of HEAD from the default branch",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "git push -u origin HEAD"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true
+  },
+  {
+    "name": "blocks a merge of a pull request",
+    "expect": "block",
+    "event": "shell",
+    "call": {
+      "command": "gh pr merge 12 --squash"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true
+  },
+  {
+    "name": "passes a push of a branch",
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "git push -u origin feature"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true
+  },
+  {
+    "name": "passes when the person handed the merge over",
+    "settings": {
+      "merge": "agent"
+    },
+    "expect": "pass",
+    "event": "shell",
+    "call": {
+      "command": "git push origin main"
+    },
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true
+  }
+]

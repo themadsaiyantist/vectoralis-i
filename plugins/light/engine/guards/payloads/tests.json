@@ -1,0 +1,53 @@
+[
+  {
+    "name": "blocks done while the tests fail",
+    "event": "stop",
+    "settings": {
+      "test": "echo 'FAILED test_total' && exit 1"
+    },
+    "state": {
+      "changed": true
+    },
+    "expect": "block"
+  },
+  {
+    "name": "passes when the tests pass",
+    "event": "stop",
+    "settings": {
+      "test": "true"
+    },
+    "state": {
+      "changed": true
+    },
+    "expect": "pass"
+  },
+  {
+    "name": "does not run when nothing changed",
+    "event": "stop",
+    "settings": {
+      "test": "exit 1"
+    },
+    "state": {},
+    "expect": "pass"
+  },
+  {
+    "name": "leaves a notice when the suite runs out of time",
+    "event": "stop",
+    "settings": {
+      "test": "sleep 3",
+      "test_timeout": 1
+    },
+    "state": {
+      "shell": true
+    },
+    "expect": "notice"
+  },
+  {
+    "name": "is off with no test command",
+    "event": "stop",
+    "state": {
+      "changed": true
+    },
+    "expect": "pass"
+  }
+]

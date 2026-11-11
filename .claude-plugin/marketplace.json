@@ -1,0 +1,9 @@
+{
+  "name": "vectoralis",
+  "owner": { "name": "themadsaiyantist" },
+  "description": "A light and a heavy harness for coding agents.",
+  "plugins": [
+    { "name": "light", "source": "./plugins/light", "description": "Three guards and one settings file." },
+    { "name": "heavy", "source": "./plugins/heavy", "description": "Records that stay true, on top of light." }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "heavy",
+  "version": "0.1.0",
+  "description": "The heavy harness, on top of light: a tracker, two to-do lists, a failure log, lessons, decisions and locks, with the guards that keep them true.",
+  "author": { "name": "themadsaiyantist" },
+  "repository": "https://github.com/themadsaiyantist/vectoralis-i",
+  "license": "MIT",
+  "keywords": ["harness", "records", "tracker"],
+  "dependencies": ["light"]
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "says so when work changed, no record moved and the agent says done",
+    "then": {
+      "src/cart.py": "changed\n"
+    },
+    "last_message": "Done. The total is fixed and the tests pass.",
+    "expect": "warn",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true,
+    "event": "stop",
+    "state": {
+      "turn": 1
+    }
+  },
+  {
+    "name": "stays silent when a record moved too",
+    "then": {
+      "src/cart.py": "changed\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n- ✅ fix the total\n"
+    },
+    "last_message": "Done.",
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true,
+    "event": "stop",
+    "state": {
+      "turn": 1
+    }
+  },
+  {
+    "name": "stays silent while the work is still going",
+    "then": {
+      "src/cart.py": "changed\n"
+    },
+    "last_message": "I am halfway through the refund path.",
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true,
+    "event": "stop",
+    "state": {
+      "turn": 1
+    }
+  },
+  {
+    "name": "stays silent when nothing changed",
+    "last_message": "Done.",
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "git": true,
+    "event": "stop",
+    "state": {
+      "turn": 1
+    }
+  }
+]

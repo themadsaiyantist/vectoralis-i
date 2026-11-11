@@ -1,0 +1,249 @@
+[
+  {
+    "name": "blocks the agent ticking the person's column",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "| cart total | ✅ | ✅ | ✅ |",
+      "old": "| cart total | ✅ | ✅ | ⬜ |"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes once the person said tick",
+    "prompt": "tick cart total",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "| cart total | ✅ | ✅ | ✅ |",
+      "old": "| cart total | ✅ | ✅ | ⬜ |"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes the agent ticking its own stage",
+    "call": {
+      "path": "harness/tracker.md",
+      "text": "| refund | ✅ | ⬜ | ⬜ |",
+      "old": "| refund | ⬜ | ⬜ | ⬜ |"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "blocks the agent ticking a box under Yours",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "- ✅ approve the copy",
+      "old": "- ⬜ approve the copy"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes the agent ticking its own box",
+    "call": {
+      "path": "harness/todo.md",
+      "text": "- ✅ write the copy",
+      "old": "- ⬜ write the copy"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "blocks a lesson nobody dictated",
+    "call": {
+      "path": "harness/lessons.md",
+      "text": "# Lessons\n\n### 2026-01-01 · Ask first\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes a lesson the person dictated",
+    "prompt": "lesson: ask before you delete anything",
+    "call": {
+      "path": "harness/lessons.md",
+      "text": "# Lessons\n\n### 2026-01-01 · Ask first\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "blocks the agent removing a lock",
+    "call": {
+      "path": "harness/locks.md",
+      "text": "# Locks\n"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes the agent adding a lock",
+    "call": {
+      "path": "harness/locks.md",
+      "text": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n- `docs/**` → locked 2026-01-02, printed\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes a lock the person opened",
+    "prompt": "unlock src/payments/**",
+    "call": {
+      "path": "harness/locks.md",
+      "text": "# Locks\n"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "blocks the agent switching a guard off",
+    "call": {
+      "path": "harness/settings.json",
+      "text": "{\"profile\": \"heavy\", \"test\": \"\", \"format\": \"\", \"guards\": {\"secrets\": \"off\"}}"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes a guard the person promoted",
+    "prompt": "promote nudge",
+    "call": {
+      "path": "harness/settings.json",
+      "text": "{\"profile\": \"heavy\", \"test\": \"\", \"format\": \"\", \"guards\": {\"nudge\": \"block\"}}"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "passes a new project guard that only warns",
+    "call": {
+      "path": "harness/guards/no-debug-print.json",
+      "text": "{\"id\": \"no-debug-print\", \"mode\": \"warn\"}"
+    },
+    "expect": "pass",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  },
+  {
+    "name": "blocks a new project guard that blocks",
+    "call": {
+      "path": "harness/guards/no-debug-print.json",
+      "text": "{\"id\": \"no-debug-print\", \"mode\": \"block\"}"
+    },
+    "expect": "block",
+    "profile": "heavy",
+    "files": {
+      "harness/locks.md": "# Locks\n\n- `src/payments/**` → locked 2026-01-01, the checkout is live\n",
+      "harness/tracker.md": "# Tracker\n\n## Checkout\n\n| Unit | Built | Checked | Yours |\n|---|---|---|---|\n| cart total | ✅ | ✅ | ⬜ |\n| refund | ⬜ | ⬜ | ⬜ |\n",
+      "harness/todo.md": "# To-do\n\n## Yours\n\n- ⬜ approve the copy\n\n## The agent's\n\n- ⬜ write the copy\n",
+      "src/payments/refund.py": "total = 0\n",
+      "src/cart.py": "total = 0\n"
+    },
+    "event": "write"
+  }
+]
