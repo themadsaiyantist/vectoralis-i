@@ -65,7 +65,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `guide/other-agents.md` | ✅ | ✅ | ⬜ |
 | `guide/proof.md` | ✅ | ✅ | ⬜ |
 | `guide/reference.md` | ✅ | ✅ | ⬜ |
-| `guide/measure.md` the same small tasks, with the harness and without | ⬜ | ⬜ | ⬜ |
+| `guide/measure.md` the same small tasks, with the harness and without | ✅ | ✅ | ⬜ |
 
 ## The kit
 
@@ -91,7 +91,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `kit/devops.md` | ✅ | ✅ | ⬜ |
 | `kit/team-tools.md` | ✅ | ✅ | ⬜ |
 | `kit/agents.md` | ✅ | ✅ | ⬜ |
-| The kit, tried: every entry small enough for a laptop is run once | ⬜ | ⬜ | ⬜ |
+| The kit, tried: every entry small enough for a laptop is run once | ✅ | ✅ | ⬜ |
 
 ## The roadmaps
 
@@ -130,5 +130,5 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `tools/check_writing.py` the repository checks | ✅ | ✅ | ⬜ |
 | `tools/check.sh` every check before a commit, as one command | ✅ | ✅ | ⬜ |
 | `.github/workflows/ci.yml` tests and payloads on every push | ✅ | ✅ | ⬜ |
-| `tools/check_links.py` every external link, opened | ⬜ | ⬜ | ⬜ |
-| `.github/ISSUE_TEMPLATE/install-report.md` a cold install, reported | ⬜ | ⬜ | ⬜ |
+| `tools/check_links.py` every external link, opened | ✅ | ✅ | ⬜ |
+| `.github/ISSUE_TEMPLATE/install-report.md` a cold install, reported | ✅ | ✅ | ⬜ |

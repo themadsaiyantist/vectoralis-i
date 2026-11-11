@@ -17,8 +17,9 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → built, checked, pushed and public: the harness (50 tests, 167 payloads), the guide, the kit, the roadmaps, the topics, the communities. Every skill ran live. CI is green.
-- **Next →** section 5, the refinement. Its first box sends five subagents in one message. Their briefs are written, and kept outside the repository.
+- **Where it stands** → built, checked, pushed and public: the harness (54 tests, 236 payloads), the guide, the kit, the roadmaps, the topics, the communities. Every skill ran live. CI is green.
+- **Section 5 is done** → the comparison on `guide/measure.md`, 63 live sessions. The `secrets` gap it found is fixed, read five times by a second reader, and run again. The four promises and the boundaries on the safety page. The research placed page by page. The kit tried: 192 entries `tried`, each with its evidence, the rest `read` with a reason.
+- **Next →** the live Codex session, once the hooks are trusted. Then whatever the five cold installs report, through `.github/ISSUE_TEMPLATE/install-report.md`.
 - **Open** → with the author: the live Codex session, public or private, how the history shows.
 - **Mind** → a push is a publication. Commit through the hook, as `themadsaiyantist`. A guard change gets a second reader. Third-party code runs in a container.
 
@@ -33,9 +34,10 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ⬜ Read `spec.md` while the build runs → say what to change
 - ⬜ Trust the hooks once in Codex → `/hooks` → then say so, and I run the first live Codex session. The outside evaluation ranks this first
 - ⬜ Open the subreddits of `community/README.md` once → Reddit refuses a checker
+- ⬜ Open the Blender MCP page of `kit/games-3d.md` once → it sits behind a bot challenge that no checker passes
 - ⬜ Give the address of the Coding Agents course → for the README's one link
 - ⬜ Say how the history goes public → as it is, or as one release commit. Today every commit carries one date
-- ⬜ Find five developers to install it cold → the one proof nobody here can make
+- ⬜ Find five developers to install it cold → the one proof nobody here can make. The issue template for their report is ready
 - ⬜ Say release → the repository goes public
 
 ---
@@ -80,14 +82,15 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 - ✅ The README says whose numbers are whose → the earlier work, then this repository
 - ✅ Send five subagents in one message → four try the kit's entries by group, in a container, one owner per page → one looks for the heavy things the guide misses and writes them down outside the repository
-- ⬜ While they run → `guide/measure.md`: six small tasks, bare agent against light against heavy, three runs each, read from the files and not from what the agent says. The outline and the spec get the page first
+- ✅ While they run → `guide/measure.md`: six small tasks, bare agent against light against heavy, three runs each, read from the files and not from what the agent says. The outline and the spec get the page first
 - ✅ Still while they run → the four guarantees side by side on `guide/safety.md`: policy, mistakes, secrets, and isolation, which is not ours. One line of it in the README's limits
+- ✅ The `secrets` guard reads a key in a shell command's own text → payloads for a heredoc, `echo` and `printf` into a file → a second reader → task 1 of the comparison run again for light. On the author's yes of 2026-11-11
 - ✅ The tests the tracker still lacks → a reverted file clears its flag → a turn cut short leaves no grant behind → an edit by hand between two turns is not the agent's
-- ⬜ When the kit subagents report → check each claim against what they ran → every entry reads `tried` with its evidence or `read` with its reason → `kit/README.md` says what the two marks mean
-- ⬜ When the kit subagents report → each missed thing they name is checked, then added on its page within the caps, on the author's word of 2026-11-11: "add cool useful effective things, and put them in proper place"
-- ⬜ When the research reports → each addition on the page where a reader meets the need: task state on the tracker page, memory on the handoff page, isolation on the safety page, public benchmarks on the measure page, a framework in a roadmap
-- ⬜ `tools/check_links.py` → the link check belongs to the repository, not to a scratch folder
-- ⬜ An install report template → `.github/ISSUE_TEMPLATE/install-report.md`, for the five cold installs
+- ✅ When the kit subagents report → check each claim against what they ran → every entry reads `tried` with its evidence or `read` with its reason → `kit/README.md` says what the two marks mean
+- ✅ When the kit subagents report → each missed thing they name is checked, then added on its page within the caps, on the author's word of 2026-11-11: "add cool useful effective things, and put them in proper place"
+- ✅ When the research reports → each addition on the page where a reader meets the need: task state on the tracker page, memory on the handoff page, isolation on the safety page, public benchmarks on the measure page, a framework in a roadmap
+- ✅ `tools/check_links.py` → the link check belongs to the repository, not to a scratch folder
+- ✅ An install report template → `.github/ISSUE_TEMPLATE/install-report.md`, for the five cold installs
 - ⬜ Last pass → every changed page's links opened → `sh tools/check.sh` → the tracker against the files → `## Now` → commit by unit → CI watched to green
 - Left out on purpose → interoperability with other trackers, a third agent, a benchmark suite of its own. The evaluation names them, and each would make the guide bigger, not truer
 
