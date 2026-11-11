@@ -411,7 +411,6 @@ One harness, the same files. A team adds four things.
 
 - The records are committed, so the team reads one truth.
 - A row with an owner is ticked only in that person's own session. The engine reads the name git is set up with on the machine.
-- Asked in `b.md`. Built on this until answered.
 
 ---
 
@@ -552,7 +551,6 @@ Grounded in           the job postings of the month, and which month
 - **A paid option** sits in brackets beside the free one, only when it is greatly better, with its price. The cap is $60 once or $30 a month.
 - **Several resources on one stage** each say what they excel at and what they do better than the others on the list.
 - **Every project names the kit page it uses** and the workflow it runs under, light or heavy.
-- The star categories and the price cap are asked in `b.md`.
 
 ---
 
@@ -580,7 +578,7 @@ Where people talk     the subreddits and the rest
 The future            where it is going
 ```
 
-The five are asked in `b.md`.
+The five are the author's, settled 2026-11-11.
 
 ---
 
@@ -593,8 +591,9 @@ The five are asked in `b.md`.
 | Topic | a kit situation, a career or one of the five topics |
 | Reddit | the exact subreddits, each with what it is good for |
 | Elsewhere | the official Discord server, the forum, Hacker News, where one matters |
+| People | the few worth following, by topic: a YouTube channel or an X account, with what each is good for |
 
-- Communities and official channels only. No single person is named. Asked in `b.md`.
+- **Both communities and people, the best only**, the author's word. At most three people per topic, each one public, active this month, and named for what they teach.
 - Every entry was opened on the day it was listed, and a dead one is cut.
 
 ---
@@ -603,7 +602,7 @@ The five are asked in `b.md`.
 
 `guide/proof.md`, and one line under "What it built" on the page of the piece it proves.
 
-- **The lines** are facts counted from the author's own repositories, each with how it was counted. Asked in `b.md`.
+- **The lines** are facts counted from the author's own repositories, each with how it was counted. Approved by the author, 2026-11-11.
 - **The frame** is what one person and an agent built, and how the pieces made it possible. A reader should finish the page wanting to start.
 - **Never the word motivation**, and never a claim the count does not back.
 
