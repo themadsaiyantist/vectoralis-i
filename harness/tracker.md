@@ -41,6 +41,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `guide/plan.md` | ✅ | ✅ | ⬜ |
 | `guide/modes.md` | ⬜ | ⬜ | ⬜ |
 | `guide/models.md` | ⬜ | ⬜ | ⬜ |
+| `guide/layout.md` | ⬜ | ⬜ | ⬜ |
 | `guide/context.md` | ⬜ | ⬜ | ⬜ |
 | `guide/handoff.md` | ⬜ | ⬜ | ⬜ |
 | `guide/guards.md` | ✅ | ✅ | ⬜ |
@@ -94,7 +95,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
 | `roadmaps/README.md` the three side by side | ✅ | ✅ | ⬜ |
-| `roadmaps/ai-engineer.md` | ⬜ | ⬜ | ⬜ |
+| `roadmaps/ai-engineer.md` | ✅ | ✅ | ⬜ |
 | `roadmaps/agentic-software-engineer.md` | ✅ | ✅ | ⬜ |
 | `roadmaps/ai-platform-engineer.md` | ✅ | ✅ | ⬜ |
 
@@ -103,9 +104,9 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
 | `topics/README.md` the five on one screen | ✅ | ✅ | ⬜ |
-| `topics/local-models.md` | ⬜ | ⬜ | ⬜ |
-| `topics/voice-agents.md` | ⬜ | ⬜ | ⬜ |
-| `topics/computer-use.md` | ⬜ | ⬜ | ⬜ |
+| `topics/local-models.md` | ✅ | ✅ | ⬜ |
+| `topics/voice-agents.md` | ✅ | ✅ | ⬜ |
+| `topics/computer-use.md` | ✅ | ✅ | ⬜ |
 | `topics/ai-security.md` | ✅ | ✅ | ⬜ |
 | `topics/generative-media.md` | ✅ | ✅ | ⬜ |
 

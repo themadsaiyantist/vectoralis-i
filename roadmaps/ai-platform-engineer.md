@@ -122,7 +122,7 @@ The ground → serving and gateways → infrastructure → evals and CI for agen
 
 | Resource | Free or paid | Clarity | Depth | Hands-on | Current | Excels at |
 |---|---|---|---|---|---|---|
-| [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) | free | ★ 9 | ★ 8 | ★ 4 | ★ 9 | The words and the method: tasks, trials, graders, capability and regression suites. Better at judgment: what to measure, before any tool. |
+| [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) | free | ★ 9 | ★ 8 | ★ 4 | ★ 9 | The words and the method: tasks, trials, graders, capability and regression suites. Better at judgment: what to measure, before any tool. |
 | [Inspect](https://inspect.aisi.org.uk/) | free | ★ 8 | ★ 9 | ★ 9 | ★ 9 | Evals as Python: dataset, solver, scorer, sandbox, log viewer, from the UK AI Security Institute. Better at agents: the deepest here on evals that run code and tools. |
 | [promptfoo: intro](https://www.promptfoo.dev/docs/intro/) | free | ★ 8 | ★ 7 | ★ 9 | ★ 9 | Prompt and model comparisons from one config file, run locally, plus red teaming. Better at speed: the shortest path to a result on a pull request. |
 | [Claude Code: GitHub Actions](https://code.claude.com/docs/en/github-actions) | free | ★ 8 | ★ 8 | ★ 9 | ★ 10 | An agent that answers `@claude` or runs on any event, with secrets, permissions and cost limits spelled out. Better on Claude Code in CI. |

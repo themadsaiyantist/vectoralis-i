@@ -69,7 +69,7 @@ The agent read the reason, wrote the script to use an environment variable, and 
 
 | Part | What it is | Start at |
 |---|---|---|
-| The guide | how to run an agent on light and heavy work, 29 pages, both agents on every page | [guide/](guide/README.md) |
+| The guide | how to run an agent on light and heavy work, 30 pages, both agents on every page | [guide/](guide/README.md) |
 | The harness | two plugins, ten guards, each guard with its proof | [plugins/](plugins/) |
 | The kit | the few skills, guards and MCP servers that matter, for 19 kinds of work | [kit/](kit/README.md) |
 | The roadmaps | three careers, stage by stage, with ranked resources and a project per stage | [roadmaps/](roadmaps/README.md) |

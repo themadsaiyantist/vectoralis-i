@@ -446,6 +446,7 @@ The same two plugins, the same engine, the same records.
 | `plan.md` ★ | the brief and the plan, every question asked up front |
 | `modes.md` | plan mode in action, and the permission modes, bypass included |
 | `models.md` | which model, what effort, for which job |
+| `layout.md` | where every file goes, at which level, and how the files point at each other |
 | `context.md` ★ | what loads, what it costs, how the core stays small |
 | `handoff.md` | handoff, compact with a prompt, auto compact |
 | `guards.md` ★ | hooks as guards: block or warn, the payloads, switching one off |
