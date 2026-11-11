@@ -112,7 +112,7 @@ Both are `run`, the same day, shortened to the lines that matter. Every block sa
 
 ## What it costs
 
-- **Tokens** → 0 always loaded. A guard costs context only when it speaks.
+- **Tokens** → 0 always loaded. The first request of a live session was the same size with the plugin and without, to the token (`run`). A guard costs context only when it speaks.
 - **Attention** → none until a guard speaks. One line when the tests pass.
 - **Time** → the test suite runs once more at the end of a turn that changed something. It does not run when nothing changed.
 
