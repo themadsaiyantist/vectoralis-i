@@ -2,6 +2,7 @@
 """Check the repository's writing rules. Exit 1 with one line per finding.
 
 Run from the repository root: `python3 tools/check_writing.py`. It reads every tracked text file and writes nothing.
+Name folders or files after it to check them before they are tracked: `python3 tools/check_writing.py guide kit`.
 The rules: no em or en dash, no semicolon in prose, every Contents line in step with its headings,
 every relative link resolves, or leads to a page the tracker still lists as not built.
 """
@@ -26,6 +27,10 @@ def names(items):
 
 def main():
     tracked = subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, text=True).stdout.split("\n")
+    for extra in sys.argv[1:]:  # folders or files to check before they are tracked
+        base = ROOT / extra
+        tracked += [p.relative_to(ROOT).as_posix() for p in ([base] if base.is_file() else sorted(base.rglob("*")))]
+    tracked = sorted(set(tracked))
     found = []
     # a link to a page the tracker still lists as not built is allowed until that row is ticked
     tracker = (ROOT / "harness" / "tracker.md").read_text(encoding="utf-8") if (ROOT / "harness" / "tracker.md").is_file() else ""

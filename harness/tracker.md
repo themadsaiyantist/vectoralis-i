@@ -22,7 +22,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 | `plugins/light/engine/briefing.py` the briefing and the compaction prompt | ✅ | ✅ | ⬜ |
 | `plugins/light/engine/dashboard.py` the dashboard | ✅ | ✅ | ⬜ |
 | `plugins/light/engine/cli.py` the CLI | ✅ | ✅ | ⬜ |
-| `plugins/light/hooks/hooks.json` one hooks file, run in a live Claude Code session | ✅ | ⬜ | ⬜ |
+| `plugins/light/hooks/hooks.json` one hooks file, run in a live Claude Code session | ✅ | ✅ | ⬜ |
 | `plugins/heavy/skills/` ten skills, used in a live session | ✅ | ⬜ | ⬜ |
 | `plugins/heavy/agents/` two subagents, used in a live session | ✅ | ⬜ | ⬜ |
 | `.claude-plugin/marketplace.json` the marketplace, validated | ✅ | ✅ | ⬜ |
@@ -32,35 +32,36 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
-| `guide/start.md` | ⬜ | ⬜ | ⬜ |
-| `guide/install.md` | ⬜ | ⬜ | ⬜ |
-| `guide/light.md` | ⬜ | ⬜ | ⬜ |
-| `guide/heavy.md` | ⬜ | ⬜ | ⬜ |
-| `guide/plan.md` | ⬜ | ⬜ | ⬜ |
+| `guide/README.md` the pages, in reading order | ✅ | ✅ | ⬜ |
+| `guide/start.md` | ✅ | ✅ | ⬜ |
+| `guide/install.md` | ✅ | ✅ | ⬜ |
+| `guide/light.md` | ✅ | ✅ | ⬜ |
+| `guide/heavy.md` | ✅ | ✅ | ⬜ |
+| `guide/plan.md` | ✅ | ✅ | ⬜ |
 | `guide/modes.md` | ⬜ | ⬜ | ⬜ |
 | `guide/models.md` | ⬜ | ⬜ | ⬜ |
 | `guide/context.md` | ⬜ | ⬜ | ⬜ |
 | `guide/handoff.md` | ⬜ | ⬜ | ⬜ |
-| `guide/guards.md` | ⬜ | ⬜ | ⬜ |
-| `guide/checks.md` | ⬜ | ⬜ | ⬜ |
+| `guide/guards.md` | ✅ | ✅ | ⬜ |
+| `guide/checks.md` | ✅ | ✅ | ⬜ |
 | `guide/tracker.md` | ⬜ | ⬜ | ⬜ |
 | `guide/todos.md` | ⬜ | ⬜ | ⬜ |
 | `guide/failures.md` | ⬜ | ⬜ | ⬜ |
 | `guide/lessons.md` | ⬜ | ⬜ | ⬜ |
 | `guide/decisions.md` | ⬜ | ⬜ | ⬜ |
 | `guide/locks.md` | ⬜ | ⬜ | ⬜ |
-| `guide/agents.md` | ⬜ | ⬜ | ⬜ |
-| `guide/pull-requests.md` | ⬜ | ⬜ | ⬜ |
+| `guide/agents.md` | ✅ | ✅ | ⬜ |
+| `guide/pull-requests.md` | ✅ | ✅ | ⬜ |
 | `guide/unattended.md` | ⬜ | ⬜ | ⬜ |
 | `guide/safety.md` | ⬜ | ⬜ | ⬜ |
-| `guide/cost.md` | ⬜ | ⬜ | ⬜ |
+| `guide/cost.md` | ✅ | ✅ | ⬜ |
 | `guide/mcp.md` | ⬜ | ⬜ | ⬜ |
 | `guide/dashboard.md` | ⬜ | ⬜ | ⬜ |
 | `guide/team.md` | ⬜ | ⬜ | ⬜ |
-| `guide/codex.md` | ⬜ | ⬜ | ⬜ |
+| `guide/codex.md` | ✅ | ✅ | ⬜ |
 | `guide/other-agents.md` | ⬜ | ⬜ | ⬜ |
-| `guide/proof.md` | ⬜ | ⬜ | ⬜ |
-| `guide/reference.md` | ⬜ | ⬜ | ⬜ |
+| `guide/proof.md` | ✅ | ✅ | ⬜ |
+| `guide/reference.md` | ✅ | ✅ | ⬜ |
 
 ## The kit
 
@@ -91,21 +92,21 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
-| `roadmaps/README.md` the three side by side | ⬜ | ⬜ | ⬜ |
+| `roadmaps/README.md` the three side by side | ✅ | ✅ | ⬜ |
 | `roadmaps/ai-engineer.md` | ⬜ | ⬜ | ⬜ |
-| `roadmaps/agentic-software-engineer.md` | ⬜ | ⬜ | ⬜ |
-| `roadmaps/ai-platform-engineer.md` | ⬜ | ⬜ | ⬜ |
+| `roadmaps/agentic-software-engineer.md` | ✅ | ✅ | ⬜ |
+| `roadmaps/ai-platform-engineer.md` | ✅ | ✅ | ⬜ |
 
 ## The five topics
 
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
-| `topics/README.md` the five on one screen | ⬜ | ⬜ | ⬜ |
+| `topics/README.md` the five on one screen | ✅ | ✅ | ⬜ |
 | `topics/local-models.md` | ⬜ | ⬜ | ⬜ |
 | `topics/voice-agents.md` | ⬜ | ⬜ | ⬜ |
 | `topics/computer-use.md` | ⬜ | ⬜ | ⬜ |
-| `topics/ai-security.md` | ⬜ | ⬜ | ⬜ |
-| `topics/generative-media.md` | ⬜ | ⬜ | ⬜ |
+| `topics/ai-security.md` | ✅ | ✅ | ⬜ |
+| `topics/generative-media.md` | ✅ | ✅ | ⬜ |
 
 ## The communities
 
@@ -117,7 +118,7 @@ The build state of Vectoralis I. ✅ is done and checked, ⬜ is not done. Nothi
 
 | Unit | Built | Checked | Yours |
 |---|---|---|---|
-| `README.md` the first screen | ⬜ | ⬜ | ⬜ |
+| `README.md` the first screen | ✅ | ✅ | ⬜ |
 | `LICENSE` MIT | ✅ | ✅ | ⬜ |
 | `CONTRIBUTING.md` ten lines | ✅ | ✅ | ⬜ |
 | `spec.md` how it is built | ✅ | ✅ | ⬜ |
