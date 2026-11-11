@@ -31,4 +31,4 @@ Five topics that sit outside the three roadmaps, and that people are building on
 ## See also
 
 - [The roadmaps](../roadmaps/README.md) → three careers, stage by stage.
-- [The communities](../community/README.md) → where the people of each topic talk.
+- [The communities](../community/README.md) → where the people of each topic talk, and the few worth following.

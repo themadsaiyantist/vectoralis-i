@@ -1,8 +1,8 @@
 # Where People Talk
 
-Where the people of each topic in this repository talk: the exact subreddits first, then the other places where one matters. Read it when the docs have no answer, when you want to see how others do the same work, or when you want to follow what changes from week to week.
+Where the people of each topic in this repository talk: the exact subreddits first, then the other places where one matters, then the few people worth following. Read it when the docs have no answer, when you want to see how others do the same work, or when you want to follow what changes from week to week.
 
-**Contents:** How to use them · The agents · By situation · By career · By topic · Beyond Reddit
+**Contents:** How to use them · The agents · By situation · By career · By topic · Beyond Reddit · People worth following
 
 ---
 
@@ -107,4 +107,26 @@ The places that matter across topics. A Discord link goes to the maker's own pag
 | Vercel Community | the official forum for Vercel and Next.js. Mostly deploy and account help | [community.vercel.com](https://community.vercel.com/) |
 | Godot Forum | engine help that stays searchable, with showcases | [forum.godotengine.org](https://forum.godotengine.org/) |
 
-Verified 2026-11-11: every community opened and active.
+---
+
+## People worth following
+
+- **Three at most per topic.** Each one teaches by showing real work in public, with something new in the 30 days before the check. A topic can hold one name, or none.
+- **Follow two or three, not twenty.** The ones closest to your own work, read every week. A short list you read beats a long one you saved.
+
+| Topic | Who to follow |
+|---|---|
+| Coding agents | **Simon Willison** · [blog](https://simonwillison.net/) → daily hands-on notes on coding agents, new models and the tools around them<br>**Armin Ronacher** · [blog](https://lucumr.pocoo.org/) · [YouTube](https://www.youtube.com/@ArminRonacher) → long notes from daily agent use, and a regular video series on the state of agentic coding<br>**Jesse Vincent** · [blog](https://blog.fsck.com/) · [Superpowers](https://github.com/obra/superpowers) → skills as a working method: he builds the Superpowers skills in the open and writes up what each release changes |
+| [Agentic software engineering](../roadmaps/agentic-software-engineer.md) | **Matt Pocock** · [YouTube](https://www.youtube.com/@mattpocockuk) · [skills](https://github.com/mattpocock/skills) → engineering habits for agent work in real codebases, with the skills he uses kept in the open<br>**Addy Osmani** · [newsletter](https://addyo.substack.com/) → field guides for shipping with agents on a team: verification, code review, old codebases |
+| [AI engineering](../roadmaps/ai-engineer.md) | **Hamel Husain** · [blog](https://hamel.dev/) → evals for AI products taught from real traces: error analysis first, then checks and judges you can trust<br>**Drew Breunig** · [blog](https://www.dbreunig.com/) → how context fails and how to manage it, with close reads of real system prompts<br>**Doug Turnbull** · [blog](https://softwaredoug.com/) → retrieval and search quality worked through with numbers: ranking, rerankers, judging results |
+| [AI platform](../roadmaps/ai-platform-engineer.md) | **Miguel Otero Pedrido**, The Neural Maze · [newsletter](https://www.theneuralmaze.com/) · [YouTube](https://www.youtube.com/@TheNeuralMaze) → build-along courses that take an agent or a retrieval system to production: durable runs, queues, error analysis, deployment, with the code shared<br>**Jia-Bin Huang** · [YouTube](https://www.youtube.com/@jbhuang0604) → how model serving, quantization and training across many GPUs work underneath, drawn step by step |
+| [Local and open models](../topics/local-models.md) | **Donato Capitella** · [YouTube](https://www.youtube.com/@donatocapitella) → open models measured on real hardware: llama.cpp next to vLLM, quantization, long contexts, with the setup shown<br>**Digital Spaceport** · [YouTube](https://www.youtube.com/@DigitalSpaceport) → home rigs for local models built and measured, from budget boxes to four-card servers, with the test scripts shared |
+| [Voice and real-time agents](../topics/voice-agents.md) | **Kwindla Hultman Kramer** · [guide](https://voiceaiandvoiceagents.com/) · [GitHub](https://github.com/kwindla) · [X](https://x.com/kwindla) → lead author of the open guide to voice agents, with public benchmarks and small demo repositories on turn taking, latency and evals |
+| [Computer use and browser agents](../topics/computer-use.md) | nobody stands out yet → the good material is on the makers' own pages, linked from the topic page |
+| [AI security](../topics/ai-security.md) | **Johann Rehberger**, Embrace The Red · [blog](https://embracethered.com/blog/) · [YouTube](https://www.youtube.com/@embracethered) → working attacks on real agents through injected instructions, with the steps, the fix and the disclosure timeline<br>**Simon Willison** · [prompt injection series](https://simonwillison.net/tags/prompt-injection/) · [security notes](https://simonwillison.net/tags/security/) → a long-running record of injected-instruction attacks and what they mean for agent permissions |
+| [Generative media](../topics/generative-media.md) | **pixaroma** · [YouTube](https://www.youtube.com/@pixaroma) → ComfyUI taught step by step, with each new image and video model tested and the workflows shared<br>**Mickmumpitz** · [YouTube](https://www.youtube.com/@mickmumpitz) → whole film and effects pipelines built in ComfyUI on a home computer, with the workflows shared<br>**Nerdy Rodent** · [YouTube](https://www.youtube.com/@NerdyRodent) → new open image and video models run at home in ComfyUI soon after they come out |
+| [Frontend](../kit/frontend.md), [design](../kit/design.md) and [animation](../kit/animation.md) with agents | **Emil Kowalski** · [site](https://emilkowal.ski/) · [skills](https://github.com/emilkowalski/skills) · [X](https://x.com/emilkowalski) → animation and interface craft written down as skills an agent can follow, with the reason behind each rule<br>**Jakub Krehel** · [site](https://jakub.kr/) · [skills](https://github.com/jakubkrehel/skills) → the small details that make an interface feel right, as articles and as agent skills<br>**Meng To**, DesignCode · [YouTube](https://www.youtube.com/@DesignCodeTeam) → full design-to-site builds with Claude Code, with the prompts, templates and design skill handed out |
+| [Data and ML](../kit/data-ml.md) | **Sebastian Raschka** · [blog](https://sebastianraschka.com/blog/) · [newsletter](https://magazine.sebastianraschka.com/) · [YouTube](https://www.youtube.com/@SebastianRaschka) → language models built from scratch in code, and clear notes on how new architectures differ<br>**Josh Starmer**, StatQuest · [YouTube](https://www.youtube.com/@statquest) → statistics and classic machine learning explained one small step at a time, with code files to run<br>**Daniel Beach**, Data Engineering Central · [newsletter](https://dataengineeringcentral.substack.com/) → data engineering tools put to the test with code: DuckDB, Polars, Airflow, Delta |
+| [DevOps and cloud](../kit/devops.md) | **Viktor Farcic**, DevOps & AI Toolkit · [YouTube](https://www.youtube.com/@DevOpsToolkit) → Kubernetes and platform work with agents in the loop, with a plain view of what works, what does not and which tool to pick<br>**Marcel Dempers**, That DevOps Guy · [YouTube](https://www.youtube.com/@MarcelDempers) → Linux and containers from the ground up, with the source code to follow along |
+
+Verified 2026-11-11: every community opened and active, and every person's newest work read in their own feed. The two X profiles opened as far as the name and bio.

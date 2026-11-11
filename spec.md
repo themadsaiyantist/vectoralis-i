@@ -584,17 +584,17 @@ The five are the author's, settled 2026-11-11.
 
 ## 17. The communities
 
-`community/README.md`, one page: every topic of this repository, and where its people talk.
+`community/README.md`, one page: every topic of this repository, where its people talk, and the few worth following.
 
 | The column | What it holds |
 |---|---|
 | Topic | a kit situation, a career or one of the five topics |
 | Reddit | the exact subreddits, each with what it is good for |
 | Elsewhere | the official Discord server, the forum, Hacker News, where one matters |
-| People | the few worth following, by topic: a YouTube channel or an X account, with what each is good for |
+| People | the few worth following, in one table of their own at the foot of the page, a row per topic: a blog, a newsletter, a YouTube channel, a repository or an X account, with what each is good for |
 
-- **Both communities and people, the best only**, the author's word. At most three people per topic, each one public, active this month, and named for what they teach.
-- Every entry was opened on the day it was listed, and a dead one is cut.
+- **Both communities and people, the best only**, the author's word. At most three people per topic, each one public, active this month, and named for what they teach. A topic where nobody stands out says so.
+- Every entry was opened on the day it was listed, and a dead one is cut. One line at the foot of the page carries the date for all of them.
 
 ---
 
