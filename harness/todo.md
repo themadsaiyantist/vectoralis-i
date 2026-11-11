@@ -19,7 +19,7 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 - **Where it stands** → the spec, the harness and fourteen guide pages are built, checked and pushed. Light ran for real in Claude Code. Both plugins install in Codex.
 - **Next →** review each page the subagents hand back → open its links → tick its row → commit. Then `kit/README.md`.
-- **In flight** → the kit, twelve guide pages, the AI engineer road, three topics, the communities.
+- **In flight** → the kit, thirteen guide pages, the communities.
 - **Open** → `b.md` is not answered, so every page is built on its pick. The proof's numbers wait on the author.
 - **Mind** → commit with explicit paths while a subagent is writing. A page that is not reviewed is not committed.
 
@@ -67,10 +67,10 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ⬜ Codex, live → the hooks and the skills in a real Codex session. It needs your Codex login
 - ✅ One real run → light on `runlog`, in Claude Code, for `guide/light.md`
 - ⬜ Install heavy in this repository → run a live session on its own harness
-- ⬜ The guide → every page listed in `spec.md`. Fourteen of 29 are in
+- ⬜ The guide → every page listed in `spec.md`. Fourteen of 30 are in
 - ⬜ The kit → 19 situations
-- ⬜ The roadmaps → 3 careers
-- ⬜ The five topics → 5 pages
+- ✅ The roadmaps → 3 careers
+- ✅ The five topics → 5 pages
 - ⬜ The communities → the subreddits and the rest, topic by topic
 - ✅ The proof → one page, built on the pick of `b.md` until it is answered
 
