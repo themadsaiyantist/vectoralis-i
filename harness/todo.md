@@ -17,10 +17,10 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 
 ## Now
 
-- **Where it stands** → built, checked and pushed: the spec, the harness (50 tests, 167 payloads), the guide's 30 pages, the kit's 19, three roadmaps, five topics, the communities and the people. Every skill and both subagents ran in live sessions. CI is green, and every commit is `themadsaiyantist`.
-- **Next →** nothing the agent can do alone. The open boxes are under **Yours**.
-- **Open** → a live Codex session needs the author's login. Kit entries are `read`, not tried. How the history goes public is the author's call.
-- **Mind** → commit through the hook, as `themadsaiyantist`. A ticked file that changed needs `vectoralis affirm` after it is checked again. A change to a guard gets a second reader. A script a background job runs is not edited.
+- **Where it stands** → built, checked, pushed and public: the harness (50 tests, 167 payloads), the guide, the kit, the roadmaps, the topics, the communities. Every skill ran live. CI is green.
+- **Next →** section 5, the refinement. Its first box sends five subagents in one message. Their briefs are written, and kept outside the repository.
+- **Open** → with the author: the live Codex session, public or private, how the history shows.
+- **Mind** → a push is a publication. Commit through the hook, as `themadsaiyantist`. A guard change gets a second reader. Third-party code runs in a container.
 
 ---
 
@@ -29,11 +29,13 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ Answer the question round → `a.md`, 25 questions
 - ✅ Say start
 - ✅ Answer `b.md` → seven short calls, while the build runs
+- ⬜ The repository is public since 2026-11-11 → say whether that is meant. Until you do, every push is a publication
 - ⬜ Read `spec.md` while the build runs → say what to change
-- ⬜ Trust the hooks once in Codex → `/hooks` → then say so, and I run the first live Codex session
+- ⬜ Trust the hooks once in Codex → `/hooks` → then say so, and I run the first live Codex session. The outside evaluation ranks this first
 - ⬜ Open the subreddits of `community/README.md` once → Reddit refuses a checker
 - ⬜ Give the address of the Coding Agents course → for the README's one link
 - ⬜ Say how the history goes public → as it is, or as one release commit. Today every commit carries one date
+- ⬜ Find five developers to install it cold → the one proof nobody here can make
 - ⬜ Say release → the repository goes public
 
 ---
@@ -73,6 +75,20 @@ Everything left on Vectoralis I, in order, in two lists: yours and the agent's. 
 - ✅ The five topics → 5 pages
 - ✅ The communities → the subreddits and the rest, topic by topic, and the few people worth following
 - ✅ The proof → one page, built on the pick of `b.md` until it is answered
+
+**5. The refinement**, on the author's word of 2026-11-11 after an outside evaluation: prove more, add less
+
+- ✅ The README says whose numbers are whose → the earlier work, then this repository
+- ⬜ Send five subagents in one message → four try the kit's entries by group, in a container, one owner per page → one looks for the heavy things the guide misses and writes them down outside the repository
+- ⬜ While they run → `guide/measure.md`: six small tasks, bare agent against light against heavy, three runs each, read from the files and not from what the agent says. The outline and the spec get the page first
+- ⬜ Still while they run → the four guarantees side by side on `guide/safety.md`: policy, mistakes, secrets, and isolation, which is not ours. One line of it in the README's limits
+- ⬜ The tests the tracker still lacks → a reverted file clears its flag → a turn cut short leaves no grant behind → an edit by hand between two turns is not the agent's
+- ⬜ When the kit subagents report → check each claim against what they ran → every entry reads `tried` with its evidence or `read` with its reason → `kit/README.md` says what the two marks mean
+- ⬜ When the research reports → each addition on the page where a reader meets the need: task state on the tracker page, memory on the handoff page, isolation on the safety page, public benchmarks on the measure page, a framework in a roadmap
+- ⬜ `tools/check_links.py` → the link check belongs to the repository, not to a scratch folder
+- ⬜ An install report template → `.github/ISSUE_TEMPLATE/install-report.md`, for the five cold installs
+- ⬜ Last pass → every changed page's links opened → `sh tools/check.sh` → the tracker against the files → `## Now` → commit by unit → CI watched to green
+- Left out on purpose → interoperability with other trackers, a third agent, a benchmark suite of its own. The evaluation names them, and each would make the guide bigger, not truer
 
 **4. The release**
 

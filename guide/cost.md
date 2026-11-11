@@ -30,7 +30,7 @@ The cheapest piece is a guard: it reads nothing until it speaks.
 - `run`: `vectoralis budget` on a fresh heavy project, 2026-11-11. It counts characters and divides by 2.7, and says it is an estimate.
 - **Measured, not only estimated.** The first request of a live session carried 1,444 tokens more with the two plugins than without, on a project one setup old, and 1,746 more on this repository. Light alone added 0. The estimate came within 2% of both. `run`: Claude Code 2.1.322, Sonnet 5.5, 2026-11-11.
 - **Four characters to a token read a third too low here.** The first version of the estimate used that rule of thumb and printed 870 where the session carried 1,444. Records are dense with paths, backticks and symbols. Measure once before you trust a rule of thumb.
-- The briefing grows with your handoff. This repository's is about 520 today, which puts its total near 1,690.
+- The briefing grows and shrinks with your handoff. This repository's has run from about 280 to about 610, which put its total between about 1,450 and 1,780.
 - In Codex the two `setup` descriptions are listed as well, about 45 tokens: the field that hides them is Claude Code's.
 - Over the cap, `vectoralis check` fails. The cap is a test, not a hope.
 - Light's one skill is called by you alone, so its description is never loaded.

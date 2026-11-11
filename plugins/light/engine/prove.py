@@ -50,7 +50,7 @@ def run_case(case) -> Dict:
         _put(root, case.get("files"))
         quiet = {"stdout": subprocess.DEVNULL, "stderr": subprocess.DEVNULL}
         if case.get("git"):
-            identity = ["-c", "user.name=goku", "-c", "user.email=goku@gmail.com"]
+            identity = ["-c", "user.name=goku", "-c", "user.email=goku@example.com"]
             subprocess.run(["git", "init", "-q", "-b", "main", str(root)], **quiet)
             subprocess.run(["git", "-C", str(root), "add", "-A"], **quiet)
             subprocess.run(["git", "-C", str(root), *identity, "commit", "-q", "-m", "start"], **quiet)

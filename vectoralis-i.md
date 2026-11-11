@@ -167,6 +167,7 @@ Settled 2026-11-11 by the author's answers.
 - **Tried before it is listed** → every pick carries the date it was tried. Anything only referenced says so.
 - **Free and open first** → a paid service appears only where nothing free does the job, and it is marked paid. The author's word: "mostly free proirity".
 - **Nothing third-party ships in or through Vectoralis** → a kit page gives the install line, the cost and the risk, and the reader runs it.
+- **The small ones are run here, the heavy ones the guide misses are added**, the author's word of 2026-11-11, after an outside evaluation: "i guess you can still refine it and make it better, validate all the small workloads and computes here, while if you missed on some really importatn heavy things outisde on the internet then by all means add them and integrate them" → an entry that fits a laptop, free and with no account, is tried and marked `tried`. A heavy one stays a reference. What the guide misses goes on the page where a reader meets the need, never into a directory.
 
 ## The roadmaps
 
@@ -241,7 +242,8 @@ Added 2026-11-11 by the author: "also mention about the efficincy etc about thos
 - **MIT for everything.**
 - **Issues open, pull requests welcome**, each with the run that proves it. Ten lines of rules in `CONTRIBUTING.md`.
 - **It goes public with its full history.**
+- **Public since 2026-11-11.** Two calls are open with the author, in `harness/todo.md`: whether it stays public, and how the history shows.
 
 ## Open questions
 
-None. The second round, `b.md`, was answered on 2026-11-11 and is folded in above.
+Two, both in the author's list of `harness/todo.md`: whether the repository stays public, and how its history shows. The second round, `b.md`, was answered on 2026-11-11 and is folded in above.

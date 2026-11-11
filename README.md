@@ -80,9 +80,14 @@ The agent read the reason, wrote the script to use an environment variable, and 
 
 ## What it built
 
+This way of working, before this repository existed:
+
 - **A 130-lesson machine learning bootcamp**, its platform and a free course, by one person and an agent, in three months.
-- **708 tracker boxes ticked, 26 pull requests merged green, 29 mistakes turned into guards.**
-- **This repository**, built under its own harness. Its tracker, its decisions and its failures are in [harness/](harness/), as they were written.
+- **In that work:** 708 tracker boxes ticked, 26 pull requests merged green, 29 mistakes turned into guards.
+
+And then this repository:
+
+- **Built under its own harness**, with 50 tests and 167 guard payloads. Its tracker, its decisions and its failures are in [harness/](harness/), as they were written.
 
 [guide/proof.md](guide/proof.md) has every number and how it was counted.
 

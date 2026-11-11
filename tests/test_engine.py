@@ -24,8 +24,8 @@ DONE, OPEN = "✅", "⬜"
 
 
 def git(root, *args, when=None):
-    env = dict(os.environ, GIT_AUTHOR_NAME="goku", GIT_AUTHOR_EMAIL="goku@gmail.com",
-               GIT_COMMITTER_NAME="goku", GIT_COMMITTER_EMAIL="goku@gmail.com")
+    env = dict(os.environ, GIT_AUTHOR_NAME="goku", GIT_AUTHOR_EMAIL="goku@example.com",
+               GIT_COMMITTER_NAME="goku", GIT_COMMITTER_EMAIL="goku@example.com")
     if when:
         env.update(GIT_AUTHOR_DATE=when, GIT_COMMITTER_DATE=when)
     subprocess.run(["git", "-C", str(root), *args], check=True, capture_output=True, env=env)

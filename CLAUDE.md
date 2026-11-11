@@ -48,7 +48,7 @@ The practical guide to running coding agents on light and heavy work, the harnes
 
 - Commit locally without asking → `type: what changed`, with `feat`, `fix`, `docs`, `refactor` or `chore`.
 - **Commits are the author's:** `themadsaiyantist`, with that account's no-reply address, set in this repository's own git config. Read `git config user.email` before the first commit of a session, and never use the machine's global identity here.
-- Push without asking. **The repository stays private** until the author says release.
+- Push without asking. **The repository is public** since 2026-11-11, so everything pushed is read by anyone, at once. Whether it stays public is the author's call. Check `gh repo view --json visibility` before saying which it is.
 - Never force-push, reset or delete without the author's yes.
 
 ---
