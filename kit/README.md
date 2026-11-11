@@ -68,7 +68,9 @@ What to install for the work in front of you: one skill, one guard and one MCP s
 - **When each earns its place** → the signal that it now pays for itself, and what it costs in context. Often a plain command does the job at no cost, and the page says so first.
 - **Left out, and why** → the well-known options that did not make the page.
 - **A sample to study** → one public example, and how to do it better.
-- **Every entry is marked `read`** → it was read in its maker's own docs on the date at the bottom of the page. Nothing here was installed by this repository, and nothing is installed for you: the page gives the line, and you run it.
+- **Every entry carries one of two marks.** Nothing is installed for you: the page gives the line, and you run it.
+  - `tried` → run here once, in a Docker container with only a scratch folder mounted, or through this repository's own engine, or on the host where a tool only reads files (`claude plugin validate`) or installs into a throwaway home, with the date and one line of evidence: the command, what it printed, the version. A skill was fetched and counted, a server answered `tools/list`, a command ran on a tiny input. A server that answered with no editor, device or app behind it was not driven.
+  - `read` → read in its maker's own docs on the date at the bottom of the page, and not run here, with the reason in a few words: paid, needs an account, needs macOS, a download too big for a laptop.
 - **A guard in backticks with a recipe under the table** is a file you save as `harness/guards/<id>.json`. It runs in light and in heavy, and it starts at `warn`. Each recipe was proved by the engine before it was printed. [Guards](../guide/guards.md)
 
 ---

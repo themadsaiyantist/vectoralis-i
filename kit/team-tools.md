@@ -8,9 +8,9 @@ Team tools are the shared places where work is tracked and talked about: GitHub,
 
 | Kind | Pick | What it does | Works in | Cost in context | Install |
 |---|---|---|---|---|---|
-| Skill | [Slack skills plugin](https://github.com/slackapi/slack-skills-plugin) | Nine skills from Slack. Two serve a working session: write a message people will read, and find a past discussion. Seven are for building Slack apps. MIT. | Claude Code, Codex | nine descriptions in every session, each body loads on use | `/plugin marketplace add slackapi/slack-skills-plugin` → `/plugin install slack@slack`. Codex: `codex plugin marketplace add slackapi/slack-skills-plugin` → `codex plugin add slack@slack` |
-| Guard | `your-voice` | Warns before `gh` posts a comment, a review or a new issue, or closes one. | both | none, a hook costs no context | below |
-| MCP server | [Linear MCP server](https://linear.app/docs/mcp) | Finds, creates and updates issues, projects and comments in Linear. | Claude Code, Codex | the docs give no count | `claude mcp add --transport http linear-server https://mcp.linear.app/mcp` → `/mcp` to sign in. Codex: `codex mcp add linear --url https://mcp.linear.app/mcp` |
+| Skill | [Slack skills plugin](https://github.com/slackapi/slack-skills-plugin) | Nine skills from Slack. Two serve a working session: write a message people will read, and find a past discussion. Seven are for building Slack apps. MIT. `tried` 2026-11-11: `claude plugin validate` passed: 9 skills, 5 commands. Both Codex lines ran in a scratch Codex home on 0.167.0: 9 skills, and the `standup` command turned into a tenth. | Claude Code, Codex | nine descriptions in every session, each body loads on use | `/plugin marketplace add slackapi/slack-skills-plugin` → `/plugin install slack@slack`. Codex: `codex plugin marketplace add slackapi/slack-skills-plugin` → `codex plugin add slack@slack` |
+| Guard | `your-voice` | Warns before `gh` posts a comment, a review or a new issue, or closes one. `tried` 2026-11-11: the engine's proof, 4 of 4 payloads behave. | both | none, a hook costs no context | below |
+| MCP server | [Linear MCP server](https://linear.app/docs/mcp) | Finds, creates and updates issues, projects and comments in Linear. `read` → needs an account: `initialize` answers 401 until you sign in. | Claude Code, Codex | the docs give no count | `claude mcp add --transport http linear-server https://mcp.linear.app/mcp` → `/mcp` to sign in. Codex: `codex mcp add linear --url https://mcp.linear.app/mcp` |
 
 The agent reads the team's tools freely, and what it would post under your name it shows you first.
 
@@ -37,15 +37,15 @@ Save it as `harness/guards/your-voice.json`. It starts at `warn`.
 
 | Kind | Name | What it adds | Free or paid |
 |---|---|---|---|
-| Skill | [Notion plugin for Claude Code](https://github.com/makenotion/claude-code-notion-plugin) | Twelve skills from Notion, with its MCP server and ten commands: turn a spec page into a plan and tasks, turn a conversation into a doc, prepare a meeting. | free, the skills are MIT in [Notion's cookbook](https://github.com/makenotion/notion-cookbook) |
-| Skill | [Notion plugin for Codex](https://github.com/openai/plugins/tree/main/plugins/notion) | Four of those skills in OpenAI's plugin catalog: knowledge capture, meeting prep, research notes, spec to implementation. | free |
-| Skill | [Atlassian skills](https://github.com/atlassian/atlassian-mcp-server/tree/main/skills) | Seven skills for Jira and Confluence: triage a bug against the issues already filed, turn a spec into a backlog, write a status report. | free, Apache-2.0 |
-| Guard | [`push`](../guide/guards.md) | Built in, heavy profile. Blocks `gh pr merge` and a push to the default branch while `merge` is `yours`. | free, ours |
-| Guard | [`secrets`](../guide/guards.md) | Built in, light profile. Blocks a GitHub or Slack token written into a file, the usual accident when a server is set up by hand. | free, ours |
-| MCP server | [Atlassian Rovo MCP server](https://github.com/atlassian/atlassian-mcp-server) | Jira and Confluence in one hosted server. About two dozen tools are visible and the rest are found on demand, by its [tools page](https://support.atlassian.com/atlassian-ai-gateway/docs/supported-tools/). | the docs name no price, and some search tools spend Rovo credits |
-| MCP server | [Notion MCP](https://developers.notion.com/guides/mcp/get-started-with-mcp) | Searches, reads and writes the pages and databases of your workspace, signed in with OAuth. | works on every plan, with higher limits on Business and Enterprise |
-| MCP server | [Slack MCP server](https://docs.slack.dev/ai/slack-mcp-server/) | Searches, reads, sends and schedules messages, and works with canvases. A workspace admin approves it first. | the docs name no plan or price |
-| MCP server | [GitHub MCP server](https://github.com/github/github-mcp-server) | For a session with no shell, where `gh` cannot run. Its README lists 93 tools, 45 of them in the default toolsets. `--read-only` and `--toolsets` cut it down. | free, MIT |
+| Skill | [Notion plugin for Claude Code](https://github.com/makenotion/claude-code-notion-plugin) | Twelve skills from Notion, with its MCP server and ten commands: turn a spec page into a plan and tasks, turn a conversation into a doc, prepare a meeting. `tried` 2026-11-11: `claude plugin validate` passed: 12 skills, 10 commands. The server stays `read`: it needs an account. | free, the skills are MIT in [Notion's cookbook](https://github.com/makenotion/notion-cookbook) |
+| Skill | [Notion plugin for Codex](https://github.com/openai/plugins/tree/main/plugins/notion) | Four of those skills in OpenAI's plugin catalog: knowledge capture, meeting prep, research notes, spec to implementation. `tried` 2026-11-11: its folder cloned, 4 skills counted, the manifest validates. | free |
+| Skill | [Atlassian skills](https://github.com/atlassian/atlassian-mcp-server/tree/main/skills) | Seven skills for Jira and Confluence: triage a bug against the issues already filed, turn a spec into a backlog, write a status report. `tried` 2026-11-11: 7 skills counted where a plugin installs them, beside 6 older ones in `v1/` that no plugin installs. | free, Apache-2.0 |
+| Guard | [`push`](../guide/guards.md) | Built in, heavy profile. Blocks `gh pr merge` and a push to the default branch while `merge` is `yours`. `tried` 2026-11-11: `vectoralis guards`: 6 of 6 payloads behave. | free, ours |
+| Guard | [`secrets`](../guide/guards.md) | Built in, light profile. Blocks a GitHub or Slack token written into a file, the usual accident when a server is set up by hand. `tried` 2026-11-11: `vectoralis guards`: 84 of 84 payloads behave. | free, ours |
+| MCP server | [Atlassian Rovo MCP server](https://github.com/atlassian/atlassian-mcp-server) | Jira and Confluence in one hosted server. About two dozen tools are visible and the rest are found on demand, by its [tools page](https://support.atlassian.com/atlassian-ai-gateway/docs/supported-tools/). `read` → needs an account: `initialize` answers 401. | the docs name no price, and some search tools spend Rovo credits |
+| MCP server | [Notion MCP](https://developers.notion.com/guides/mcp/get-started-with-mcp) | Searches, reads and writes the pages and databases of your workspace, signed in with OAuth. `read` → needs an account: `initialize` answers 401. | works on every plan, with higher limits on Business and Enterprise |
+| MCP server | [Slack MCP server](https://docs.slack.dev/ai/slack-mcp-server/) | Searches, reads, sends and schedules messages, and works with canvases. A workspace admin approves it first. `read` → needs an account: `initialize` answers 401. | the docs name no plan or price |
+| MCP server | [GitHub MCP server](https://github.com/github/github-mcp-server) | For a session with no shell, where `gh` cannot run. Version 2.1.0 lists 46 tools in the default toolsets and 91 with `--toolsets=all`. `--read-only` and `--toolsets` cut it down. `tried` 2026-11-11: its Docker image over stdio with a dummy token, `tools/list`. | free, MIT |
 
 ## When each earns its place
 
@@ -62,7 +62,7 @@ Save it as `harness/guards/your-voice.json`. It starts at `warn`.
 
 ## A sample to study
 
-[Claude Issue Triage](https://github.com/anthropics/claude-code-action/blob/main/examples/issue-triage.yml) → a workflow that lets an agent read every new issue, text from strangers included, and gives it one way to write: [a script](https://github.com/anthropics/claude-code-action/blob/main/scripts/edit-issue-labels.sh) that only adds or removes labels the repository already has, on the issue the event named. [The command](https://github.com/anthropics/claude-code-action/blob/main/.claude/commands/label-issue.md) behind it allows that script and a `gh` wrapper that can only read, and it forbids comments. `referenced`
+[Claude Issue Triage](https://github.com/anthropics/claude-code-action/blob/main/examples/issue-triage.yml) → a workflow that lets an agent read every new issue, text from strangers included, and gives it one way to write: [a script](https://github.com/anthropics/claude-code-action/blob/main/scripts/edit-issue-labels.sh) that only adds or removes labels the repository already has, on the issue the event named. [The command](https://github.com/anthropics/claude-code-action/blob/main/.claude/commands/label-issue.md) behind it allows that script and a `gh` wrapper that can only read, and it forbids comments. `referenced`, opened 2026-11-11: last push the day before, not archived, and all four files it names are there.
 
 ## How to do it better
 
@@ -79,4 +79,4 @@ Save it as `harness/guards/your-voice.json`. It starts at `warn`.
 - [r/ClaudeCode](https://www.reddit.com/r/ClaudeCode/) → Claude Code in daily use, plugins and MCP servers included.
 - [r/codex](https://www.reddit.com/r/codex/) → the same for Codex: the CLI, plugins and MCP setup.
 
-Verified 2026-11-11: every link opened except the subreddits, which Reddit does not let a checker open. Every entry is marked `read`: read in its maker's docs, not installed here.
+Verified 2026-11-11: every link opened except the subreddits, which Reddit does not let a checker open. `tried` 2026-11-11, in Docker or in a scratch folder: the four skills, the guard recipe, the two built-in guards and the GitHub MCP server, each with its evidence beside it. Still `read`: the Linear, Atlassian, Notion and Slack servers, which need an account. No plugin was loaded in a live agent session: a plugin counts as loaded when its manifest validates.
