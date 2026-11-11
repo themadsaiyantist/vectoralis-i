@@ -3,7 +3,7 @@
 
 Run from the repository root: `python3 tools/check_writing.py`. It reads every tracked text file and writes nothing.
 The rules: no em or en dash, no semicolon in prose, every Contents line in step with its headings,
-every relative link resolves.
+every relative link resolves, or leads to a page the tracker still lists as not built.
 """
 import re
 import subprocess
@@ -27,6 +27,10 @@ def names(items):
 def main():
     tracked = subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, text=True).stdout.split("\n")
     found = []
+    # a link to a page the tracker still lists as not built is allowed until that row is ticked
+    tracker = (ROOT / "harness" / "tracker.md").read_text(encoding="utf-8") if (ROOT / "harness" / "tracker.md").is_file() else ""
+    planned = {(ROOT / row["path"]).resolve() for row in records.tracker_rows(tracker)
+               if row["path"] and records.DONE not in row["marks"].values()}
     for name in sorted(n for n in tracked if n.endswith((".md", ".py", ".json", ".yml", ".txt"))):
         path = ROOT / name
         if not path.is_file():
@@ -45,7 +49,8 @@ def main():
             for target in LINK.findall(CODE.sub("", line)):
                 if target.startswith(("http://", "https://", "#", "mailto:")):
                     continue
-                if not (path.parent / target.split("#")[0]).exists():
+                goal = (path.parent / target.split("#")[0]).resolve()
+                if not goal.exists() and goal not in planned:
                     found.append(f"{name}:{number}: the link `{target}` leads nowhere")
         contents = next((line for _, line in plain if line.startswith("**Contents:**")), None)
         if contents and names(contents.replace("**Contents:**", "").split("·")) != names(records.headings(text)):

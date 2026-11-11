@@ -1,7 +1,7 @@
 {
   ".claude-plugin/marketplace.json": "1e48488807c702c01bf298121d3d626358d7aadd",
-  ".github/workflows/ci.yml": "7089e97c2ec4c252a651a8fc3f13d74dcf336aaf",
-  "CONTRIBUTING.md": "ab6e6271ec92c78e09716ba54f506f102cfc34ff",
+  ".github/workflows/ci.yml": "9b735d639d46707f73c44f2dabf26d9c1a64a2c2",
+  "CONTRIBUTING.md": "e0f2bb9ebd9ef25c44972047e4f7b86b7998fdcc",
   "LICENSE": "b4a13ee94d9a55c332414c135262c7e1e4de132c",
   "plugins/heavy/agents": "d414a58add5388271b4d363b9b77de542bee3758",
   "plugins/heavy/skills": "ba4d9be5ddc68dd80c2b74a5ffd99dddba49146e",
@@ -15,5 +15,6 @@
   "plugins/light/engine/rules.py": "886e5285ccbb8321506b0eb789e437998672b007",
   "plugins/light/hooks/hooks.json": "b34925bc7bca781ae8bb7de82158863179f10e02",
   "spec.md": "f4e1c0e66a21877cd76362fcabab15ed7d57a649",
-  "tools/check_writing.py": "d662f03409ceb22ec97e323a0e88bd711d37e252"
+  "tools/check.sh": "64d599ae900ced55a47fc402adb4392853c4c65b",
+  "tools/check_writing.py": "377bffdb564f2313ac305756222c5b38bfbc3395"
 }
